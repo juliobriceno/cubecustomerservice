@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8"/>
+    <title>Registro Garantía::..</title>
+    <link rel="stylesheet" href="css/estilos.css"/> <!--enlace de hoja de estilos -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- *****************************************Bootstrap.Estilos***************************************** -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/><!--enlace bootstrap -->
+    <!-- *****************************************Lists***************************************** -->
+    <script src="js/Lists.js"></script>
+    <!-- *****************************************JQuery***************************************** -->
+    <script src="js/jquery.js"></script>
+    <!-- *****************************************Bootstrap.Códigos***************************************** -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"> <!-- enlace con fuentes font-awosome-->
+    <!-- *****************************************Angular Librerías***************************************** -->
+    <script src="js/angular.js"></script>
+    <script src="js/angular-drag-and-drop-lists.js"></script>
+
+    <script src="js/angular-animate.js"></script>
+    <script src="js/angular-sanitize.js"></script>
+    <!-- *****************************************Boostrap Angular Librerías***************************************** -->
+    <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
+    <!-- *****************************************Example Código***************************************** -->
+    <script src="js/example.js"></script>
+    <!-- *****************************************Código de Select Boostrap Angular***************************************** -->
+    <script src="./select.js"></script>
+    <link rel="stylesheet" href="./select.css">
+    <script src="./demo.js"></script>
+    <!-- *****************************************Librería de Select Boostrap Angular***************************************** -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+    <!-- *****************************************Librería de controlador principal***************************************** -->
+    <script src="js/controller.js"></script>
+    <!-- *****************************************Librería de angular loading***************************************** -->
+    <script src="js/spin.min.js"></script>
+    <script src="js/angular-loading.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <!-- *****************************************Librería de angular tags inputs***************************************** -->
+    <link rel="stylesheet" href="css/ng-tags-input.min.css" />
+    <script src="js/ng-tags-input.min.js"></script>
+    <!-- *****************************************Librería de file upload***************************************** -->
+    <script src="js/angular-file-upload.min.js"></script>
+    <!-- *****************************************Librería de boostrap toogle ***************************************** -->
+    <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
+    <link href="css/estiloslistas.css" rel="stylesheet">
+
+    <script src="js/angular-bootstrap-toggle.min.js"></script>
+</head>
+
+<body ng-controller="ctrlWarrantyLogin">
+
+<div class="typesDemo ng-scope">
+
+  <div  ng-repeat="list in lists" >
+
+    <ul dnd-list="list.people"
+        class="row ">
+
+        <li ng-repeat="person in list.people"
+            dnd-draggable="person"
+            dnd-type="person.type"
+            dnd-disable-if="person.type == 'unknown'"
+            dnd-moved="list.people.splice($index, 1)"
+            class="col-md-6 ng-scope"
+            >
+            <dnd-nodrag class="box box-primary">
+              <div dnd-handle class="handle"><i class="fa fa-arrows" aria-hidden="true"></i></div>
+              <div class="pull-left" style="margin-top:-15px; margin-left:18px;"><h3 ><i class="fa fa-list-alt" aria-hidden="true" style="font-size:0.90em"></i>
+Quick Email</h3></div>
+              <div class="pull-right box-tools">
+                  <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+              </div><!-- /. tools -->
+
+              <div class="name">
+                <table class="table table-responsive">
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Task22</th>
+                        <th>Progress</th>
+                        <th style="width: 40px">Label</th>
+                    </tr>
+                    <tr>
+                        <td>1.</td>
+                        <td>Update software</td>
+                        <td>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-red">55%</span></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td>Clean database</td>
+                        <td>
+                            <div class="progress xs">
+                                <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-yellow">70%</span></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td>Cron job running</td>
+                        <td>
+                            <div class="progress xs progress-striped active">
+                                <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-light-blue">30%</span></td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td>Fix and squish bugs</td>
+                        <td>
+                            <div class="progress xs progress-striped active">
+                                <div class="progress-bar progress-bar-success" style="width: 90%"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-green">90%</span></td>
+                    </tr>
+                </table>
+              </div>
+            </dnd-nodrag>
+        </li>
+
+        <li class="dndPlaceholder">
+            Drop any <strong>{{list.allowedTypes.join(' or ')}}</strong> here
+        </li>
+
+    </ul>
+
+  </div>
+
+</div>
+
+</body>
+
+</html>
