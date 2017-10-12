@@ -675,15 +675,15 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
 
-          $http.get('http://www.cube-mia.com/api/CubeClientAuthentication.ashx?obj={"username":"briceno@cube-usa.com","password":"123456"}', {headers: headers}).then(function (response) {
+          $http.get('http://www.cube-mia.com/api/CubeClientAuthentication.ashx?obj={"username":"briceno@cube-usa.com","password":"123456"}', {headers: headers, withCredentials: true}).then(function (response) {
               console.log(response.data.CubeAuthentication.DATA);
               var cnnData = response.data.CubeAuthentication.DATA;
 
-              $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
+              $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers, withCredentials: true}).then(function (response) {
                   console.log(response.data.CubeFlexIntegration.DATA);
                   var CustomerData = response.data.CubeFlexIntegration.DATA;
 
-                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers, withCredentials: true}).then(function (response) {
                     console.log(response.data.CubeFlexIntegration.DATA);
                     var CustomerData = response.data.CubeFlexIntegration.DATA;
 
@@ -691,7 +691,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                     CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
                     console.log(CustomerData);
 
-                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers, withCredentials: true}).then(function (response) {
                       console.log(response.data.CubeFlexIntegration.DATA);
                       $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
 
