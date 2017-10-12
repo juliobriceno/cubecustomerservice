@@ -5,52 +5,17 @@
         <table class="table table-striped">
           <tr>
               <th>ID</th>
-              <th>Columna1</th>
-              <th>Columna2</th>
-              <th>Columna3</th>
-              <th>Date</th>
+              <th>Reported Issue</th>
+              <th>Service Technician</th>
+              <th>Status</th>
+              <th>Schedule Date</th>
           </tr>
-          <tr>
-              <td><a href="#"><i class="-alt fa  fa-eye fa-fw"></i>52301</a></td>
-              <td><div id="sparkline-1"></div></td>
-              <td></td>
-              <td></td>
-              <td>04/10/2017</td>
-          </tr>
-          <tr>
-              <td><a href="#"><i class="-alt fa  fa-eye fa-fw"></i>52303</a></td>
-              <td><div id="sparkline-2"></div></td>
-              <td></td>
-              <td></td>
-              <td>05/10/2017</td>
-          </tr>
-          <tr>
-              <td><a href="#"><i class="-alt fa  fa-eye fa-fw"></i>52305</a></td>
-              <td><div id="sparkline-3"></div></td>
-              <td></td>
-              <td></td>
-              <td>06/10/2017</td>
-          </tr>
-          <tr>
-              <td><a href="#"><i class="-alt fa  fa-eye fa-fw"></i>52309</a></td>
-              <td><div id="sparkline-4"></div></td>
-              <td></td>
-              <td></td>
-              <td>07/10/2017</td>
-          </tr>
-          <tr>
-              <td><a href="#"><i class="-alt fa  fa-eye fa-fw"></i>52330</a></td>
-              <td><div id="sparkline-5"></div></td>
-              <td></td>
-              <td></td>
-              <td>08/10/2017</td>
-          </tr>
-          <tr>
-              <td><a href="#"><i class="-alt fa  fa-eye fa-fw"></i>52309</a></td>
-              <td><div id="sparkline-6"></div></td>
-              <td></td>
-              <td></td>
-              <td>09/10/2017</td>
+          <tr ng-repeat="data in person.data">
+              <td><a href="#"><i class="-alt fa  fa-eye fa-fw"></i>{{data.Id}}</a></td>
+              <td>{{data.Reported_Issue}}</td>
+              <td>{{data.Service_Tech}}</td>
+              <td>{{data.STATUSNAME}}</td>
+              <td>{{data.Schedule_Date | date:'medium'}}</td>
           </tr>
       </table><!-- /.table -->
     </div>

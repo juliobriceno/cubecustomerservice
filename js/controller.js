@@ -672,36 +672,67 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
         .controller('ctrlWarrantyLogin', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
 
-          // Temp
-          $scope.lists = [
-              {
-                  label: "Men",
-                  allowedTypes: ['man'],
-                  max: 4,
-                  people: [
-                      {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
-                      {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"}
-                  ]
-              },
-              {
-                  label: "Women",
-                  allowedTypes: ['woman'],
-                  max: 4,
-                  people: [
-                      {name: "Gráfico 1", type: "woman",  page: "table-billing.html", title:"Billing Statement"},
-                      {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}
-                  ]
-              },
-              {
-                  label: "People",
-                  allowedTypes: ['man', 'woman'],
-                  max: 6,
-                  people: [
-                      {name: "Grafico 2", type: "man",  page: "table-notificacion.html", title:"Recent Notificacion from you BMS"}
-                  ]
-              }
-          ];
-          // Fin Temp
+
+          var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+
+          $http.get('http://www.cube-mia.com/api/CubeClientAuthentication.ashx?obj={"username":"briceno@cube-usa.com","password":"123456"}', {headers: headers}).then(function (response) {
+              console.log(response.data.CubeAuthentication.DATA);
+              var cnnData = response.data.CubeAuthentication.DATA;
+
+              $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
+                  console.log(response.data.CubeFlexIntegration.DATA);
+                  var CustomerData = response.data.CubeFlexIntegration.DATA;
+
+                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                    console.log(response.data.CubeFlexIntegration.DATA);
+                    var CustomerData = response.data.CubeFlexIntegration.DATA;
+
+                    console.log(CustomerData);
+                    CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
+                    console.log(CustomerData);
+
+                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                      console.log(response.data.CubeFlexIntegration.DATA);
+                      $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
+
+                      $scope.lists = [
+                          {
+                              label: "Men",
+                              allowedTypes: ['man'],
+                              max: 4,
+                              people: [
+                                  {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List", data: [CustomerData]},
+                                  {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"}
+                              ]
+                          },
+                          {
+                              label: "Women",
+                              allowedTypes: ['woman'],
+                              max: 4,
+                              people: [
+                                  {name: "Gráfico 1", type: "woman",  page: "table-billing.html", title:"Billing Statement"},
+                                  {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}
+                              ]
+                          },
+                          {
+                              label: "People",
+                              allowedTypes: ['man', 'woman'],
+                              max: 6,
+                              people: [
+                                  {name: "Grafico 2", type: "man",  page: "table-notificacion.html", title:"Recent Notificacion from you BMS"}
+                              ]
+                          }
+                      ];
+
+
+                    })
+
+                  })
+
+
+              })
+
+          })
 
             // Valores por defecto de modales
             $scope.MessagesModalInterface = {};
