@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8" />
+      <title>Help desk::..</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      <!--Theme style-->
+      <link rel="stylesheet" href="css/general-style.css" />
+      <!--  bootstrap 3.3.7 -->
+      <link rel="stylesheet" href="css/bootstrap.min.css" />
+      <!--Boostrap JQuery -->
+      <script src="js/jquery.js"></script>
+      <!--Boostrap JS Para animaciones-->
+      <script src="js/bootstrap.min.js"></script>
+      <!-- font Awesome -->
+      <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="wrap-login">
+                    <div class="login-wrap">
+                        <div class="imagen-login">
+                            <img src="img/cube.png" class="img-responsive center-block" alt="Logo-in-corp" width="150" height="150" />
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group margen-input">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <label for="user" class="sr-only control-label">User</label>
+                                        <input ng-model="Usuario" type="text" class="form-control" placeholder="User">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group margen-input">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <label for="pass" class="sr-only control-label">Password</label>
+                                        <input ng-model="Contrasena" type="password" class="form-control" data-type="password" placeholder="Password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer-login pull-right">
+                                <a  href="#">Forgot Password?</a> <br>
+                            </div>
+                            <div class="margen-input ">
+                                <button  type="submit" class="btn btn-primary btn-block ">INGRESAR</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!--fin row login-->
+    </div><!--fin container principal login-->
+  </body>
+</html>
