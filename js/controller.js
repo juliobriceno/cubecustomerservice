@@ -672,63 +672,94 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
         .controller('ctrlWarrantyLogin', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
 
+          $scope.User = {};
+          $scope.User.name = '';
+          $scope.User.password = '';
+
+          // Connect Cube Service
+          $scope.Login = function(){
+
+            $http.get('http://www.cube-mia.com/api/CubeClientAuthentication.ashx?obj={"username":"' + $scope.User.name + '","password":"' + $scope.User.password + '"}', {headers: headers}).then(function (response) {
+                var cnnData2 = response.data.CubeAuthentication.DATA;
+
+                if (typeof cnnData2 == 'undefined'){
+                  swal("Cube Interface", "Invalid Credentials.");
+                }
+                else{
+                  localStorage.cnnData2 = JSON.stringify(cnnData2);
+                  window.location = '/index.html';
+                }
+
+            })
+
+          }
 
           var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
 
-          delete $http.defaults.headers.common['X-Requested-With'];
+          if (typeof localStorage.cnnData2 != 'undefined'){
 
-          $http.get('http://www.cube-mia.com/api/CubeClientAuthentication.ashx?obj={"username":"briceno@cube-usa.com","password":"123456"}', {headers: headers}).then(function (response) {
-              var cnnData = response.data.CubeAuthentication.DATA;
+            var cnnData = JSON.parse(localStorage.cnnData2);
 
-              $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
+            console.log(cnnData);
+
+            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
+
+                console.log(response);
+
+                var CustomerData = response.data.CubeFlexIntegration.DATA;
+
+                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+
+                  console.log(response);
+
                   var CustomerData = response.data.CubeFlexIntegration.DATA;
 
-                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
-                    var CustomerData = response.data.CubeFlexIntegration.DATA;
+                  CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
 
-                    CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
+                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
-                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
-                      $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
+                    console.log(response);
+                    
+                    $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
 
-                      $scope.lists = [
-                          {
-                              label: "Men",
-                              allowedTypes: ['man'],
-                              max: 4,
-                              people: [
-                                  {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List", data: [CustomerData]},
-                                  {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"}
-                              ]
-                          },
-                          {
-                              label: "Women",
-                              allowedTypes: ['woman'],
-                              max: 4,
-                              people: [
-                                  {name: "Gráfico 1", type: "woman",  page: "table-billing.html", title:"Billing Statement"},
-                                  {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}
-                              ]
-                          },
-                          {
-                              label: "People",
-                              allowedTypes: ['man', 'woman'],
-                              max: 6,
-                              people: [
-                                  {name: "Grafico 2", type: "man",  page: "table-notificacion.html", title:"Recent Notificacion from you BMS"}
-                              ]
-                          }
-                      ];
+                    $scope.lists = [
+                        {
+                            label: "Men",
+                            allowedTypes: ['man'],
+                            max: 4,
+                            people: [
+                                {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List", data: [CustomerData]},
+                                {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"}
+                            ]
+                        },
+                        {
+                            label: "Women",
+                            allowedTypes: ['woman'],
+                            max: 4,
+                            people: [
+                                {name: "Gráfico 1", type: "woman",  page: "table-billing.html", title:"Billing Statement"},
+                                {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}
+                            ]
+                        },
+                        {
+                            label: "People",
+                            allowedTypes: ['man', 'woman'],
+                            max: 6,
+                            people: [
+                                {name: "Grafico 2", type: "man",  page: "table-notificacion.html", title:"Recent Notificacion from you BMS"}
+                            ]
+                        }
+                    ];
 
-
-                    })
 
                   })
 
+                })
 
-              })
 
-          })
+            })
+
+          }
 
             // Valores por defecto de modales
             $scope.MessagesModalInterface = {};
@@ -753,6 +784,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             $scope.strCountryClass = 'form-group';
             $scope.strEmailLogonClass = 'form-group';
             $scope.strPasswordLogonClass = 'form-group';
+
             // Crear nuevo usuario
             $scope.NewUserRegister = function () {
                 var booError = false;
