@@ -685,13 +685,32 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
               $scope.CustomerOrderHistory = response.data.CubeFlexIntegration.DATA;
-              console.log($scope.CustomerOrderHistory);
+
+              $scope.CustomerOrderHistory.forEach(function(element) {
+                element.Schedule_Date = new Date(element.Schedule_Date);
+              });
+
+              $scope.CustomerOrderHistoryFiltered = $scope.CustomerOrderHistory;
+
+            })
+
+          }
+
+          $scope.SearchWOL = function(){
+
+            $scope.CustomerOrderHistoryFiltered = $scope.CustomerOrderHistory;
+
+            var fromDateOneDay = $scope.fromDate;
+            fromDateOneDay.setDate(fromDateOneDay.getDate()-1);
+
+            $scope.CustomerOrderHistoryFiltered = $scope.CustomerOrderHistoryFiltered.filter(function (el){
+              return el.Schedule_Date >= fromDateOneDay && el.Schedule_Date <= $scope.toDate && el.Reported_Issue.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1;
             })
 
           }
 
           $scope.fromDate = new Date();
-          $scope.fromDate.setDate($scope.fromDate.getDate()-365);
+          $scope.fromDate.setDate($scope.fromDate.getDate()-3650);
           $scope.toDate = new Date();
           $scope.toDate.setDate($scope.toDate.getDate()+1);
 
