@@ -10,12 +10,12 @@
               <th>Status</th>
               <th>Schedule Date</th>
           </tr>
-          <tr ng-repeat="data in person.data">
-              <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(data.Id);"><i class="-alt fa  fa-eye fa-fw"></i>{{data.Id}}</a></td>
-              <td>{{data.Reported_Issue}}</td>
-              <td>{{data.Service_Tech}}</td>
-              <td>{{data.STATUSNAME}}</td>
-              <td>{{data.Schedule_Date | date:'medium'}}</td>
+          <tr>
+              <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(CustomerData.Id);"><i class="-alt fa  fa-eye fa-fw"></i>{{CustomerData.Id}}</a></td>
+              <td>{{CustomerData.Reported_Issue}}</td>
+              <td>{{CustomerData.Service_Tech}}</td>
+              <td>{{CustomerData.STATUSNAME}}</td>
+              <td>{{CustomerData.Schedule_Date | date:'medium'}}</td>
           </tr>
       </table><!-- /.table -->
     </div>
@@ -193,7 +193,7 @@
                         <label class="control-label" for="name">Priority:</label>
                         <div class="input-group">
                           <span class="input-group-addon"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
-                          <input ng-model="WorkOrder.PRIOROTYID" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Priority">
+                          <input ng-model="WorkOrder.PRIORITYANAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Priority">
                         </div>
                       </div>
                     </div>
@@ -242,8 +242,6 @@
                           <th>Problem Description</th>
                           <th>Resolution Notes</th>
                           <th>Billable</th>
-                          <th>Last Update</th>
-                          <th>Update By</th>
                           <th>Completed On</th>
                         </tr>
                         <tr ng-repeat="WorkOrderDetailItem in WorkOrderDetail">
@@ -255,8 +253,6 @@
                           <td>{{WorkOrderDetailItem.PROBLEMTETX}}</td>
                           <td>{{WorkOrderDetailItem.RESOLUTIONTEXT}}</td>
                           <td class="text-center"><input id="checkbox1" type="checkbox"></td>
-                          <td>{{WorkOrderDetailItem.LASTUPDATED}}</td>
-                          <td>{{WorkOrderDetailItem.LASTUPDATEDBYID}}</td>
                           <td>{{WorkOrderDetailItem.WORKCOMPLETEDDATE}}</td>
                         </tr>
                       </table><!-- /.table -->
@@ -290,8 +286,8 @@
                             <td>{{WorkOrderRecomendation.ID}}</td>
                             <td>{{WorkOrderRecomendation.OBSERVATION}}</td>
                             <td>{{WorkOrderRecomendation.OBSERVATION}}</td>
-                            <td>{{WorkOrderRecomendation.STATUSID}}</td>
-                            <td>{{WorkOrderRecomendation.USERID}}</td>
+                            <td>{{WorkOrderRecomendation.STATUSNAME}}</td>
+                            <td>{{WorkOrderRecomendation.USERNAME}}</td>
                             <td>{{WorkOrderRecomendation.TIMESTAMP}}</td>
                             <td>{{WorkOrderRecomendation.DESCRIPTION}}</td>
                           </tr>

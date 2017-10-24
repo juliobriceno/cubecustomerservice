@@ -672,6 +672,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
         .controller('ctrlServiceHistory', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
 
+          $scope.NameUser = localStorage.NameUser;
+
           var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
 
           if (typeof localStorage.cnnData2 != 'undefined'){
@@ -709,6 +711,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           }
 
+          $scope.SearchText = '';
           $scope.fromDate = new Date();
           $scope.fromDate.setDate($scope.fromDate.getDate()-3650);
           $scope.toDate = new Date();
@@ -814,11 +817,11 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           $scope.GetWorkOrderDetail = function(WorkOrderId){
             $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceInfo","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
               $scope.WorkOrder = response.data.CubeFlexIntegration.DATA;
+              console.log($scope.WorkOrder);
               $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceDetails","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
                 $scope.WorkOrderDetail = response.data.CubeFlexIntegration.DATA;
                 $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceRecomendations","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
                   $scope.WorkOrderRecomendation = response.data.CubeFlexIntegration.DATA;
-                  console.log($scope.WorkOrderRecomendation);
                 })
               })
             })
@@ -867,6 +870,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             var cnnData = JSON.parse(localStorage.cnnData2);
 
             $scope.NameUser = cnnData.Name;
+            localStorage.NameUser = $scope.NameUser;
 
             $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
 
@@ -876,6 +880,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
                   var CustomerData = response.data.CubeFlexIntegration.DATA;
+                  $scope.CustomerData = response.data.CubeFlexIntegration.DATA;
+                  console.log($scope.CustomerData);
 
                   CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
 
@@ -883,45 +889,45 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
                     $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
 
+                    // Get Knowleges for home
                     $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_MessagesBoard","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
                       $scope.Knowleges = response.data.CubeFlexIntegration.DATA;
                     })
 
+                    // Get service sites for customer to populate select sites in create new order
+                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                      $scope.CustomerSites = response.data.CubeFlexIntegration.DATA;
+                      $scope.CustomerSitesFiltered = $scope.CustomerSites;
+
+                      console.log($scope.CustomerSites);
+                    })
+
+                    // GetPriorities to populate select Priorities in create new order
+                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+                      $scope.Priorities = response.data.CubeFlexIntegration.DATA;
+                      console.log($scope.Priorities);
+                    })
+
                     $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceOpen_Recomendations","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
-                      var CustomerRecomendation = response.data.CubeFlexIntegration.DATA;
+                      $scope.Recomendations = response.data.CubeFlexIntegration.DATA;
+                      console.log($scope.Recomendations);
 
                       $loading.finish('myloading');
 
-                      $scope.lists = [
-                          {
-                              label: "Men",
-                              allowedTypes: ['man'],
-                              max: 4,
-                              people: [
-                                  {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List", data: [CustomerData]},
-                                  {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"}
-                              ]
-                          },
-                          {
-                              label: "Women",
-                              allowedTypes: ['woman'],
-                              max: 4,
-                              people: [
-                                  {name: "Gráfico 1", type: "woman",  page: "table-billing.html", title:"Billing Statement"},
-                                  {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}
-                              ]
-                          },
-                          {
-                              label: "People",
-                              allowedTypes: ['man', 'woman'],
-                              max: 6,
-                              people: [
-                                  {name: "Grafico 2", type: "man",  page: "table-notificacion.html", title:"Recent Notificacion from you BMS"}
-                              ]
-                          }
-                      ];
-
+                      if (typeof localStorage.Rows == 'undefined'){
+                        $scope.Rows = [
+                            {
+                                Columns: [
+                                    {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
+                                    {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
+                                    {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"},
+                                ]
+                            }
+                        ];
+                      }else {
+                          $scope.Rows = JSON.parse(localStorage.Rows);
+                      }
 
                     })
 
@@ -934,6 +940,27 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             })
 
           }
+
+          $scope.SearchSites = function(){
+
+            $scope.CustomerSitesFiltered = $scope.CustomerSites;
+
+            $scope.CustomerSitesFiltered = $scope.CustomerSitesFiltered.filter(function (el){
+              return el.SITENAME.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1;
+            })
+
+          }
+
+          $scope.DropHomeTable = function(tablename) {
+            $scope.Rows[0].Columns = $scope.Rows[0].Columns.filter(function(el){
+              return el.page != tablename;
+            })
+            $scope.Rows = JSON.parse(localStorage.Rows);
+          };
+
+          $scope.DragFinish = function(index, item, external) {
+            localStorage.Rows = JSON.stringify($scope.Rows);
+          };
 
             // Valores por defecto de modales
             $scope.MessagesModalInterface = {};

@@ -79,7 +79,7 @@
                               <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                             </a>
                             <ul class="dropdown-menu float-right">
-                              <li><a href="">Open Server Work Order List</a></li>
+                              <li><a href="">Open Service Work Order List</a></li>
                               <li><a href="">Knowlege Basic</a></li>
                               <li><a href="">Billing Statement</a></li>
                               <li><a href="">Open Recomendation</a></li>
@@ -205,10 +205,10 @@
                             <div class="small-box  bg-aqua">
                                 <div class="inner">
                                     <h3>
-                                        0
+                                        1
                                     </h3>
                                     <p>
-                                        Alerts & Messages
+                                        Open Recomendations
                                     </p>
                                 </div>
                                 <div class="icon">
@@ -219,26 +219,27 @@
                     </div><!-- /.row -->
                     <div class="container-fluid">
                       <div class="typesDemo ng-scope">
-                        <div  ng-repeat="list in lists" >
-                          <ul dnd-list="list.people"
+                        <div ng-repeat="Row in Rows" >
+                          <ul dnd-list="Row.Columns"
                               class="row ">
-                              <li ng-repeat="person in list.people"
-                                  dnd-draggable="person"
-                                  dnd-type="person.type"
-                                  dnd-disable-if="person.type == 'unknown'"
-                                  dnd-moved="list.people.splice($index, 1)"
+                              <li ng-repeat="Column in Row.Columns"
+                                  dnd-draggable="Column"
+                                  dnd-type="Column.type"
+                                  dnd-disable-if="Column.type == 'unknown'"
+                                  dnd-moved="Row.Columns.splice($index, 1)"
+                                  dnd-dragend="DragFinish(testItem, event, true)"
                                   class="col-md-6 ng-scope"
                                   >
                                   <dnd-nodrag class="box box-primary">
                                     <div dnd-handle class="handle"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
                                     <div class="pull-left" style="margin-top:-5px; margin-left:18px;">
-                                      <h4><i class="fa fa-list-alt" aria-hidden="true" style="font-size:0.80em"></i> {{person.title}}</h4>
+                                      <h4><i class="fa fa-list-alt" aria-hidden="true" style="font-size:0.80em"></i> {{Column.title}}</h4>
                                     </div>
                                     <div class="pull-right box-tools">
-                                        <button class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                                        <button ng-click="DropHomeTable(Column.page);" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
                                     </div><!-- /. tools -->
                                     <div class="name">
-                                      <div ng-include="person.page"></div>
+                                      <div ng-include="Column.page"></div>
                                     </div>
                                   </dnd-nodrag>
                               </li>
@@ -263,12 +264,9 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                   <label>Site name:</label>
-                                  <select class="form-control">
-                                      <option>option 1</option>
-                                      <option>option 2</option>
-                                      <option>option 3</option>
-                                      <option>option 4</option>
-                                      <option>option 5</option>
+                                  <select class="form-control"
+                                    ng-model="selectedCustomerSite"
+                                    ng-options="CustomerSite as CustomerSite.SITENAME for CustomerSite in CustomerSites">
                                   </select>
                               </div>
                             </div>
@@ -284,12 +282,9 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                   <label>Priority:</label>
-                                  <select class="form-control">
-                                      <option>option 1</option>
-                                      <option>option 2</option>
-                                      <option>option 3</option>
-                                      <option>option 4</option>
-                                      <option>option 5</option>
+                                  <select class="form-control"
+                                    ng-model="selectedPriority"
+                                    ng-options="Priority as Priority.PRIORITY for Priority in Priorities">
                                   </select>
                               </div>
                             </div>

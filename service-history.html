@@ -77,7 +77,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" >
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Hello, Hector Hernandez </span>
+                                <span>Hello, {{NameUser}} </span>
                             </a>
                         </li>
                     </ul>
@@ -141,7 +141,7 @@
                     <div class="col-md-4">
                       <label for="">From:</label>
                       <div class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
@@ -150,7 +150,7 @@
                     <div class="col-md-4">
                       <label for="">To:</label>
                       <div class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                         <span class="input-group-btn">
                           <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
@@ -159,7 +159,7 @@
                     <div class="col-md-4">
                       <label for=""> <br></label>
                       <div class="form-group">
-                        <input ng-model="SearchText" type="text" class="form-control" placeholder="Search">
+                        <input ng-change="SearchWOL();" ng-model="SearchText" type="text" class="form-control" placeholder="Search by name">
                       </div>
                     </div>
                   </div>
@@ -177,7 +177,7 @@
                                   <th>Status</th>
                                   <th>Schedule Date</th>
                               </tr>
-                              <tr ng-repeat="CustomerOrderHistoryItem in CustomerOrderHistory">
+                              <tr ng-repeat="CustomerOrderHistoryItem in CustomerOrderHistoryFiltered">
                                   <td class="text-center"><button type="button" class="btn btn-info btn-sm btn-circle"><i class="fa fa-info" aria-hidden="true"></i></button></td>
                                   <td><a href="#" >{{CustomerOrderHistoryItem.Id}}</a></td>
                                   <td>{{CustomerOrderHistoryItem.Reported_Issue}}</td>
