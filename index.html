@@ -67,8 +67,25 @@
                               <i class="fa fa-bell-o" ></i>
                                 <span class="label label-danger">5</span>
                             </a>
-
                         </li>
+                        <li class="dropdown tasks-menu">
+                            <a href="#create_order"  data-toggle="modal">
+                              <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                            </a>
+                        </li>
+
+                          <li class="dropdown">
+                            <a data-toggle="dropdown" aria-expanded="false">
+                              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </a>
+                            <ul class="dropdown-menu float-right">
+                              <li><a href="">Open Server Work Order List</a></li>
+                              <li><a href="">Knowlege Basic</a></li>
+                              <li><a href="">Billing Statement</a></li>
+                              <li><a href="">Open Recomendation</a></li>
+                            </ul>
+                          </li>
+
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" >
@@ -232,6 +249,64 @@
                         </div>
                     </div>
                     <!-- Widgets as boxes -->
+                    <div class="modal fade" id="create_order" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog  modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                          <div class="titulo-modal">
+                            <h5 class="modal-title"><i class="fa fa-tasks" aria-hidden="true"></i> <label>Create New Work Order</label></span></h5>
+                          </div>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Site name:</label>
+                                  <select class="form-control">
+                                      <option>option 1</option>
+                                      <option>option 2</option>
+                                      <option>option 3</option>
+                                      <option>option 4</option>
+                                      <option>option 5</option>
+                                  </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label" for="name">Customer PO:</label>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                  <input ng-model="rfc" class="form-control" type="text" placeholder="Service ID">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Priority:</label>
+                                  <select class="form-control">
+                                      <option>option 1</option>
+                                      <option>option 2</option>
+                                      <option>option 3</option>
+                                      <option>option 4</option>
+                                      <option>option 5</option>
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for ="description"> Reason for Service</label>
+                                <textarea  class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->

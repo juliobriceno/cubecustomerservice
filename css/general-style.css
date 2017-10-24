@@ -209,3 +209,8 @@
   line-height: 1.428571429;
   border-radius: 15px;
 }
+
+.head-table{
+  padding: 7px 25px;
+  background-color: #e9ecef;
+}
