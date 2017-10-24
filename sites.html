@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Help Desk::..</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <!-- bootstrap 3.3.7 -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- font Awesome -->
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <!-- Theme style -->
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link href="css/general-style.css" rel="stylesheet">
+        <!-- Angular Librerías -->
+        <script src="js/angular.js"></script>
+        <script src="js/angular-animate.js"></script>
+        <script src="js/angular-sanitize.js"></script>
+        <script src="js/angular-bootstrap-toggle.min.js"></script>
+        <!-- Librería de controlador principal -->
+        <script src="js/controller.js"></script>
+        <!-- Lists -->
+        <script src="js/Lists.js"></script>
+        <!-- JQuery -->
+        <script src="js/jquery.js"></script>
+        <!-- Angular Librerías -->
+        <script src="js/angular-drag-and-drop-lists.js"></script>
+        <!-- Boostrap Angular Librerías -->
+        <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
+        <!-- Código de Select Boostrap Angular -->
+        <script src="./select.js"></script>
+        <link rel="stylesheet" href="./select.css">
+        <script src="./demo.js"></script>
+        <!-- Librería de angular loading -->
+        <script src="js/spin.min.js"></script>
+        <script src="js/angular-loading.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
+        <!--Librería de angular tags inputs -->
+        <link rel="stylesheet" href="css/ng-tags-input.min.css" />
+        <script src="js/ng-tags-input.min.js"></script>
+        <!--Librería de file upload -->
+        <script src="js/angular-file-upload.min.js"></script>
+        <!-- Librería de boostrap toogle -->
+        <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="js/angular-bootstrap-toggle.min.js"></script>
+    </head>
+    <body class="skin-blue"  ng-controller="ctrlWarrantyLogin">
+        <!-- header logo: style can be found in header.less -->
+        <header class="header">
+            <a href="index.html" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                Logo
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <li class="dropdown tasks-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-bell-o" ></i>
+                                <span class="label label-danger">5</span>
+                            </a>
+
+                        </li>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" >
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span>Hello, Hector Hernandez </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li  class="active">
+                            <a href="index.html">
+                              <i class="fa fa-home"></i><span>Home</span>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="service-history.html">
+                              <i class="fa fa-history"></i><span>Service History</span>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="sites.html">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>Service Sites</span>
+                            </a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                              <i class="fa fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                              <i class="fa fa-sign-out"></i></i><span>Log-Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Service History
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="active"><a href="#"><i class="fa fa-history"></i><span>Service History</span></a></li>
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="container-fluid">
+                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="table-responsive">
+                            <!-- .table - Uses sparkline charts-->
+                            <table class="table table-striped">
+                              <tr>
+                                  <th>Site ID</th>
+                                  <th>Site name</th>
+                                  <th>Active</th>
+                                  <th>Account Manager</th>
+                                  <th>Account Technician</th>
+                              </tr>
+                              <tr>
+                                  <td>2979</td>
+                                  <td><a href="#">Service Site 2979</a></td>
+                                  <td >Yes</td>
+                                  <td></td>
+                                  <td></td>
+                              </tr>
+                              <tr>
+                                  <td>2973</td>
+                                  <td><a href="#">West Miami Fire Station #40</a></td>
+                                  <td>Yes</td>
+                                  <td></td>
+                                  <td>Juan C Suarez</td>
+                              </tr>
+                              <tr>
+                                  <td>2972</td>
+                                  <td><a href="#">Bay Short Grove Apartments aka Summerhill</a></td>
+                                  <td>Yes</td>
+                                  <td></td>
+                                  <td>Juan C Suarez</td>
+                              </tr>
+                               <tr>
+                                  <td>2963</td>
+                                  <td><a href="#">Harbour Park</a></td>
+                                  <td>Yes</td>
+                                  <td></td>
+                                  <td>Juan C Suarez</td>
+                              </tr>
+                              <tr>
+                                  <td>2959</td>
+                                  <td><a href="#">Zoo Miami </a></td>
+                                  <td>Yes</td>
+                                  <td></td>
+                                  <td>Ross Jimenez</td>
+                              </tr>
+                              <tr>
+                                  <td>2958</td>
+                                  <td><a href="#">Kindred Hospital Coral Gables </a></td>
+                                  <td>Yes</td>
+                                  <td></td>
+                                  <td>Ross Jimenez</td>
+                              </tr>
+                            </table><!-- /.table -->
+                        </div>
+                    </div>
+                    <!-- Widgets as boxes -->
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>

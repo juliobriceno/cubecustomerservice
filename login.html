@@ -32,6 +32,7 @@
       <!-- *****************************************Librería de angular loading***************************************** -->
       <script src="js/spin.min.js"></script>
       <script src="js/angular-loading.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
       <!-- *****************************************Librería de angular tags inputs***************************************** -->
       <script src="js/ng-tags-input.min.js"></script>
       <!-- *****************************************Librería de file upload***************************************** -->
@@ -45,6 +46,7 @@
       <script src="https://ptreesys.mx/sharedfiles/src/sweetalert.min.js"></script>
   </head>
   <body  ng-controller="ctrlWarrantyLogin">
+    <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
@@ -84,5 +86,6 @@
             </div>
         </div><!--fin row login-->
     </div><!--fin container principal login-->
+    </div>
   </body>
 </html>

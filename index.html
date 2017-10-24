@@ -1,50 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>Help Desk::..</title>
-        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <!-- bootstrap 3.3.7 -->
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <!-- font Awesome -->
-        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <!-- Ionicons -->
-        <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
-        <!-- Theme style -->
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <link href="css/general-style.css" rel="stylesheet">
-        <!-- Angular Librerías -->
-        <script src="js/angular.js"></script>
-        <script src="js/angular.min.js"></script>
-        <script src="js/angular-animate.js"></script>
-        <script src="js/angular-sanitize.js"></script>
-        <script src="js/angular-bootstrap-toggle.min.js"></script>
-        <!-- Librería de controlador principal -->
-        <script src="js/controller.js"></script>
-        <!-- Lists -->
-        <script src="js/Lists.js"></script>
-        <!-- JQuery -->
-        <script src="js/jquery.js"></script>
-        <!-- Angular Librerías -->
-        <script src="js/angular-drag-and-drop-lists.js"></script>
-        <!-- Boostrap Angular Librerías -->
-        <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
-        <!-- Código de Select Boostrap Angular -->
-        <script src="./select.js"></script>
-        <link rel="stylesheet" href="./select.css">
-        <script src="./demo.js"></script>
-        <!-- Librería de angular loading -->
-        <script src="js/spin.min.js"></script>
-        <script src="js/angular-loading.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
-        <!--Librería de angular tags inputs -->
-        <link rel="stylesheet" href="css/ng-tags-input.min.css" />
-        <script src="js/ng-tags-input.min.js"></script>
-        <!--Librería de file upload -->
-        <script src="js/angular-file-upload.min.js"></script>
-        <!-- Librería de boostrap toogle -->
-        <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
-        <script src="js/angular-bootstrap-toggle.min.js"></script>
+      <meta charset="UTF-8">
+      <title>Help Desk::..</title>
+      <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+      <!-- bootstrap 3.3.7 -->
+      <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <!-- font Awesome -->
+      <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+      <!-- Theme style -->
+      <link href="css/style.css" rel="stylesheet" type="text/css" />
+      <link href="css/general-style.css" rel="stylesheet">
+      <!-- Angular Librerías -->
+      <script src="js/angular.js"></script>
+      <script src="js/angular-animate.js"></script>
+      <script src="js/angular-sanitize.js"></script>
+      <script src="js/angular-bootstrap-toggle.min.js"></script>
+      <!-- Librería de controlador principal -->
+      <script src="js/controller.js"></script>
+      <!-- Lists -->
+      <script src="js/Lists.js"></script>
+      <!-- JQuery -->
+      <script src="js/jquery.js"></script>
+      <!-- Angular Librerías -->
+      <script src="js/angular-drag-and-drop-lists.js"></script>
+      <!-- Boostrap Angular Librerías -->
+      <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
+      <!-- Código de Select Boostrap Angular -->
+      <script src="./select.js"></script>
+      <link rel="stylesheet" href="./select.css">
+      <script src="./demo.js"></script>
+      <!-- Librería de angular loading -->
+      <script src="js/spin.min.js"></script>
+      <script src="js/angular-loading.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
+      <!--Librería de angular tags inputs -->
+      <link rel="stylesheet" href="css/ng-tags-input.min.css" />
+      <script src="js/ng-tags-input.min.js"></script>
+      <!--Librería de file upload -->
+      <script src="js/angular-file-upload.min.js"></script>
+      <!-- Librería de boostrap toogle -->
+      <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
+      <script src="js/angular-bootstrap-toggle.min.js"></script>
     </head>
     <body class="skin-blue"  ng-controller="ctrlWarrantyLogin">
         <!-- header logo: style can be found in header.less -->
@@ -56,7 +53,7 @@
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
                 <!-- Sidebar toggle button-->
-                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <a ng-click="HideMenu();" href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -76,7 +73,7 @@
                         <li class="dropdown user user-menu">
                             <a href="#" >
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Hello, Hector Hernandez </span>
+                                <span>Hello, {{NameUser}} </span>
                             </a>
                         </li>
                     </ul>
@@ -85,7 +82,7 @@
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="left-side sidebar-offcanvas">
+            <aside ng-class="LeftMenu">
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
                     <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -96,14 +93,14 @@
                             </a>
                         </li>
                         <li >
-                            <a href="#">
+                            <a href="service-history.html">
                               <i class="fa fa-history"></i><span>Service History</span>
                             </a>
                         </li>
                         <li class="treeview">
-                            <a href="#">
+                            <a href="sites.html">
                                 <i class="fa fa-bar-chart-o"></i>
-                                <span>Service Sta</span>
+                                <span>Service Sites</span>
                             </a>
                         </li>
                         <li class="treeview">
@@ -123,7 +120,7 @@
             </aside>
 
             <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">
+            <aside ng-class="RightMenu">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
@@ -238,11 +235,13 @@
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
+
+        <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
+        </div><!-- ./loading -->
+
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
-        <!-- AdminLTE App -->
-        <script src="js/AdminLTE/app.js" type="text/javascript"></script>
     </body>
 </html>

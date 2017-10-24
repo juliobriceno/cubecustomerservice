@@ -670,19 +670,164 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             // End countries control code
         }])
 
+        .controller('ctrlServiceHistory', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
+
+          var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+
+          if (typeof localStorage.cnnData2 != 'undefined'){
+
+            $loading.start('myloading');
+
+            var cnnData = JSON.parse(localStorage.cnnData2);
+            var EmployeeData = JSON.parse(localStorage.EmployeeData);
+
+            $scope.NameUser = cnnData.Name;
+
+            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+              $scope.CustomerOrderHistory = response.data.CubeFlexIntegration.DATA;
+              console.log($scope.CustomerOrderHistory);
+            })
+
+          }
+
+          $scope.fromDate = new Date();
+          $scope.fromDate.setDate($scope.fromDate.getDate()-365);
+          $scope.toDate = new Date();
+          $scope.toDate.setDate($scope.toDate.getDate()+1);
+
+          // Date Control Functions
+          $scope.today = function() {
+            $scope.dt = new Date();
+          };
+          $scope.today();
+
+          $scope.clear = function() {
+            $scope.dt = null;
+          };
+
+          $scope.inlineOptions = {
+            customClass: getDayClass,
+            minDate: new Date(),
+            showWeeks: true
+          };
+
+          $scope.dateOptions = {
+            dateDisabled: disabled,
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+          };
+
+          // Disable weekend selection
+          function disabled(data) {
+            var date = data.date,
+              mode = data.mode;
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+          }
+          $scope.toggleMin = function() {
+            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+          };
+          $scope.toggleMin();
+          $scope.open1 = function() {
+            $scope.popup1.opened = true;
+          };
+          $scope.open2 = function() {
+            $scope.popup2.opened = true;
+          };
+          $scope.setDate = function(year, month, day) {
+            $scope.dt = new Date(year, month, day);
+          };
+          $scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+          $scope.format = $scope.formats[0];
+          $scope.altInputFormats = ['M!/d!/yyyy'];
+          $scope.popup1 = {
+            opened: false
+          };
+          $scope.popup2 = {
+            opened: false
+          };
+          var tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          var afterTomorrow = new Date();
+          afterTomorrow.setDate(tomorrow.getDate() + 1);
+          $scope.events = [
+            {
+              date: tomorrow,
+              status: 'full'
+            },
+            {
+              date: afterTomorrow,
+              status: 'partially'
+            }
+          ];
+          function getDayClass(data) {
+            var date = data.date,
+              mode = data.mode;
+            if (mode === 'day') {
+              var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+              for (var i = 0; i < $scope.events.length; i++) {
+                var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                if (dayToCheck === currentDay) {
+                  return $scope.events[i].status;
+                }
+              }
+            }
+
+            return '';
+          }
+          // End Date Control Functions
+
+        }])
+
         .controller('ctrlWarrantyLogin', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
 
           $scope.User = {};
           $scope.User.name = '';
           $scope.User.password = '';
+          $scope.ShowSideBar = true;
+          $scope.LeftMenu = 'left-side sidebar-offcanvas';
+          $scope.RightMenu = 'right-side';
+
+          $scope.GetWorkOrderDetail = function(WorkOrderId){
+            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceInfo","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+              $scope.WorkOrder = response.data.CubeFlexIntegration.DATA;
+              $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceDetails","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+                $scope.WorkOrderDetail = response.data.CubeFlexIntegration.DATA;
+                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceRecomendations","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+                  $scope.WorkOrderRecomendation = response.data.CubeFlexIntegration.DATA;
+                  console.log($scope.WorkOrderRecomendation);
+                })
+              })
+            })
+          }
+
+          $scope.HideMenu = function(){
+            if ($scope.ShowSideBar == false){
+              $scope.LeftMenu = 'left-side sidebar-offcanvas';
+              $scope.RightMenu = 'right-side';
+              $scope.ShowSideBar = true;
+            }
+            else{
+              $scope.LeftMenu = 'left-side sidebar-offcanvas collapse-left';
+              $scope.RightMenu = 'right-side strech';
+              $scope.ShowSideBar = false;
+            }
+          }
 
           // Connect Cube Service
           $scope.Login = function(){
+
+            $loading.start('myloading');
 
             $http.get('http://www.cube-mia.com/api/CubeClientAuthentication.ashx?obj={"username":"' + $scope.User.name + '","password":"' + $scope.User.password + '"}', {headers: headers}).then(function (response) {
                 var cnnData2 = response.data.CubeAuthentication.DATA;
 
                 if (typeof cnnData2 == 'undefined'){
+                  $loading.finish('myloading');
                   swal("Cube Interface", "Invalid Credentials.");
                 }
                 else{
@@ -698,58 +843,68 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           if (typeof localStorage.cnnData2 != 'undefined'){
 
+            $loading.start('myloading');
+
             var cnnData = JSON.parse(localStorage.cnnData2);
 
-            console.log(cnnData);
+            $scope.NameUser = cnnData.Name;
 
             $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
 
-                console.log(response);
+                var EmployeeData = response.data.CubeFlexIntegration.DATA;
+                localStorage.EmployeeData = JSON.stringify(EmployeeData);
 
-                var CustomerData = response.data.CubeFlexIntegration.DATA;
-
-                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
-
-                  console.log(response);
+                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
                   var CustomerData = response.data.CubeFlexIntegration.DATA;
 
                   CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
 
-                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + CustomerData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
-                    console.log(response);
-                    
                     $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
 
-                    $scope.lists = [
-                        {
-                            label: "Men",
-                            allowedTypes: ['man'],
-                            max: 4,
-                            people: [
-                                {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List", data: [CustomerData]},
-                                {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"}
-                            ]
-                        },
-                        {
-                            label: "Women",
-                            allowedTypes: ['woman'],
-                            max: 4,
-                            people: [
-                                {name: "Gráfico 1", type: "woman",  page: "table-billing.html", title:"Billing Statement"},
-                                {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}
-                            ]
-                        },
-                        {
-                            label: "People",
-                            allowedTypes: ['man', 'woman'],
-                            max: 6,
-                            people: [
-                                {name: "Grafico 2", type: "man",  page: "table-notificacion.html", title:"Recent Notificacion from you BMS"}
-                            ]
-                        }
-                    ];
+                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_MessagesBoard","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+                      $scope.Knowleges = response.data.CubeFlexIntegration.DATA;
+                    })
+
+                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceOpen_Recomendations","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+
+                      var CustomerRecomendation = response.data.CubeFlexIntegration.DATA;
+
+                      $loading.finish('myloading');
+
+                      $scope.lists = [
+                          {
+                              label: "Men",
+                              allowedTypes: ['man'],
+                              max: 4,
+                              people: [
+                                  {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List", data: [CustomerData]},
+                                  {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"}
+                              ]
+                          },
+                          {
+                              label: "Women",
+                              allowedTypes: ['woman'],
+                              max: 4,
+                              people: [
+                                  {name: "Gráfico 1", type: "woman",  page: "table-billing.html", title:"Billing Statement"},
+                                  {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}
+                              ]
+                          },
+                          {
+                              label: "People",
+                              allowedTypes: ['man', 'woman'],
+                              max: 6,
+                              people: [
+                                  {name: "Grafico 2", type: "man",  page: "table-notificacion.html", title:"Recent Notificacion from you BMS"}
+                              ]
+                          }
+                      ];
+
+
+                    })
 
 
                   })
