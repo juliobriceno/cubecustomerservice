@@ -3,22 +3,20 @@
 }
 
 .dw-loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    text-align: center;
-    display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  display: none;
 
 }
-
-
 
 .dw-loading:before {
     content: '';
     display: inline-block;
-    height: 100%;
+    height: 100vh;
     vertical-align: middle;
 }
 

@@ -127,18 +127,6 @@
             <aside class="right-side">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-
-                  <div class="well head-table">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <label for=""> <br></label>
-                      <div class="form-group">
-                        <input ng-change="SearchSites();" ng-model="SearchText" type="text" class="form-control" placeholder="Search by site name">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                     <h1>
                         Service Sites
                     </h1>
@@ -148,6 +136,18 @@
                 </section>
                 <!-- Main content -->
                 <section class="content">
+                  <div class="well head-table">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="">Search by site name:</label>
+                      <div class="input-group">
+                            <span class="input-group-addon "><span class="glyphicon glyphicon-search"></span></span>
+                          <input ng-change="SearchSites();" ng-model="SearchText" type="text" class="form-control" placeholder="Enter name">
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
 
                     <div class="container-fluid">
                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
