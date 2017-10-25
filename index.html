@@ -79,10 +79,9 @@
                               <i class="fa fa-cog" aria-hidden="true"></i> Add Windows
                             </a>
                             <ul class="dropdown-menu float-right">
-                              <li><a href="">Open Service Work Order List</a></li>
-                              <li><a href="">Knowlege Basic</a></li>
-                              <li><a href="">Billing Statement</a></li>
-                              <li><a href="">Open Recomendation</a></li>
+                              <li ng-click="Rows[0].Columns.push(ListRows[0])"><a href="">Open Service Work Order List</a></li>
+                              <li ng-click="Rows[0].Columns.push(ListRows[1])"><a href="">Knowlege Basic</a></li>
+                              <li ng-click="Rows[0].Columns.push(ListRows[2])"><a href="">Open Recomendation</a></li>
                             </ul>
                           </li>
 
@@ -126,7 +125,7 @@
                                 <span>Settings</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li ng-click="CloseSession();" class="treeview">
                             <a href="#">
                               <i class="fa fa-sign-out"></i></i><span>Log-Out</span>
                             </a>
@@ -275,7 +274,7 @@
                                 <label class="control-label" for="name">Customer PO:</label>
                                 <div class="input-group">
                                   <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                  <input ng-model="rfc" class="form-control" type="text" placeholder="Service ID">
+                                  <input ng-model="CustomerPO" class="form-control" type="text" placeholder="Service ID">
                                 </div>
                               </div>
                             </div>
@@ -293,14 +292,14 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for ="description"> Reason for Service</label>
-                                <textarea  class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
+                                <textarea ng-model="ReasonForService" class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
                               </div>
                             </div>
                           </div>
                         </div>
                         <div class="modal-footer">
                           <button data-dismiss="modal" class="btn btn-default btn-opciones "><span class="glyphicon glyphicon-floppy-remove"></span> Cancel</button>
-                          <button  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+                          <button ng-click="CreateOrder();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
                         </div><!--end modal footer-->
                       </div>
 
@@ -308,6 +307,7 @@
                   </div>
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
+          </div><!-- ./wrapper -->
         </div><!-- ./wrapper -->
 
         <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
