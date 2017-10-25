@@ -42,6 +42,8 @@
       <!-- Librería de boostrap toogle -->
       <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
       <script src="js/angular-bootstrap-toggle.min.js"></script>
+      <!-- Lodash -->
+      <script src="js/lodash.min.js"></script>
     </head>
     <body class="skin-blue"  ng-controller="ctrlWarrantyLogin">
         <!-- header logo: style can be found in header.less -->
@@ -79,9 +81,9 @@
                               <i class="fa fa-cog" aria-hidden="true"></i> Add Windows
                             </a>
                             <ul class="dropdown-menu float-right">
-                              <li ng-click="Rows[0].Columns.push(ListRows[0])"><a href="">Open Service Work Order List</a></li>
-                              <li ng-click="Rows[0].Columns.push(ListRows[1])"><a href="">Knowlege Basic</a></li>
-                              <li ng-click="Rows[0].Columns.push(ListRows[2])"><a href="">Open Recomendation</a></li>
+                              <li ng-click="AddWidget(0);"><a href="">Open Service Work Order List</a></li>
+                              <li ng-click="AddWidget(1);"><a href="">Knowlege Basic</a></li>
+                              <li ng-click="AddWidget(2);"><a href="">Open Recomendation</a></li>
                             </ul>
                           </li>
 
@@ -221,12 +223,11 @@
                         <div ng-repeat="Row in Rows" >
                           <ul dnd-list="Row.Columns"
                               class="row ">
-                              <li ng-repeat="Column in Row.Columns"
+                              <li ng-repeat="Column in Row.Columns track by Column.ID"
                                   dnd-draggable="Column"
                                   dnd-type="Column.type"
                                   dnd-disable-if="Column.type == 'unknown'"
-                                  dnd-moved="Row.Columns.splice($index, 1)"
-                                  dnd-dragend="DragFinish(testItem, event, true)"
+                                  dnd-moved="DragFinish(testItem, event, true)"
                                   class="col-md-6 ng-scope"
                                   >
                                   <dnd-nodrag class="box box-primary">

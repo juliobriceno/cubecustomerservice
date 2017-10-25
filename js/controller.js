@@ -926,9 +926,9 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                         $scope.Rows = [
                             {
                                 Columns: [
-                                    {name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
-                                    {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
-                                    {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"},
+                                    {ID: 4, name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
+                                    {ID: 5, name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
+                                    {ID: 6, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"},
                                 ]
                             }
                         ];
@@ -948,9 +948,14 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           }
 
-          $scope.ListRows = [{name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
-          {name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
-          {name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}]
+          $scope.AddWidget = function(WidgetId){
+            $scope.Rows[0].Columns.push($scope.ListRows[WidgetId])
+            localStorage.Rows = JSON.stringify($scope.Rows);
+          }
+
+          $scope.ListRows = [{ID: 1, name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
+          {ID: 2, name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
+          {ID: 3, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}]
 
           $scope.SearchSites = function(){
 
@@ -987,6 +992,9 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           };
 
           $scope.DragFinish = function(index, item, external) {
+            console.log($scope.Rows[0].Columns);
+            $scope.Rows[0].Columns = _.uniqBy($scope.Rows[0].Columns, 'ID');
+            console.log($scope.Rows[0].Columns);
             localStorage.Rows = JSON.stringify($scope.Rows);
           };
 
