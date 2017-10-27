@@ -9,11 +9,11 @@
               <th>Site Name</th>
               <th>Status</th>
           </tr>
-          <tr>
-              <td><a href="#id_table_order"  data-toggle="modal"><i class="-alt fa  fa-eye fa-fw"></i>{{Recomendations.ID}}</a></td>
-              <td>{{Recomendations.DESCRIPTION}}</td>
-              <td>{{Recomendations.SITENAME}}</td>
-              <td>{{Recomendations.STATUS}}</td>
+          <tr ng-repeat="RecomendationItem in Recomendations">
+              <td><a href="#id_table_order"  data-toggle="modal"><i class="-alt fa  fa-eye fa-fw"></i>{{RecomendationItem.ID}}</a></td>
+              <td>{{RecomendationItem.DESCRIPTION}}</td>
+              <td>{{RecomendationItem.SITENAME}}</td>
+              <td>{{RecomendationItem.STATUS}}</td>
           </tr>
       </table><!-- /.table -->
     </div>

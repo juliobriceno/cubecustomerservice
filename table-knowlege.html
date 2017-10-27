@@ -1,11 +1,11 @@
 <div class="row">
   <ul>
-    <li style="margin-left:-40px; margin-top:10px;">
+    <li ng-repeat="KnowlegeItem in Knowleges" style="margin-left:-40px; margin-top:10px;">
       <div class="">
         <div class="timeline-heading">
-          <h4 class="timeline-title"><a href="#">{{Knowleges.MESSAGETITLE}}</a></h4>
+          <h4 class="timeline-title"><a href="#">{{KnowlegeItem.MESSAGETITLE}}</a></h4>
         </div>
-        <p>{{Knowleges.MESSAGEDESCRIPTION}}</p>
+        <p>{{KnowlegeItem.MESSAGEDESCRIPTION}}</p>
       </div>
       <hr>
     </li>

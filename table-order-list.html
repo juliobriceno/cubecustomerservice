@@ -10,12 +10,12 @@
               <th>Status</th>
               <th>Schedule Date</th>
           </tr>
-          <tr>
-              <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(CustomerData.Id);"><i class="-alt fa  fa-eye fa-fw"></i>{{CustomerData.Id}}</a></td>
-              <td>{{CustomerData.Reported_Issue}}</td>
-              <td>{{CustomerData.Service_Tech}}</td>
-              <td>{{CustomerData.STATUSNAME}}</td>
-              <td>{{CustomerData.Schedule_Date | date:'medium'}}</td>
+          <tr ng-repeat="CustomerDataItem in CustomerData">
+              <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(CustomerDataItem.Id);"><i class="-alt fa  fa-eye fa-fw"></i>{{CustomerDataItem.Id}}</a></td>
+              <td>{{CustomerDataItem.Reported_Issue}}</td>
+              <td>{{CustomerDataItem.Service_Tech}}</td>
+              <td>{{CustomerDataItem.STATUSNAME}}</td>
+              <td>{{CustomerDataItem.Schedule_Date | date:'medium'}}</td>
           </tr>
       </table><!-- /.table -->
     </div>
@@ -28,7 +28,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
         <div class="titulo-modal">
-          <h5 class="modal-title"><i class="fa fa-tasks" aria-hidden="true"></i> <label>Service: 4158-Cube Miami Office  Estimate:4988</label></span></h5>
+          <h5 class="modal-title"><i class="fa fa-tasks" aria-hidden="true"></i> <label>{{'Service Id: ' + WorkOrder.SERVICEID}}</label></span></h5>
         </div>
       </div><!--fin panel modal header-->
       <div class="row">

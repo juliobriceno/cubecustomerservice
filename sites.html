@@ -77,7 +77,6 @@
                         <li class="dropdown user user-menu">
                             <a href="#" >
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Hello, {{NameUser}} </span>
                             </a>
                         </li>
                     </ul>
@@ -113,7 +112,7 @@
                                 <span>Settings</span>
                             </a>
                         </li>
-                        <li class="treeview">
+                        <li ng-click="CloseSession();" class="treeview">
                             <a href="#">
                               <i class="fa fa-sign-out"></i></i><span>Log-Out</span>
                             </a>
