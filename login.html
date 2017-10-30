@@ -44,47 +44,50 @@
       <!-- *****************************************Alertas***************************************** -->
       <link rel="stylesheet" type="text/css" href="https://ptreesys.mx/sharedfiles/src/sweetalert.css">
       <script src="https://ptreesys.mx/sharedfiles/src/sweetalert.min.js"></script>
+
   </head>
-  <body  ng-controller="ctrlWarrantyLogin">
+  <body  ng-controller="ctrlWarrantyLogin" class="background-login">
     <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="wrap-login">
-                    <div class="login-wrap">
-                        <div class="imagen-login">
-                            <img src="img/cube.png" class="img-responsive center-block" alt="Logo-in-corp" width="150" height="150" />
-                        </div>
-                        <form>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-group margen-input">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <label for="user" class="sr-only control-label">User</label>
-                                        <input ng-model="User.name" type="text" class="form-control" placeholder="User">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-group margen-input">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <label for="pass" class="sr-only control-label">Password</label>
-                                        <input ng-model="User.password" type="password" class="form-control" data-type="password" placeholder="Password">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="footer-login pull-right">
-                            </div>
-                            <div class="margen-input ">
-                                <button ng-click="Login();"  type="submit" class="btn btn-primary btn-block ">INGRESAR</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+      <div class="container">
+        <br><br><br>
+        <div class=" col-md-10 col-lg-10 col-md-offset-1 " >
+          <div class="col-md-6 left-side" style="background-color:#fff;" >
+            <div class="head-login">
             </div>
-        </div><!--fin row login-->
-    </div><!--fin container principal login-->
+            <!--Form with header-->
+            <div class="form">
+              <h3 class="text-center">Sign In</h3>
+              <br>
+              <div class="form-group">
+                <label  for="user">Username:</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                  <input ng-model="User.name" type="text" class="form-control" placeholder="User">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="pass">Password</label>
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
+                  <input ng-model="User.password" type="password" class="form-control" data-type="password" placeholder="Password">
+                </div>
+              </div>
+              <div class="footer-login pull-right">
+                <a  href="#"></a> <br>
+              </div>
+              <br>
+              <div class="margen-input" >
+                <button ng-click="Login();"  type="submit" class="btn btn-blue btn-block ">Sign In</button>
+              </div>
+            </div><!--fin row login-->
+          </div><!--col-sm-6-->
+          <div class="col-md-6 right-side image-login" style=""  >
+            <img src="img/cubenew.png" class="img-responsive center-block text-center" alt="Logo-in-corp" width="150" height="150" />
+            <br>
+            <p class="text-center">Customer's services</p>
+          </div><!--fin container principal login-->
+        </div>
+      </div>
     </div>
   </body>
 </html>
