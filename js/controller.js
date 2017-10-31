@@ -729,6 +729,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
               $scope.CustomerOrderHistory = response.data.CubeFlexIntegration.DATA;
 
+              $loading.finish('myloading');
+
               $scope.CustomerOrderHistory.forEach(function(element) {
                 element.Schedule_Date = new Date(element.Schedule_Date);
               });
@@ -870,11 +872,13 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           }
 
           $scope.GetWorkOrderDetail = function(WorkOrderId){
+            $loading.start('myloading');
             $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceInfo","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
               $scope.WorkOrder = response.data.CubeFlexIntegration.DATA;
               $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceDetails","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
                 $scope.WorkOrderDetail = getArray(response.data.CubeFlexIntegration.DATA);
                 $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceRecomendations","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+                  $loading.finish('myloading');
                   $scope.WorkOrderRecomendation = response.data.CubeFlexIntegration.DATA;
                 })
                 .catch(function (data) {
@@ -966,6 +970,27 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
                   CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
 
+                  // Get service sites for customer to populate select sites in create new order
+                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                    $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
+                    $scope.CustomerSitesFiltered = $scope.CustomerSites;
+                  })
+                  .catch(function (data) {
+                    console.log('Error 27');
+                    console.log(data);
+                    swal("Cube Service", "Unexpected error. Check console Error 27.");
+                  });
+
+                  // GetPriorities to populate select Priorities in create new order
+                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+                    $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
+                  })
+                  .catch(function (data) {
+                    console.log('Error 28');
+                    console.log(data);
+                    swal("Cube Service", "Unexpected error. Check console Error 28.");
+                  });
+
                   $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
                     $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
@@ -978,27 +1003,6 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                       console.log('Error 26');
                       console.log(data);
                       swal("Cube Service", "Unexpected error. Check console Error 26.");
-                    });
-
-                    // Get service sites for customer to populate select sites in create new order
-                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
-                      $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
-                      $scope.CustomerSitesFiltered = $scope.CustomerSites;
-                    })
-                    .catch(function (data) {
-                      console.log('Error 27');
-                      console.log(data);
-                      swal("Cube Service", "Unexpected error. Check console Error 27.");
-                    });
-
-                    // GetPriorities to populate select Priorities in create new order
-                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
-                      $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
-                    })
-                    .catch(function (data) {
-                      console.log('Error 28');
-                      console.log(data);
-                      swal("Cube Service", "Unexpected error. Check console Error 28.");
                     });
 
                     $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceOpen_Recomendations","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
