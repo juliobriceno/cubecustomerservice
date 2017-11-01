@@ -7,15 +7,15 @@
       <!--Theme style-->
       <link rel="stylesheet" href="css/general-style.css" />
       <!--  bootstrap 3.3.7 -->
-      <link rel="stylesheet" href="css/bootstrap.min.css" />
-      <!-- *****************************************Lists***************************************** -->
-      <script src="js/Lists.js"></script>
+      <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
       <!--Boostrap JQuery -->
       <script src="js/jquery.js"></script>
-      <!-- *****************************************Bootstrap.Códigos***************************************** -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
       <!--Boostrap JS Para animaciones-->
       <script src="js/bootstrap.min.js"></script>
+      <!--Listas-->
+      <script src="js/Lists.js"></script>
       <!-- font Awesome -->
       <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
       <!-- *****************************************Angular Librerías***************************************** -->
@@ -48,46 +48,58 @@
   </head>
   <body  ng-controller="ctrlWarrantyLogin" class="background-login">
     <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
+      <header>
+      <nav class="navbar navbar-default navbar-fixed-top color-header" role="navigation" style="padding:15px 15px 10px 0;">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="img/cubenew.png" class="img-responsive center-block text-center img-margen" alt="Logo-cube" width="105" height="40" /></a>
+          </div>
+        </div>
+      </nav>
+    </header>
       <div class="container">
-        <br><br><br>
-        <div class=" col-md-10 col-lg-10 col-md-offset-1 " >
-          <div class="col-md-6 left-side" style="background-color:#fff;" >
-            <div class="head-login">
+        <div class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" style="padding-top:150px;">
+          <h2 class="text-center"> Log in</h2>
+          <form  class="form" >
+            <div class="form-group">
+              <input ng-model="User.name" type="text" class="form-control  space-input" placeholder="Username">
             </div>
-            <!--Form with header-->
-            <div class="form">
-              <h3 class="text-center">Sign In</h3>
-              <br>
-              <div class="form-group">
-                <label  for="user">Username:</label>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                  <input ng-model="User.name" type="text" class="form-control" placeholder="User">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="pass">Password</label>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
-                  <input ng-model="User.password" type="password" class="form-control" data-type="password" placeholder="Password">
-                </div>
-              </div>
-              <div class="footer-login pull-right">
-                <a  href="#"></a> <br>
-              </div>
-              <br>
-              <div class="margen-input" >
-                <button ng-click="Login();"  type="submit" class="btn btn-blue btn-block ">Sign In</button>
-              </div>
-            </div><!--fin row login-->
-          </div><!--col-sm-6-->
-          <div class="col-md-6 right-side image-login" style=""  >
-            <img src="img/cubenew.png" class="img-responsive center-block text-center" alt="Logo-in-corp" width="150" height="150" />
+            <div class="form-group space-input">
+              <input ng-model="User.password" type="password" class="form-control  space-input" data-type="password" placeholder="Password">
+            </div>
+            <div class="footer-login pull-right">
+              <a href="#"> Forgot password?</a>
+            </div>
             <br>
-            <p class="text-center">Customer's services</p>
-          </div><!--fin container principal login-->
+            <div class="margen-input" >
+              <button ng-click="Login();" type="submit" class="btn btn-blue btn-block">Sign In</button>
+            </div>
+          </form>
         </div>
       </div>
+
     </div>
+    <footer>
+      <div class="container">
+        <div class="row">
+         <div class="col-md-12 text-center">
+            <h4 class="copy-footer">
+                © 2017 Cube.
+            </h4>
+            <a href="#" class="link-footer">Term of Service </a>
+            <br>
+            <a href="#" class="link-footer">Cookie Policy</a>
+         </div>
+
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

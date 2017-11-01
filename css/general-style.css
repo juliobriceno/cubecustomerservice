@@ -183,27 +183,18 @@
 .btn-blue{
   background-color: #12A5DD;
   color: #fff;
+  padding: 11px 29px !important;
 }
 .btn-blue:hover{
   background-color: #1293C5;
   color: #fff !important;
+
 }
 
 .background-login{
-  background: rgba(33,95,171,1);
-  background: -moz-linear-gradient(left, rgba(33,95,171,1) 0%, rgba(33,95,171,1) 16%, rgba(12,168,221,1) 100%);
-  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(33,95,171,1)), color-stop(16%, rgba(33,95,171,1)), color-stop(100%, rgba(12,169,221,1)));
-  background: -webkit-linear-gradient(left, rgba(33,95,171,1) 0%, rgba(33,95,171,1) 16%, rgba(12,168,221,1) 100%);
-  background: -o-linear-gradient(left, rgba(33,95,171,1) 0%, rgba(33,95,171,1) 16%, rgba(12,168,221,1) 100%);
-  background: -ms-linear-gradient(left, rgba(33,95,171,1) 0%, rgba(33,95,171,1) 16%, rgba(12,168,221,1) 100%);
-  background: linear-gradient(to right, rgba(33,95,171,1) 0%, rgba(33,95,171,1) 16%, rgba(12,168,221,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#215fab', endColorstr='#0ca9dd', GradientType=1 );
+background-color:#F4F5F5;
 }
 
-.form-group .input-group-addon {
-  border-radius: 0;
-  background-color: #f4f4f4;
-}
 .form-control  {
   border-radius: 0 !important;
 }
@@ -222,6 +213,9 @@
   border-radius: 15px;
 }
 
+.img-margen{
+  margin-top:-10px;
+}
 .head-table{
   padding: 7px 25px;
   background-color: #e9ecef;
@@ -229,4 +223,43 @@
 
 .point{
   cursor:pointer;
+}
+
+.color-header{
+  background: #fff;
+  border: none;
+  margin-bottom: 0;
+  box-shadow: 0 1px 6px rgba(57,73,76,.35);
+}
+.space-input{
+  margin-bottom:25px;
+}
+
+footer{
+   background-color: #215FAB;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    text-align: center;
+    color: #CCC;
+}
+
+.footer-login{
+  margin-top: -12px;
+}
+
+.copy-footer{
+  margin-top: 20px;
+}
+.link-footer{
+  color: #A1A1A1;
+}
+.link-footer:hover{
+  color:#12A5DD;
+}
+
+.footer-login a {
+  color:#12A5DD;
 }
