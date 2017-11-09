@@ -1025,7 +1025,20 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                           ];
                         }
                         else{
-                          $scope.Rows = JSON.parse(lRows[0].CONFIGURATION.replace(/@@@/gi, '"'));
+                          try {
+                            $scope.Rows = JSON.parse(lRows[0].CONFIGURATION.replace(/@@@/gi, '"'));
+                          }
+                          catch(err) {
+                            $scope.Rows = [
+                                {
+                                    Columns: [
+                                        {ID: 4, name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
+                                        {ID: 5, name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
+                                        {ID: 6, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"},
+                                    ]
+                                }
+                            ];
+                          }
                         }
                       })
                       .catch(function (data) {
