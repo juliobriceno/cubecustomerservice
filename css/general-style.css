@@ -212,9 +212,11 @@ background-color:#F4F5F5;
   line-height: 1.428571429;
   border-radius: 15px;
 }
-
 .img-margen{
   margin-top:-10px;
+}
+.img-logo{
+  margin-top:1%;
 }
 .head-table{
   padding: 7px 25px;

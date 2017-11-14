@@ -1144,7 +1144,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             $loading.start('myloading');
             $http.get(urlRq, {headers: headers}).then(function (response) {
-              if (response.data.responseCode == '200'){
+              if (response.data.responseCode.substring(0, 3) == '200'){
                 $loading.finish('myloading');
                 swal("Cube Service", "Service was created.");
                 $scope.CustomerPO = '';
