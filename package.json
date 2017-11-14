@@ -8,6 +8,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "client-sessions": "^0.8.0",
     "comma-separated-values": "^3.6.4",
     "express": "^4.13.4",
     "file-type": "^6.1.0",
