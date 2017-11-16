@@ -47,6 +47,8 @@
       <!-- Msgs Apps -->
       <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
       <script src="js/sweetalert.min.js"></script>
+      <!-- Pattern -->
+      <script src="js/ng-pattern-restrict.js"></script>
     </head>
     <body class="skin-blue"  ng-controller="ctrlWarrantyLogin">
         <!-- header logo: style can be found in header.less -->
@@ -86,7 +88,7 @@
                             <ul class="dropdown-menu float-right">
                               <li ng-click="AddWidget(0);"><a href="">Open Service Work Order List</a></li>
                               <li ng-click="AddWidget(1);"><a href="">Knowlege Basic</a></li>
-                              <li ng-click="AddWidget(2);"><a href="">Open Recomendation</a></li>
+                              <li ng-click="AddWidget(2);"><a href="">Open Recommendation</a></li>
                             </ul>
                           </li>
 
@@ -212,7 +214,7 @@
                                         1
                                     </h3>
                                     <p>
-                                        Open Recomendations
+                                        Open Recommendations
                                     </p>
                                 </div>
                                 <div class="icon">
@@ -278,7 +280,7 @@
                                 <label class="control-label" for="name">Customer PO:</label>
                                 <div class="input-group">
                                   <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                  <input ng-model="CustomerPO" class="form-control" type="text" placeholder="Service ID">
+                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Service ID">
                                 </div>
                               </div>
                             </div>

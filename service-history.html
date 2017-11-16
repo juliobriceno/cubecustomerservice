@@ -42,6 +42,8 @@
         <!-- Librería de boostrap toogle -->
         <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
         <script src="js/angular-bootstrap-toggle.min.js"></script>
+        <!-- Pattern -->
+        <script src="js/ng-pattern-restrict.js"></script>
     </head>
     <body class="skin-blue"  ng-controller="ctrlServiceHistory">
         <!-- header logo: style can be found in header.less -->
@@ -281,7 +283,7 @@
                             <label class="control-label" for="name">Service ID:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SERVICEID" class="form-control" type="text" placeholder="Service ID">
+                              <input ng-model="WorkOrder.SERVICEID" ng-disabled="true" class="form-control" type="text" placeholder="Service ID">
                             </div>
                           </div>
                         </div>
@@ -292,7 +294,7 @@
                             <label class="control-label" for="name">Site Name:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SITENAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Name">
+                              <input ng-model="WorkOrder.SITENAME" ng-disabled="true" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Name">
                             </div>
                           </div>
                         </div>
@@ -301,7 +303,7 @@
                             <label class="control-label" for="name">Service Type:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-tag" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SERVICETYPE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Service Type">
+                              <input ng-model="WorkOrder.SERVICETYPE" ng-disabled="true" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Service Type">
                             </div>
                           </div>
                         </div>
@@ -312,7 +314,7 @@
                             <label class="control-label" for="name">Site Address:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SITEADDRESS" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Address">
+                              <input ng-disabled="true" ng-model="WorkOrder.SITEADDRESS" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Address">
                             </div>
                           </div>
                         </div>
@@ -321,7 +323,7 @@
                             <label class="control-label" for="name">Category:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-tasks" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SERVICECATEGORY" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Category">
+                              <input ng-disabled="true" ng-model="WorkOrder.SERVICECATEGORY" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Category">
                             </div>
                           </div>
                         </div>
@@ -332,7 +334,7 @@
                             <label class="control-label" for="name">Request By:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.RESPONSIBLENAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Request By">
+                              <input ng-disabled="true" ng-model="WorkOrder.RESPONSIBLENAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Request By">
                             </div>
                           </div>
                         </div>
@@ -341,7 +343,7 @@
                             <label class="control-label" for="name">Responsible:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.RESPONSIBLELASTNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Responsible">
+                              <input ng-disabled="true" ng-model="WorkOrder.RESPONSIBLELASTNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Responsible">
                             </div>
                           </div>
                         </div>
@@ -352,7 +354,7 @@
                             <label class="control-label" for="name">Customer PO:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.CUSTOMERPO" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Customer PO">
+                              <input ng-disabled="true" ng-model="WorkOrder.CUSTOMERPO" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Customer PO">
                             </div>
                           </div>
                         </div>
@@ -361,7 +363,7 @@
                             <label class="control-label" for="name">Resources:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-link" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.REASONFORSERVICE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Resources">
+                              <input ng-disabled="true" ng-model="WorkOrder.REASONFORSERVICE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Resources">
                             </div>
                           </div>
                         </div>
@@ -372,7 +374,7 @@
                             <label class="control-label" for="name">Request Date:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.REQDATE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Request Date">
+                              <input ng-disabled="true" ng-model="WorkOrder.REQDATE | date:'medium'" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Request Date">
                             </div>
                           </div>
                         </div>
@@ -381,7 +383,7 @@
                             <label class="control-label" for="name">Schedule Date:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SCHEDULEDATE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Schedule Date">
+                              <input ng-disabled="true" ng-model="WorkOrder.SCHEDULEDATE | date:'medium'" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Schedule Date">
                             </div>
                           </div>
                         </div>
@@ -406,7 +408,7 @@
                             <label class="control-label" for="name">Status:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-tachometer" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.STATUSNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Status">
+                              <input ng-disabled="true" ng-model="WorkOrder.STATUSNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Status">
                             </div>
                           </div>
                         </div>
@@ -417,7 +419,7 @@
                             <label class="control-label" for="name">Quote:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-file" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.QUOTE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Quote">
+                              <input ng-disabled="true" ng-model="WorkOrder.QUOTE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Quote">
                             </div>
                           </div>
                         </div>
@@ -426,7 +428,7 @@
                             <label class="control-label" for="name">Priority:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.PRIORITYANAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Priority">
+                              <input ng-disabled="true" ng-model="WorkOrder.PRIORITYANAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Priority">
                             </div>
                           </div>
                         </div>
@@ -437,7 +439,7 @@
                             <label class="control-label" for="name">Created By:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.CREATEDBYLASTNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Created By">
+                              <input ng-disabled="true" ng-model="WorkOrder.CREATEDBYLASTNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Created By">
                             </div>
                           </div>
                         </div>
@@ -446,7 +448,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label for ="description"> Reason for Service</label>
-                            <textarea ng-model="WorkOrder.REASONFORSERVICE"  class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
+                            <textarea ng-disabled="true" ng-model="WorkOrder.REASONFORSERVICE"  class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
                           </div>
                         </div>
                       </div>
@@ -486,7 +488,7 @@
                               <td>{{WorkOrderDetailItem.PROBLEMTETX}}</td>
                               <td>{{WorkOrderDetailItem.RESOLUTIONTEXT}}</td>
                               <td class="text-center"><input id="checkbox1" type="checkbox"></td>
-                              <td>{{WorkOrderDetailItem.WORKCOMPLETEDDATE}}</td>
+                              <td>{{WorkOrderDetailItem.WORKCOMPLETEDDATE | date:'medium'}}</td>
                             </tr>
                           </table><!-- /.table -->
                         </div>
@@ -521,7 +523,7 @@
                                 <td>{{WorkOrderRecomendation.OBSERVATION}}</td>
                                 <td>{{WorkOrderRecomendation.STATUSNAME}}</td>
                                 <td>{{WorkOrderRecomendation.USERNAME}}</td>
-                                <td>{{WorkOrderRecomendation.TIMESTAMP}}</td>
+                                <td>{{WorkOrderRecomendation.TIMESTAMP | date:'medium'}}</td>
                                 <td>{{WorkOrderRecomendation.DESCRIPTION}}</td>
                               </tr>
                             </table><!-- /.table -->

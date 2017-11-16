@@ -2,7 +2,7 @@ angular.element(function() {
     angular.bootstrap(document, ['WarrantyModule']);
 });
 
-angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngTagsInput', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ui.select', 'ui.toggle', 'dndLists'])
+angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngTagsInput', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ui.select', 'ui.toggle', 'dndLists', 'ngPatternRestrict'])
 
         .controller('ctrlWarrantyHome', ['$scope', '$http', '$loading', '$uibModal', 'FileUploader', function ($scope, $http, $loading, $uibModal, FileUploader) {
             // Base de data
@@ -1019,7 +1019,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                                   Columns: [
                                       {ID: 4, name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
                                       {ID: 5, name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
-                                      {ID: 6, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"},
+                                      {ID: 6, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recommendation on you sites"},
                                   ]
                               }
                           ];
@@ -1034,7 +1034,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                                     Columns: [
                                         {ID: 4, name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
                                         {ID: 5, name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
-                                        {ID: 6, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"},
+                                        {ID: 6, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recommendation on you sites"},
                                     ]
                                 }
                             ];
@@ -1097,7 +1097,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.ListRows = [{ID: 1, name: "Tabla 1", type: "man", page: "table-order-list.html", title: "Open Service Work Order List"},
           {ID: 2, name: "Tabla 2", type: "man", page: "table-knowlege.html", title:"Knowlege Basic"},
-          {ID: 3, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recomendation on you sites"}]
+          {ID: 3, name: "Tabla 3", type: "woman", page: "table-recomendations.html", title: "Open Recommendation on you sites"}]
 
           $scope.SearchSites = function(){
 
