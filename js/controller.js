@@ -723,6 +723,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             var cnnData = JSON.parse(localStorage.cnnData2);
             var EmployeeData = JSON.parse(localStorage.EmployeeData);
+            $scope.cnnData = cnnData;
 
             $scope.NameUser = cnnData.Name;
 
