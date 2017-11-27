@@ -165,6 +165,7 @@
                                   <th style="width:5%;"></th>
                                   <th>ID</th>
                                   <th>Reported Issue</th>
+                                  <th>Site Name</th>
                                   <th>Service Technician</th>
                                   <th>Status</th>
                                   <th>Schedule Date</th>
@@ -173,6 +174,7 @@
                                   <td class="text-center"><button type="button" class="btn btn-info btn-sm btn-circle"><i class="fa fa-info" aria-hidden="true"></i></button></td>
                                   <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(CustomerOrderHistoryItem.Id);" >{{CustomerOrderHistoryItem.Id}}</a></td>
                                   <td>{{CustomerOrderHistoryItem.Reported_Issue}}</td>
+                                  <td>{{CustomerOrderHistoryItem.ITEMNAME}}</td>
                                   <td>{{CustomerOrderHistoryItem.Service_Tech}}</td>
                                   <td>{{CustomerOrderHistoryItem.STATUSNAME}}</td>
                                   <td>{{CustomerOrderHistoryItem.Schedule_Date | date:'medium'}}</td>
