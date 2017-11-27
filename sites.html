@@ -77,10 +77,12 @@
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
-                            <a href="#" >
-                                <i class="glyphicon glyphicon-user"></i>
-                            </a>
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span> Hello, {{NameUser}} </span> <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li ng-click="CloseSession();"><a href="#"><i class="fa fa-fw fa-power-off"></i> Close session</a></li>
+                          </ul>
                         </li>
+
                     </ul>
                 </div>
             </nav>
@@ -106,17 +108,6 @@
                             <a href="sites.html">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>Service Sites</span>
-                            </a>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                              <i class="fa fa-cog"></i>
-                                <span>Settings</span>
-                            </a>
-                        </li>
-                        <li ng-click="CloseSession();" class="treeview">
-                            <a href="#">
-                              <i class="fa fa-sign-out"></i></i><span>Log-Out</span>
                             </a>
                         </li>
                     </ul>
@@ -162,8 +153,8 @@
                               </tr>
                               <tr ng-repeat="CustomerSitesFilteredItem in CustomerSitesFiltered">
                                   <td>{{CustomerSitesFilteredItem.ID}}</td>
-                                  <td><a href="#">{{CustomerSitesFilteredItem.SITENAME}}</a></td>
-                                  <td >{{CustomerSitesFilteredItem.ACTIVE}}</td>
+                                  <td>{{CustomerSitesFilteredItem.SITENAME}}</td>
+                                  <td >{{ (CustomerSitesFilteredItem.ACTIVE == 'true' ? 'Yes' : 'No') }}</td>
                               </tr>
                             </table><!-- /.table -->
                         </div>

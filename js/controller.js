@@ -738,6 +738,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
               $scope.CustomerOrderHistoryFiltered = $scope.CustomerOrderHistory;
 
+              $scope.SearchWOL();
+
             })
             .catch(function (data) {
               console.log('Error 16');
@@ -761,8 +763,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           }
 
           $scope.SearchText = '';
-          $scope.fromDate = new Date();
-          $scope.fromDate.setDate($scope.fromDate.getDate()-3650);
+          var date = new Date();
+          $scope.fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
           $scope.toDate = new Date();
           $scope.toDate.setDate($scope.toDate.getDate()+1);
 
@@ -1141,17 +1143,24 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
-            var urlRq = 'http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","SiteID":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
+            var urlRq = 'http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
 
             $loading.start('myloading');
             $http.get(urlRq, {headers: headers}).then(function (response) {
               if (response.data.responseCode.substring(0, 3) == '200'){
-                $loading.finish('myloading');
-                swal("Cube Service", "Service was created.");
                 $scope.CustomerPO = '';
                 $scope.ReasonForService = '';
                 $scope.selectedCustomerSite = undefined;
                 $scope.selectedPriority = undefined;
+                // Refresh Services
+                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + $scope.EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
+                  $loading.finish('myloading');
+                  swal("Cube Service", "Service was created.");
+                  // Close modal
+                  $('#create_order').modal('hide');
+                })
+
               }
             })
             .catch(function (data) {
