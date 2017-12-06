@@ -50,7 +50,7 @@
         <header class="header">
             <a href="index.html" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                <img ng-src="img/{{cnnnData2.DBNAME}}/logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-in-corp" width="105" height="40"  />
+                <img ng-src="img/{{cnnnData2.DBNAME}}/logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-Cube-Usa" width="105" height="40"  />
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
@@ -71,17 +71,19 @@
                             </a>
                         </li> -->
                         <li class="dropdown tasks-menu">
-                            <a href="#create_order"  data-toggle="modal">
-                              <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                            </a>
+                            <button href="#create_order" title="create order" class="btn btn-info" style="margin-top:8px;" data-toggle="modal">
+                              <i class="fa fa-file-text-o" aria-hidden="true"></i> Create Order
+                            </button>
                         </li>
                         <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span> Hello, {{NameUser}} </span> <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li ng-click="CloseSession();"><a href="#"><i class="fa fa-fw fa-power-off"></i> Close session</a></li>
-                          </ul>
-                        </li>
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span> Hello, {{NameUser}} </span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li ng-click="CloseSession();"><a href="#"><i class="fa fa-fw fa-power-off"></i> Close session</a></li>
+                            </ul>
+                          </li>
+                        </ul>
 
                     </ul>
                 </div>
@@ -166,7 +168,7 @@
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                           <div class="titulo-modal">
-                            <h5 class="modal-title"><i class="fa fa-tasks" aria-hidden="true"></i> <label>Create New Work Order</label></span></h5>
+                            <h5 class="modal-title"><i class="fa fa-file-text-o"></i><b> Create New Work Order</b></h5>
                           </div>
                         </div>
                         <div class="modal-body">
@@ -174,12 +176,9 @@
                             <div class="col-md-4">
                               <div class="form-group">
                                   <label>Site name:</label>
-                                  <select class="form-control">
-                                      <option>option 1</option>
-                                      <option>option 2</option>
-                                      <option>option 3</option>
-                                      <option>option 4</option>
-                                      <option>option 5</option>
+                                  <select class="form-control"
+                                    ng-model="selectedCustomerSite"
+                                    ng-options="CustomerSite as CustomerSite.SITENAME for CustomerSite in CustomerSites">
                                   </select>
                               </div>
                             </div>
@@ -188,19 +187,16 @@
                                 <label class="control-label" for="name">Customer PO:</label>
                                 <div class="input-group">
                                   <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                  <input ng-model="rfc" class="form-control" type="text" placeholder="Service ID">
+                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Service ID">
                                 </div>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <div class="form-group">
                                   <label>Priority:</label>
-                                  <select class="form-control">
-                                      <option>option 1</option>
-                                      <option>option 2</option>
-                                      <option>option 3</option>
-                                      <option>option 4</option>
-                                      <option>option 5</option>
+                                  <select class="form-control"
+                                    ng-model="selectedPriority"
+                                    ng-options="Priority as Priority.PRIORITY for Priority in Priorities">
                                   </select>
                               </div>
                             </div>
@@ -209,13 +205,17 @@
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for ="description"> Reason for Service</label>
-                                <textarea  class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
+                                <textarea ng-model="ReasonForService" class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
                               </div>
                             </div>
                           </div>
-
                         </div>
+                        <div class="modal-footer">
+                          <button data-dismiss="modal" class="btn btn-default btn-opciones "><span class="glyphicon glyphicon-floppy-remove"></span> Cancel</button>
+                          <button ng-click="CreateOrder();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+                        </div><!--end modal footer-->
                       </div>
+
                     </div>
                   </div>
                 </section><!-- /.content -->
