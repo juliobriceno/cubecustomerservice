@@ -44,6 +44,8 @@
         <script src="js/angular-bootstrap-toggle.min.js"></script>
         <!-- Pattern -->
         <script src="js/ng-pattern-restrict.js"></script>
+        <!--Librería para máscara números -->
+        <script type="text/javascript" src="js/mask.js"></script>
     </head>
     <body class="skin-blue"  ng-controller="ctrlServiceHistory">
         <!-- header logo: style can be found in header.less -->
@@ -129,24 +131,29 @@
                 <section class="content">
                   <div class="well head-table">
                   <div class="row">
-                    <div class="col-md-4">
-                      <label for="">From:</label>
-                      <div class="input-group">
-                        <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                        <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
+
+
+                    <div ng-class="{true:'form-group col-md-4', false:'form-group has-error col-md-4'}[ValidaDate(fromDate)]">
+                       <label class="control-label" for="">From:</label>
+                       <div class="input-group">
+                           <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                           <span class="input-group-btn">
+                             <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                           </span>
+                       </div>
+                     </div>
+
+                     <div ng-class="{true:'form-group col-md-4', false:'form-group has-error col-md-4'}[ValidaDate(toDate)]">
+                        <label class="control-label" for="">To:</label>
+                        <div class="input-group">
+                            <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-md-4">
-                      <label for="">To:</label>
-                      <div class="input-group">
-                        <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                        <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                      </div>
-                    </div>
+
+
                     <div class="col-md-4">
                       <label>Search by site name:</label>
                       <div class="input-group">
@@ -154,6 +161,8 @@
                         <input ng-change="SearchWOL();" ng-model="SearchText" type="text" class="form-control" placeholder="Enter name">
                       </div>
                     </div>
+
+
                   </div>
                 </div>
                     <div class="container-fluid">
@@ -323,10 +332,10 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label class="control-label" for="name">Request By:</label>
+                            <label class="control-label" for="name">Requested By:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.RESPONSIBLENAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Request By">
+                              <input ng-disabled="true" ng-model="WorkOrder.RESPONSIBLENAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Requested By">
                             </div>
                           </div>
                         </div>
@@ -507,7 +516,6 @@
                                 <th>Status</th>
                                 <th>User</th>
                                 <th>Date</th>
-                                <th>Asset</th>
                               </tr>
                               <tr>
                                 <td>{{WorkOrderRecomendation.ID}}</td>
@@ -516,7 +524,6 @@
                                 <td>{{WorkOrderRecomendation.STATUSNAME}}</td>
                                 <td>{{WorkOrderRecomendation.USERNAME}}</td>
                                 <td>{{WorkOrderRecomendation.TIMESTAMP | date:'medium'}}</td>
-                                <td>{{WorkOrderRecomendation.DESCRIPTION}}</td>
                               </tr>
                             </table><!-- /.table -->
                           </div>
