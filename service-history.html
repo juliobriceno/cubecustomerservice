@@ -187,7 +187,6 @@
                                   <th>Schedule Date</th>
                               </tr>
                               <tr ng-repeat="CustomerOrderHistoryItem in CustomerOrderHistoryFiltered">
-                                  <td class="text-center"><button type="button" class="btn btn-info btn-sm btn-circle"><i class="fa fa-info" aria-hidden="true"></i></button></td>
                                   <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(CustomerOrderHistoryItem.Id);" >{{CustomerOrderHistoryItem.Id}}</a></td>
                                   <td>{{CustomerOrderHistoryItem.Reported_Issue}}</td>
                                   <td>{{CustomerOrderHistoryItem.ITEMNAME}}</td>
@@ -340,7 +339,7 @@
                             <label class="control-label" for="name">Requested By:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.RESPONSIBLENAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Requested By">
+                              <input ng-disabled="true" ng-model="WorkOrder.CREATEDBYNAMETEXT" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Requested By">
                             </div>
                           </div>
                         </div>
@@ -369,7 +368,7 @@
                             <label class="control-label" for="name">Resources:</label>
                             <div class="input-group">
                               <span class="input-group-addon"><i class="fa fa-link" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.REASONFORSERVICE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Resources">
+                              <input ng-disabled="true" ng-model="WorkOrder.RESOURCES" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Resources">
                             </div>
                           </div>
                         </div>
