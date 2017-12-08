@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+      <title>Help Desk::..</title>
+      <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+      <!-- bootstrap 3.3.7 -->
+      <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <!-- font Awesome -->
+      <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+      <!-- Theme style -->
+      <link href="css/style.css" rel="stylesheet" type="text/css" />
+      <link href="css/general-style.css" rel="stylesheet">
+      <!-- Angular Librerías -->
+      <script src="js/angular.js"></script>
+      <script src="js/angular-animate.js"></script>
+      <script src="js/angular-sanitize.js"></script>
+      <script src="js/angular-bootstrap-toggle.min.js"></script>
+      <!-- Librería de controlador principal -->
+      <script src="js/controller.js"></script>
+      <!-- Lists -->
+      <script src="js/Lists.js"></script>
+      <!-- JQuery -->
+      <script src="js/jquery.js"></script>
+      <!-- Angular Librerías -->
+      <script src="js/angular-drag-and-drop-lists.js"></script>
+      <!-- Boostrap Angular Librerías -->
+      <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
+      <!-- Código de Select Boostrap Angular -->
+      <script src="./select.js"></script>
+      <link rel="stylesheet" href="./select.css">
+      <script src="./demo.js"></script>
+      <!-- Librería de angular loading -->
+      <script src="js/spin.min.js"></script>
+      <script src="js/angular-loading.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
+      <!--Librería de angular tags inputs -->
+      <link rel="stylesheet" href="css/ng-tags-input.min.css" />
+      <script src="js/ng-tags-input.min.js"></script>
+      <!--Librería de file upload -->
+      <script src="js/angular-file-upload.min.js"></script>
+      <!-- Librería de boostrap toogle -->
+      <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
+      <script src="js/angular-bootstrap-toggle.min.js"></script>
+      <!-- Lodash -->
+      <script src="js/lodash.min.js"></script>
+      <!-- Msgs Apps -->
+      <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+      <script src="js/sweetalert.min.js"></script>
+      <!-- Pattern -->
+      <script src="js/ng-pattern-restrict.js"></script>
+    </head>
+    <body class="skin-blue"  ng-controller="ctrlCubeCustomerAppHome">
+        <!-- header logo: style can be found in header.less -->
+        <header class="header">
+            <a href="home.html" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                <img ng-src="img/{{cnnnData2.DBNAME}}/logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-Cube-Usa" width="105" height="40"  />
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a ng-click="HideMenu();" href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <!--<li class="dropdown tasks-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              <i class="fa fa-bell-o" ></i>
+                                <span class="label label-danger">5</span>
+                            </a>
+                        </li> -->
+                        <li class="dropdown tasks-menu">
+                            <button href="#create_order"  title="create order"  class="btn btn-info" style="margin-top:8px;" data-toggle="modal">
+                              <i class="fa fa-file-text-o" aria-hidden="true"></i> Create Order
+                            </button>
+                        </li>
+
+                          <li class="dropdown">
+                            <a data-toggle="dropdown" class="point" >
+                              <i class="fa fa-cog" aria-hidden="true"></i> Add Windows
+                            </a>
+                            <ul class="dropdown-menu float-right">
+                              <li ng-click="AddWidget(0);"><a href="">Open Service Work Order List</a></li>
+                              <li ng-click="AddWidget(1);"><a href="">Knowledge Base Articles</a></li>
+                              <li ng-click="AddWidget(2);"><a href="">Open Recommendation</a></li>
+                            </ul>
+                          </li>
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <ul class="nav navbar-nav">
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span> Hello, {{NameUser}} </span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li ng-click="CloseSession();"><a href="#"><i class="fa fa-fw fa-power-off"></i> Close session</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside ng-class="LeftMenu">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <li  class="active">
+                            <a href="home.html">
+                              <i class="fa fa-home"></i><span>Home</span>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="service-history.html">
+                              <i class="fa fa-history"></i><span>Service History</span>
+                            </a>
+                        </li>
+                        <li class="treeview">
+                            <a href="sites.html">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>Service Sites</span>
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside ng-class="RightMenu">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        Dashboard
+                        <small>Control Panel</small>
+                    </h1>
+                    <ol class="breadcrumb">
+                        <li class="active"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                    </ol>
+                </section>
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>
+                                        {{ServiceCountCustomer.ONO}}
+                                    </h3>
+                                    <p>
+                                        Open New Orders
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa fa-eye" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3>
+                                      {{ServiceCountCustomer.OIP}}
+                                    </h3>
+                                    <p>
+                                        Work Orders in Progress
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa fa-tasks"></i>
+                                </div>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>
+                                      {{ServiceCountCustomer.WOL}}
+                                    </h3>
+                                    <p>
+                                      Work Orders Late
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-hourglass-start" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div><!-- ./col -->
+                        <div class="col-lg-3 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box  bg-aqua">
+                                <div class="inner">
+                                    <h3>
+                                        1
+                                    </h3>
+                                    <p>
+                                        Open Recommendations
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                  <i class="fa fa-envelope"></i>
+                                </div>
+                            </div>
+                        </div><!-- ./col -->
+                    </div><!-- /.row -->
+                    <div class="container-fluid">
+                      <div class="typesDemo ng-scope">
+                        <div ng-repeat="Row in Rows" >
+                          <ul dnd-list="Row.Columns"
+                              class="row ">
+                              <li ng-repeat="Column in Row.Columns track by Column.ID"
+                                  dnd-draggable="Column"
+                                  dnd-type="Column.type"
+                                  dnd-disable-if="Column.type == 'unknown'"
+                                  dnd-moved="DragFinish(testItem, event, true)"
+                                  class="col-md-6 ng-scope"
+                                  >
+                                  <dnd-nodrag class="box box-primary">
+                                    <div dnd-handle class="handle"><i class="fa fa-ellipsis-v" aria-hidden="true"></i><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
+                                    <div class="pull-left" style="margin-top:-5px; margin-left:18px;">
+                                      <h4><i class="fa fa-list-alt" aria-hidden="true" style="font-size:0.80em"></i> {{Column.title}}</h4>
+                                    </div>
+                                    <div class="pull-right box-tools">
+                                        <button ng-click="DropHomeTable(Column.page);" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                                    </div><!-- /. tools -->
+                                    <div class="name">
+                                      <div ng-include="Column.page"></div>
+                                    </div>
+                                  </dnd-nodrag>
+                              </li>
+                              <li class="dndPlaceholder">
+                                  Drop any component here
+                              </li>
+                          </ul>
+                        </div>
+                    </div>
+                    <!-- Widgets as boxes -->
+                    <div class="modal fade" id="create_order" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog  modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                          <div class="titulo-modal">
+                            <h5 class="modal-title"><i class="fa fa-file-text-o"></i><b> Create New Work Order</b></h5>
+                          </div>
+                        </div>
+                        <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Site name:</label>
+                                  <select class="form-control"
+                                    ng-model="selectedCustomerSite"
+                                    ng-options="CustomerSite as CustomerSite.SITENAME for CustomerSite in CustomerSites">
+                                  </select>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label" for="name">Customer PO:</label>
+                                <div class="input-group">
+                                  <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Service ID">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                  <label>Priority:</label>
+                                  <select class="form-control"
+                                    ng-model="selectedPriority"
+                                    ng-options="Priority as Priority.PRIORITY for Priority in Priorities">
+                                  </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for ="description"> Reason for Service</label>
+                                <textarea ng-model="ReasonForService" class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button data-dismiss="modal" class="btn btn-default btn-opciones "><span class="glyphicon glyphicon-floppy-remove"></span> Cancel</button>
+                          <button ng-click="CreateOrder();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+                        </div><!--end modal footer-->
+                      </div>
+
+                    </div>
+                  </div>
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+          </div><!-- ./wrapper -->
+        </div><!-- ./wrapper -->
+
+        <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
+        </div><!-- ./loading -->
+
+        <!-- jQuery 2.0.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    </body>
+</html>
