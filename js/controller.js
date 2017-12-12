@@ -712,10 +712,20 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 // Refresh Services
                 $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + $scope.EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
-                  $loading.finish('myloading');
-                  swal("Cube Service", "Service was created.");
-                  // Close modal
-                  $('#create_order').modal('hide');
+                  $scope.ServiceCountCustomer.OIP = $scope.ServiceCountCustomer.OIP + 1;
+
+
+                  // Refresh Services Count
+                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + $scope.EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+
+                    $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
+
+                    $loading.finish('myloading');
+                    swal("Cube Service", "Service was created.");
+                    // Close modal
+                    $('#create_order').modal('hide');
+                  })
+
                 })
 
               }

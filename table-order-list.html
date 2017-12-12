@@ -241,7 +241,6 @@
                           <th>Category</th>
                           <th>Problem Description</th>
                           <th>Resolution Notes</th>
-                          <th>Billable</th>
                           <th>Completed On</th>
                         </tr>
                         <tr ng-repeat="WorkOrderDetailItem in WorkOrderDetail">
@@ -252,7 +251,6 @@
                           <td>{{WorkOrderDetailItem.SERVDETAILCATNAME}}</td>
                           <td>{{WorkOrderDetailItem.PROBLEMTETX}}</td>
                           <td>{{WorkOrderDetailItem.RESOLUTIONTEXT}}</td>
-                          <td class="text-center"><input id="checkbox1" type="checkbox"></td>
                           <td>{{WorkOrderDetailItem.WORKCOMPLETEDDATE | date:'medium'}}</td>
                         </tr>
                       </table><!-- /.table -->
