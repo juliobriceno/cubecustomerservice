@@ -821,6 +821,7 @@ app.post('/GetSuggestProducts', function (req, res) {
         var Data = {};
         Data.SuggestProducts = result;
         res.end(JSON.stringify(Data));
+        return 0;
     }
     );
 
