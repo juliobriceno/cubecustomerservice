@@ -279,13 +279,13 @@
                             <th>User</th>
                             <th>Date</th>
                           </tr>
-                          <tr>
-                            <td>{{WorkOrderRecomendation.ID}}</td>
-                            <td>{{WorkOrderRecomendation.OBSERVATION}}</td>
-                            <td>{{WorkOrderRecomendation.OBSERVATION}}</td>
-                            <td>{{WorkOrderRecomendation.STATUSNAME}}</td>
-                            <td>{{WorkOrderRecomendation.USERNAME}}</td>
-                            <td>{{WorkOrderRecomendation.TIMESTAMP | date:'medium'}}</td>
+                          <tr ng-repeat="WorkOrderRecomendationDetail in WorkOrderRecomendation">
+                            <td>{{WorkOrderRecomendationDetail.ID}}</td>
+                            <td>{{WorkOrderRecomendationDetail.OBSERVATION}}</td>
+                            <td>{{WorkOrderRecomendationDetail.OBSERVATION}}</td>
+                            <td>{{WorkOrderRecomendationDetail.STATUSNAME}}</td>
+                            <td>{{WorkOrderRecomendationDetail.USERNAME}}</td>
+                            <td>{{WorkOrderRecomendationDetail.TIMESTAMP | date:'medium'}}</td>
                           </tr>
                         </table><!-- /.table -->
                       </div>
