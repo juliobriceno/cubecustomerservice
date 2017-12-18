@@ -335,11 +335,26 @@ body > .header {
   max-height: 100px;
   z-index: 1030;
 }
-body > .header .navbar {
-  height: 50px;
-  margin-bottom: 0;
-  margin-left: 220px;
+
+
+body > .header .navbar .nav > li > a:hover > .label {
+  top: 3px;
 }
+body > .header .logo {
+  float: left;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  padding: 0 10px;
+  width: 220px;
+  font-weight: 500;
+  height: 50px;
+  display: block;
+}
+body > .header .logo .icon {
+  margin-right: 10px;
+}
+
 body > .header .navbar .sidebar-toggle {
   float: left;
   padding: 9px 5px;
@@ -367,46 +382,6 @@ body > .header .navbar .sidebar-toggle .icon-bar {
 }
 body > .header .navbar .sidebar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
-}
-body > .header .navbar .nav > li.user > a {
-  font-weight: bold;
-}
-body > .header .navbar .nav > li.user > a > .fa,
-body > .header .navbar .nav > li.user > a > .glyphicon,
-body > .header .navbar .nav > li.user > a > .ion {
-  margin-right: 5px;
-}
-body > .header .navbar .nav > li > a > .label {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  position: absolute;
-  top: 7px;
-  right: 2px;
-  font-size: 10px;
-  font-weight: normal;
-  width: 15px;
-  height: 15px;
-  line-height: 1.0em;
-  text-align: center;
-  padding: 2px;
-}
-body > .header .navbar .nav > li > a:hover > .label {
-  top: 3px;
-}
-body > .header .logo {
-  float: left;
-  font-size: 20px;
-  line-height: 50px;
-  text-align: center;
-  padding: 0 10px;
-  width: 220px;
-  font-weight: 500;
-  height: 50px;
-  display: block;
-}
-body > .header .logo .icon {
-  margin-right: 10px;
 }
 .right-side > .content-header {
   position: relative;
@@ -458,44 +433,7 @@ body > .header .logo .icon {
     background: #efefef;
   }
 }
-@media (max-width: 767px) {
-  .navbar .navbar-nav > li {
-    float: left;
-  }
-  .navbar-nav {
-    margin: 0;
-    float: left;
-  }
-  .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    line-height: 20px;
-  }
-  .navbar .navbar-right {
-    float: right;
-  }
-}
-@media screen and (max-width: 560px) {
-  body > .header {
-    position: relative;
-  }
-  body > .header .logo,
-  body > .header .navbar {
-    width: 100%;
-    float: none;
-    position: relative!important;
-  }
-  body > .header .navbar {
-    margin: 0;
-  }
-  body.fixed > .header {
-    position: fixed;
-  }
-  body.fixed > .wrapper,
-  body.fixed .sidebar-offcanvas {
-    margin-top: 100px!important;
-  }
-}
+
 /*
     Component: Sidebar
 --------------------------

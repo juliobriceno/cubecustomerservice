@@ -53,57 +53,94 @@
     <body class="skin-blue"  ng-controller="ctrlCubeCustomerAppHome">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="home.html" class="logo">
-                <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                <img ng-src="img/{{cnnnData2.DBNAME}}/logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-Cube-Usa" width="105" height="40"  />
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a ng-click="HideMenu();" href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-right">
-                    <ul class="nav navbar-nav">
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <!--<li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              <i class="fa fa-bell-o" ></i>
-                                <span class="label label-danger">5</span>
-                            </a>
-                        </li> -->
-                        <li class="dropdown tasks-menu">
-                            <button href="#create_order"  title="create order"  class="btn btn-info" style="margin-top:8px;" data-toggle="modal">
-                              <i class="fa fa-file-text-o" aria-hidden="true"></i> Create Order
-                            </button>
-                        </li>
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="home.html" class="logo navbar-brand">
+                            <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                            <img ng-src="img/{{cnnnData2.DBNAME}}/logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-Cube-Usa" width="105" height="40"  />
+                        </a>
+                    </div>
 
-                          <li class="dropdown">
-                            <a data-toggle="dropdown" class="point" >
-                              <i class="fa fa-cog" aria-hidden="true"></i> Add Windows
-                            </a>
-                            <ul class="dropdown-menu float-right">
-                              <li ng-click="AddWidget(0);"><a href="">Open Service Work Order List</a></li>
-                              <li ng-click="AddWidget(1);"><a href="">Knowledge Base Articles</a></li>
-                              <li ng-click="AddWidget(2);"><a href="">Open Recommendation</a></li>
-                            </ul>
-                          </li>
-
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <ul class="nav navbar-nav">
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span> Hello, {{NameUser}} </span> <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li ng-click="CloseSession();"><a href="#"><i class="fa fa-fw fa-power-off"></i> Close session</a></li>
-                            </ul>
-                          </li>
+                    <div class="navbar-collapse collapse">
+                      <a ng-click="HideMenu();" href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                      </a>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                              <button href="#create_order"  title="create order"  class="btn btn-info" style="margin-top:8px;" data-toggle="modal">
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i> Create Order
+                              </button>
+                            </li>
+                            <li class="dropdown">
+                              <a data-toggle="dropdown" class="point" >
+                                <i class="fa fa-cog" aria-hidden="true"></i> Add Windows
+                              </a>
+                              <ul class="dropdown-menu float-right">
+                                <li ng-click="AddWidget(0);"><a href="">Open Service Work Order List</a></li>
+                                <li ng-click="AddWidget(1);"><a href="">Knowledge Base Articles</a></li>
+                                <li ng-click="AddWidget(2);"><a href="">Open Recommendation</a></li>
+                              </ul>
+                            </li>
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i><span> Hello, {{NameUser}} </span> <span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li ng-click="CloseSession();"><a href="#"><i class="fa fa-fw fa-power-off"></i> Close session</a></li>
+                              </ul>
+                            </li>
                         </ul>
-                    </ul>
-                </div>
+                    </div>
+
+                </div> <!--FIN DE container fluid-->
+
+            </nav> <!--FIN NAVBAR PASWORD DONDE-->
+
+
+            <nav class="navbar navbar-static-top " role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="nav1">
+                        <ul id="tabs" class="nav navbar-nav side-menu " data-tabs="tabs">
+                            <li>
+                              <button href="#create_order"  title="create order"  class="btn btn-info" style="margin-top:8px;" data-toggle="modal">
+                                <i class="fa fa-file-text-o" aria-hidden="true"></i> Create Order
+                              </button>
+                            </li>
+                            <li class="dropdown">
+                              <a data-toggle="dropdown" class="point" >
+                                <i class="fa fa-cog" aria-hidden="true"></i> Add Windows
+                              </a>
+                              <ul class="dropdown-menu float-right">
+                                <li ng-click="AddWidget(0);"><a href="">Open Service Work Order List</a></li>
+                                <li ng-click="AddWidget(1);"><a href="">Knowledge Base Articles</a></li>
+                                <li ng-click="AddWidget(2);"><a href="">Open Recommendation</a></li>
+                              </ul>
+                            </li>
+                            <li  class="active"><a href="home.html"> <i class="fa fa-home"></i><span> Home</span></a></li>
+                            <li><a href="service-history.html"> <i class="fa fa-history"></i><span> Service History</span></a></li>
+                            <li><a href="sites.html"><i class="fa fa-bar-chart-o"></i> <span> Service Sites</span></a></li>
+                            <li ng-click="CloseSession();"><a href="#"><i class="fa fa-fw fa-power-off"></i> Close session</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
             </nav>
+
         </header>
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
