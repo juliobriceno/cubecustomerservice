@@ -1,3 +1,12 @@
+
+// Cube Service Parameters
+// URL Cube Service String
+var connServiceString = "http://www.cube-mia.com/api/";
+// Server Authorization
+var ServerAuth = "Basic Y3ViZXU6Y3ViZTIwMTc=";
+// End Cube Service Parameters
+
+
 angular.element(function() {
     angular.bootstrap(document, ['WarrantyModule']);
 });
@@ -5,7 +14,7 @@ angular.element(function() {
 function testInterceptor() {
   return {
     request: function(config) {
-      if (!config.url.startsWith("http://www.cube-mia.com/api/CubeClientAuthentication.ashx")) {
+      if (!config.url.startsWith(connServiceString + "CubeClientAuthentication.ashx")) {
         if (localStorage.cnnData2 == 'undefined'){
           window.location = '/index.html';
         }
@@ -29,7 +38,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.CreateOrder = function() {
             // Call method to create order
-            var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+            var headers = {"Authorization": ServerAuth};
             var cnnData = JSON.parse(localStorage.cnnData2);
 
             if (typeof $scope.selectedCustomerSite == 'undefined' || $scope.CustomerPO.trim() == '' || typeof $scope.selectedPriority == 'undefined' || $scope.ReasonForService.trim() == '') {
@@ -37,7 +46,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
-            var urlRq = 'http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + cnnData.ID + '"}';
+            var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + cnnData.ID + '"}';
 
             $loading.start('myloading');
             $http.get(urlRq, {headers: headers}).then(function (response) {
@@ -48,7 +57,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 $scope.selectedPriority = undefined;
                 // Refresh Services
 
-                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
                   $scope.CustomerOrderHistory = response.data.CubeFlexIntegration.DATA;
 
                   $loading.finish('myloading');
@@ -99,11 +108,11 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           }
 
           $scope.GetWorkOrderDetail = function(WorkOrderId){
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceInfo","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceInfo","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
               $scope.WorkOrder = response.data.CubeFlexIntegration.DATA;
-              $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceDetails_Customer","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+              $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceDetails_Customer","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
                 $scope.WorkOrderDetail = getArray(response.data.CubeFlexIntegration.DATA);
-                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceRecomendations","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceRecomendations","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
                   $scope.WorkOrderRecomendation = getArray(response.data.CubeFlexIntegration.DATA);
                 })
                 .catch(function (data) {
@@ -127,7 +136,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.NameUser = localStorage.NameUser;
 
-          var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+          var headers = {"Authorization": ServerAuth};
 
           if (typeof localStorage.cnnData2 != 'undefined'){
 
@@ -137,7 +146,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             $scope.NameUser = cnnData.Name;
 
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
               $scope.CustomerOrderHistory = response.data.CubeFlexIntegration.DATA;
 
               $loading.finish('myloading');
@@ -195,7 +204,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           }
 
           // Get service sites for customer to populate select sites in create new order
-          $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+          $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
             $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
             $scope.CustomerSitesFiltered = $scope.CustomerSites;
           })
@@ -206,7 +215,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           });
 
           // GetPriorities to populate select Priorities in create new order
-          $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+          $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
             $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
           })
           .catch(function (data) {
@@ -350,12 +359,12 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             window.location = '/index.html';
           }
 
-          var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+          var headers = {"Authorization": ServerAuth};
 
           if (typeof localStorage.cnnData2 != 'undefined'){
 
             // Get service sites for customer to populate select sites in create new order
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
               $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
               $scope.CustomerSitesFiltered = $scope.CustomerSites;
             })
@@ -366,7 +375,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             });
 
             // GetPriorities to populate select Priorities in create new order
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
               $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
             })
             .catch(function (data) {
@@ -394,7 +403,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.CreateOrder = function() {
             // Call method to create order
-            var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+            var headers = {"Authorization": ServerAuth};
             var cnnData = JSON.parse(localStorage.cnnData2);
 
             if (typeof $scope.selectedCustomerSite == 'undefined' || $scope.CustomerPO.trim() == '' || typeof $scope.selectedPriority == 'undefined' || $scope.ReasonForService.trim() == '') {
@@ -402,7 +411,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
-            var urlRq = 'http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
+            var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
 
             $loading.start('myloading');
             $http.get(urlRq, {headers: headers}).then(function (response) {
@@ -412,7 +421,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 $scope.selectedCustomerSite = undefined;
                 $scope.selectedPriority = undefined;
                 // Refresh Services
-                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
                   $loading.finish('myloading');
                   swal("Cube Service", "Service was created.");
@@ -452,11 +461,11 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.GetWorkOrderDetail = function(WorkOrderId){
             $loading.start('myloading');
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceInfo","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceInfo","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
               $scope.WorkOrder = response.data.CubeFlexIntegration.DATA;
-              $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceDetails_Customer","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+              $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceDetails_Customer","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
                 $scope.WorkOrderDetail = getArray(response.data.CubeFlexIntegration.DATA);
-                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceRecomendations","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceRecomendations","conncode":"' + cnnData.DBNAME + '","serviceid":"' + WorkOrderId + '"}', {headers: headers}).then(function (response) {
                   $loading.finish('myloading');
                   $scope.WorkOrderRecomendation = getArray(response.data.CubeFlexIntegration.DATA);
                 })
@@ -497,7 +506,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             window.location = '/index.html';
           }
 
-          var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+          var headers = {"Authorization": ServerAuth};
 
           if (typeof localStorage.cnnData2 != 'undefined'){
 
@@ -509,14 +518,14 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             $scope.NameUser = cnnData.Name;
             localStorage.NameUser = $scope.NameUser;
 
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_EmployeeID","conncode":"' + cnnData.DBNAME + '","masteruserid":"' + cnnData.ID + '"}', {headers: headers}).then(function (response) {
 
                 var EmployeeData = response.data.CubeFlexIntegration.DATA;
                 $scope.EmployeeData = EmployeeData;
 
                 localStorage.EmployeeData = JSON.stringify(EmployeeData);
 
-                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
                   var CustomerData = response.data.CubeFlexIntegration.DATA;
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
@@ -524,7 +533,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                   CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
 
                   // Get service sites for customer to populate select sites in create new order
-                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
                     $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
                     $scope.CustomerSitesFiltered = $scope.CustomerSites;
                   })
@@ -535,7 +544,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                   });
 
                   // GetPriorities to populate select Priorities in create new order
-                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+                  $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
                     $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
                   })
                   .catch(function (data) {
@@ -544,12 +553,12 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                     swal("Cube Service", "Unexpected error. Check console Error 28.");
                   });
 
-                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
                     $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
 
                     // Get Knowleges for home
-                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_MessagesBoard","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+                    $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_MessagesBoard","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
                       $scope.Knowleges = getArray(response.data.CubeFlexIntegration.DATA);
                     })
                     .catch(function (data) {
@@ -558,13 +567,13 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                       swal("Cube Service", "Unexpected error. Check console Error 26.");
                     });
 
-                    $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"GetServiceOpen_Recomendations","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                    $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceOpen_Recomendations","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
                       $scope.Recomendations = getArray(response.data.CubeFlexIntegration.DATA);
 
                       $loading.finish('myloading');
 
-                      $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '"}', {headers: headers}).then(function (response) {
+                      $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '"}', {headers: headers}).then(function (response) {
                         var lRows = getArray(response.data.CubeFlexIntegration.DATA);
                         if (typeof lRows[0] == 'undefined'){
                           $scope.Rows = [
@@ -645,7 +654,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             var jsonFormatted = localStorage.Rows.replace(/"/gi, "@@@");
 
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Save_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '", "configuration": "' + jsonFormatted + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Save_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '", "configuration": "' + jsonFormatted + '"}', {headers: headers}).then(function (response) {
             })
             .catch(function (data) {
               console.log('Error 7');
@@ -677,7 +686,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             var jsonFormatted = localStorage.Rows.replace(/"/gi, "@@@");
 
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Save_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '", "configuration": "' + jsonFormatted + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Save_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '", "configuration": "' + jsonFormatted + '"}', {headers: headers}).then(function (response) {
             })
             .catch(function (data) {
               console.log('Error 8');
@@ -692,7 +701,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.CreateOrder = function() {
             // Call method to create order
-            var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+            var headers = {"Authorization": ServerAuth};
             var cnnData = JSON.parse(localStorage.cnnData2);
 
             if (typeof $scope.selectedCustomerSite == 'undefined' || $scope.CustomerPO.trim() == '' || typeof $scope.selectedPriority == 'undefined' || $scope.ReasonForService.trim() == '') {
@@ -700,7 +709,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
-            var urlRq = 'http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
+            var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
 
             $loading.start('myloading');
             $http.get(urlRq, {headers: headers}).then(function (response) {
@@ -710,13 +719,13 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 $scope.selectedCustomerSite = undefined;
                 $scope.selectedPriority = undefined;
                 // Refresh Services
-                $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + $scope.EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + $scope.EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
                   $scope.ServiceCountCustomer.OIP = $scope.ServiceCountCustomer.OIP + 1;
 
 
                   // Refresh Services Count
-                  $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + $scope.EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Count_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + $scope.EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
 
                     $scope.ServiceCountCustomer = response.data.CubeFlexIntegration.DATA;
 
@@ -745,7 +754,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             var jsonFormatted = localStorage.Rows.replace(/"/gi, "@@@");
 
-            $http.get('http://www.cube-mia.com/api/CubeFlexIntegration.ashx?obj={"method":"Save_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '", "configuration": "' + jsonFormatted + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Save_User_DashboardConf","conncode":"' + cnnData.DBNAME + '", "userid":"' + $scope.cnnnData2.ID + '", "configuration": "' + jsonFormatted + '"}', {headers: headers}).then(function (response) {
             })
             .catch(function (data) {
               console.log('Error 10');
@@ -780,7 +789,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
             $loading.start('myloading');
 
-            $http.get('http://www.cube-mia.com/api/CubeClientAuthentication.ashx?obj={"username":"' + $scope.User.name + '","password":"' + $scope.User.password + '"}', {headers: headers}).then(function (response) {
+            $http.get(connServiceString + 'CubeClientAuthentication.ashx?obj={"username":"' + $scope.User.name + '","password":"' + $scope.User.password + '"}', {headers: headers}).then(function (response) {
                 var cnnData2 = response.data.CubeAuthentication.DATA;
 
                 if (typeof cnnData2 == 'undefined'){
@@ -801,6 +810,6 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           }
 
-          var headers = {"Authorization": "Basic Y3ViZXU6Y3ViZTIwMTc="};
+          var headers = {"Authorization": ServerAuth};
 
         }])
