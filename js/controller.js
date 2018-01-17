@@ -16,7 +16,7 @@ function testInterceptor() {
     request: function(config) {
       if (!config.url.startsWith(connServiceString + "CubeClientAuthentication.ashx")) {
         if (localStorage.cnnData2 == 'undefined'){
-          window.location = '/index.html';
+          window.location = 'index.html';
         }
       }
       return config;
@@ -95,7 +95,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.CloseSession = function(){
             delete localStorage.cnnData2;
-            window.location = '/index.html';
+            window.location = 'index.html';
           }
 
           function getArray(object){
@@ -168,7 +168,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           }
           else{
-            window.location = '/index.html';
+            window.location = 'index.html';
           }
 
           $scope.ValidaDate = function(dDate){
@@ -356,7 +356,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.CloseSession = function(){
             delete localStorage.cnnData2;
-            window.location = '/index.html';
+            window.location = 'index.html';
           }
 
           var headers = {"Authorization": ServerAuth};
@@ -385,7 +385,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             });
           }
           else{
-            window.location = '/index.html';
+            window.location = 'index.html';
           }
 
           $scope.SearchSites = function(){
@@ -503,7 +503,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.CloseSession = function(){
             delete localStorage.cnnData2;
-            window.location = '/index.html';
+            window.location = 'index.html';
           }
 
           var headers = {"Authorization": ServerAuth};
@@ -645,7 +645,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           }
           else{
-            window.location = '/index.html';
+            window.location = 'index.html';
           }
 
           $scope.AddWidget = function(WidgetId){
@@ -798,7 +798,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 }
                 else{
                   localStorage.cnnData2 = JSON.stringify(cnnData2);
-                  window.location = '/home.html';
+                  window.location = 'home.html';
                 }
 
             })
