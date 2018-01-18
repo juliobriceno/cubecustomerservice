@@ -1,7 +1,7 @@
 
 // Cube Service Parameters
 // URL Cube Service String
-var connServiceString = "http://www.cube-mia.com/api/";
+var connServiceString = "http://api.cube-usa.com/";
 // Server Authorization
 var ServerAuth = "Basic Y3ViZXU6Y3ViZTIwMTc=";
 // End Cube Service Parameters
@@ -62,9 +62,11 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
                   $loading.finish('myloading');
 
-                  $scope.CustomerOrderHistory.forEach(function(element) {
-                    element.Schedule_Date = new Date(element.Schedule_Date);
-                  });
+                  if (typeof $scope.CustomerOrderHistory != 'undefined'){
+                    $scope.CustomerOrderHistory.forEach(function(element) {
+                      element.Schedule_Date = new Date(element.Schedule_Date);
+                    });
+                  }
 
                   $scope.CustomerOrderHistoryFiltered = $scope.CustomerOrderHistory;
 
@@ -147,17 +149,22 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             $scope.NameUser = cnnData.Name;
 
             $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_History_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+
               $scope.CustomerOrderHistory = response.data.CubeFlexIntegration.DATA;
 
               $loading.finish('myloading');
 
-              $scope.CustomerOrderHistory.forEach(function(element) {
-                element.Schedule_Date = new Date(element.Schedule_Date);
-              });
+              if (typeof $scope.CustomerOrderHistory != 'undefined'){
+                $scope.CustomerOrderHistory.forEach(function(element) {
+                  element.Schedule_Date = new Date(element.Schedule_Date);
+                });
+              }
 
               $scope.CustomerOrderHistoryFiltered = $scope.CustomerOrderHistory;
 
-              $scope.SearchWOL();
+              if (typeof $scope.CustomerOrderHistory != 'undefined'){
+                $scope.SearchWOL();
+              }
 
             })
             .catch(function (data) {
@@ -530,7 +537,9 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                   var CustomerData = response.data.CubeFlexIntegration.DATA;
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
 
-                  CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
+                  if (typeof CustomerData != 'undefined'){
+                    CustomerData.Schedule_Date = new Date(CustomerData.Schedule_Date);
+                  }
 
                   // Get service sites for customer to populate select sites in create new order
                   $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
