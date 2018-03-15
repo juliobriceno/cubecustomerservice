@@ -141,6 +141,12 @@
                                 <span>Service Sites</span>
                             </a>
                         </li>
+                        <li >
+                            <a href="active-projects.html">
+                                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                <span>Active Projects</span>
+                            </a>
+                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
@@ -183,7 +189,7 @@
                                   <th>Active</th>
                               </tr>
                               <tr ng-repeat="CustomerSitesFilteredItem in CustomerSitesFiltered">
-                                  <td>{{CustomerSitesFilteredItem.ID}}</td>
+                                  <td><a href="details-id.html">{{CustomerSitesFilteredItem.ID}}</a></td>
                                   <td>{{CustomerSitesFilteredItem.SITENAME}}</td>
                                   <td >{{ (CustomerSitesFilteredItem.ACTIVE == 'true' ? 'Yes' : 'No') }}</td>
                               </tr>
