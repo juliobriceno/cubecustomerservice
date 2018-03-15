@@ -1,7 +1,9 @@
 
 // Cube Service Parameters
 // URL Cube Service String
+//var connServiceString = "https://portal.cube-usa.com/api/";
 var connServiceString = "https://portal.cube-usa.com/api/";
+
 // Server Authorization
 var ServerAuth = "Basic Y3ViZXU6Y3ViZTIwMTc=";
 // End Cube Service Parameters
