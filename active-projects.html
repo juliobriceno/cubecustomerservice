@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Help Desk::..</title>
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <!-- bootstrap 3.3.7 -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <!-- font Awesome -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <!-- Theme style -->
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="css/general-style.css" rel="stylesheet">
-    <!-- Angular Librerías -->
-    <script src="js/angular.js"></script>
-    <script src="js/angular-animate.js"></script>
-    <script src="js/angular-sanitize.js"></script>
-    <script src="js/angular-bootstrap-toggle.min.js"></script>
-    <!-- Librería de controlador principal -->
-    <script src="js/controller.js"></script>
-    <!-- Lists -->
-    <script src="js/Lists.js"></script>
-    <!-- JQuery -->
-    <script src="js/jquery.js"></script>
-    <!-- Angular Librerías -->
-    <script src="js/angular-drag-and-drop-lists.js"></script>
-    <!-- Boostrap Angular Librerías -->
-    <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
-    <!-- Código de Select Boostrap Angular -->
-    <script src="./select.js"></script>
-    <link rel="stylesheet" href="./select.css">
-    <script src="./demo.js"></script>
-    <!-- Librería de angular loading -->
-    <script src="js/spin.min.js"></script>
-    <script src="js/angular-loading.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
-    <!--Librería de angular tags inputs -->
-    <link rel="stylesheet" href="css/ng-tags-input.min.css" />
-    <script src="js/ng-tags-input.min.js"></script>
-    <!--Librería de file upload -->
-    <script src="js/angular-file-upload.min.js"></script>
-    <!-- Librería de boostrap toogle -->
-    <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="js/angular-bootstrap-toggle.min.js"></script>
-    <!-- Pattern -->
-    <script src="js/ng-pattern-restrict.js"></script>
-    <!-- Msgs Apps -->
-    <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
-    <script src="js/sweetalert.min.js"></script>
+  <meta charset="UTF-8">
+  <title>Help Desk::..</title>
+  <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+  <!-- bootstrap 3.3.7 -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <!-- font Awesome -->
+  <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <!-- Theme style -->
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/general-style.css" rel="stylesheet">
+  <!-- Angular Librerías -->
+  <script src="js/angular.js"></script>
+  <script src="js/angular-animate.js"></script>
+  <script src="js/angular-sanitize.js"></script>
+  <script src="js/angular-bootstrap-toggle.min.js"></script>
+  <!-- Librería de controlador principal -->
+  <script src="js/controller.js"></script>
+  <!-- Lists -->
+  <script src="js/Lists.js"></script>
+  <!-- JQuery -->
+  <script src="js/jquery.js"></script>
+  <!-- Angular Librerías -->
+  <script src="js/angular-drag-and-drop-lists.js"></script>
+  <!-- Boostrap Angular Librerías -->
+  <script src="js/ui-bootstrap-tpls-2.5.0.js"></script>
+  <!-- Código de Select Boostrap Angular -->
+  <script src="./select.js"></script>
+  <link rel="stylesheet" href="./select.css">
+  <script src="./demo.js"></script>
+  <!-- Librería de angular loading -->
+  <script src="js/spin.min.js"></script>
+  <script src="js/angular-loading.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/angular-loading.css" />
+  <!--Librería de angular tags inputs -->
+  <link rel="stylesheet" href="css/ng-tags-input.min.css" />
+  <script src="js/ng-tags-input.min.js"></script>
+  <!--Librería de file upload -->
+  <script src="js/angular-file-upload.min.js"></script>
+  <!-- Librería de boostrap toogle -->
+  <link href="css/angular-bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="js/angular-bootstrap-toggle.min.js"></script>
+  <!-- Pattern -->
+  <script src="js/ng-pattern-restrict.js"></script>
+  <!-- Msgs Apps -->
+  <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
+  <script src="js/sweetalert.min.js"></script>
 </head>
-    <body class="skin-blue"  ng-controller="ctrlWarrantyLogin">
+    <body class="skin-blue"  ng-controller="ctrlCubeCustomerAppActiveProjects">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
           <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -167,12 +167,12 @@
                         <th>Schedule date</th>
 
                       </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                      <tr ng-repeat="CustomerSitesFilteredItem in CustomerSitesFiltered">
+                        <td>{{CustomerSitesFilteredItem.ID}}</td>
+                        <td>{{CustomerSitesFilteredItem.Name}}</td>
+                        <td>{{CustomerSitesFilteredItem.Name}}</td>
+                        <td>{{CustomerSitesFilteredItem.STATUS}}</td>
+                        <td>{{CustomerSitesFilteredItem.Name}}</td>
 
                       </tr>
                     </table><!-- /.table -->

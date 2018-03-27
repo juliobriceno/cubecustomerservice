@@ -824,3 +824,251 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           var headers = {"Authorization": ServerAuth};
 
         }])
+
+        .controller('ctrlCubeCustomerAppActiveProjects', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
+
+          $scope.User = {};
+          $scope.User.name = '';
+          $scope.User.password = '';
+          $scope.ShowSideBar = true;
+          $scope.LeftMenu = 'left-side sidebar-offcanvas';
+          $scope.RightMenu = 'right-side';
+
+          var cnnData = JSON.parse(localStorage.cnnData2);
+          $scope.cnnnData2 = cnnData;
+          var EmployeeData = JSON.parse(localStorage.EmployeeData);
+          $scope.NameUser = cnnData.Name;
+
+          function getArray(object){
+              if (Array.isArray(object)){
+                return object;
+              }
+              else{
+                return [object]
+              }
+          }
+
+          $scope.HideMenu = function(){
+            if ($scope.ShowSideBar == false){
+              $scope.LeftMenu = 'left-side sidebar-offcanvas';
+              $scope.RightMenu = 'right-side';
+              $scope.ShowSideBar = true;
+            }
+            else{
+              $scope.LeftMenu = 'left-side sidebar-offcanvas collapse-left';
+              $scope.RightMenu = 'right-side strech';
+              $scope.ShowSideBar = false;
+            }
+          }
+
+          $scope.CloseSession = function(){
+            delete localStorage.cnnData2;
+            window.location = 'index.html';
+          }
+
+          var headers = {"Authorization": ServerAuth};
+
+          if (typeof localStorage.cnnData2 != 'undefined'){
+
+
+            // Get service sites for customer to populate select sites in create new order
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_ProjectsCust","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+              $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
+              $scope.CustomerSitesFiltered = $scope.CustomerSites;
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+
+            // GetPriorities to populate select Priorities in create new order
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+              $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
+            })
+            .catch(function (data) {
+              console.log('Error 28');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 28.");
+            });
+          }
+          else{
+            window.location = 'index.html';
+          }
+
+          $scope.SearchSites = function(){
+
+            $scope.CustomerSitesFiltered = $scope.CustomerSites;
+
+            $scope.CustomerSitesFiltered = $scope.CustomerSitesFiltered.filter(function (el){
+              return el.Name.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1;
+            })
+
+          }
+
+          $scope.CustomerPO = '';
+          $scope.ReasonForService = '';
+
+          $scope.CreateOrder = function() {
+            // Call method to create order
+            var headers = {"Authorization": ServerAuth};
+            var cnnData = JSON.parse(localStorage.cnnData2);
+
+            if (typeof $scope.selectedCustomerSite == 'undefined' || $scope.CustomerPO.trim() == '' || typeof $scope.selectedPriority == 'undefined' || $scope.ReasonForService.trim() == '') {
+                swal("Cube Service", "You must fill all fields.");
+                return 0;
+            }
+
+            var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
+
+            $loading.start('myloading');
+            $http.get(urlRq, {headers: headers}).then(function (response) {
+              if (response.data.responseCode.substring(0, 3) == '200'){
+                $scope.CustomerPO = '';
+                $scope.ReasonForService = '';
+                $scope.selectedCustomerSite = undefined;
+                $scope.selectedPriority = undefined;
+                // Refresh Services
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
+                  $loading.finish('myloading');
+                  swal("Cube Service", "Service was created.");
+                  // Close modal
+                  $('#create_order').modal('hide');
+                })
+
+              }
+            })
+            .catch(function (data) {
+              console.log('Error 9');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 9.");
+            });
+
+          };
+
+        }])
+
+        .controller('ctrlCubeCustomerAppSiteDetails', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
+
+          $scope.User = {};
+          $scope.User.name = '';
+          $scope.User.password = '';
+          $scope.ShowSideBar = true;
+          $scope.LeftMenu = 'left-side sidebar-offcanvas';
+          $scope.RightMenu = 'right-side';
+
+          var cnnData = JSON.parse(localStorage.cnnData2);
+          $scope.cnnnData2 = cnnData;
+          var EmployeeData = JSON.parse(localStorage.EmployeeData);
+          $scope.NameUser = cnnData.Name;
+
+          function getArray(object){
+              if (Array.isArray(object)){
+                return object;
+              }
+              else{
+                return [object]
+              }
+          }
+
+          $scope.HideMenu = function(){
+            if ($scope.ShowSideBar == false){
+              $scope.LeftMenu = 'left-side sidebar-offcanvas';
+              $scope.RightMenu = 'right-side';
+              $scope.ShowSideBar = true;
+            }
+            else{
+              $scope.LeftMenu = 'left-side sidebar-offcanvas collapse-left';
+              $scope.RightMenu = 'right-side strech';
+              $scope.ShowSideBar = false;
+            }
+          }
+
+          $scope.CloseSession = function(){
+            delete localStorage.cnnData2;
+            window.location = 'index.html';
+          }
+
+          var headers = {"Authorization": ServerAuth};
+
+          if (typeof localStorage.cnnData2 != 'undefined'){
+
+
+            // Get service sites for customer to populate select sites in create new order
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_ProjectsCust","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+              $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
+              $scope.CustomerSitesFiltered = $scope.CustomerSites;
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+
+            // GetPriorities to populate select Priorities in create new order
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
+              $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
+            })
+            .catch(function (data) {
+              console.log('Error 28');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 28.");
+            });
+          }
+          else{
+            window.location = 'index.html';
+          }
+
+          $scope.SearchSites = function(){
+
+            $scope.CustomerSitesFiltered = $scope.CustomerSites;
+
+            $scope.CustomerSitesFiltered = $scope.CustomerSitesFiltered.filter(function (el){
+              return el.Name.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1;
+            })
+
+          }
+
+          $scope.CustomerPO = '';
+          $scope.ReasonForService = '';
+
+          $scope.CreateOrder = function() {
+            // Call method to create order
+            var headers = {"Authorization": ServerAuth};
+            var cnnData = JSON.parse(localStorage.cnnData2);
+
+            if (typeof $scope.selectedCustomerSite == 'undefined' || $scope.CustomerPO.trim() == '' || typeof $scope.selectedPriority == 'undefined' || $scope.ReasonForService.trim() == '') {
+                swal("Cube Service", "You must fill all fields.");
+                return 0;
+            }
+
+            var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
+
+            $loading.start('myloading');
+            $http.get(urlRq, {headers: headers}).then(function (response) {
+              if (response.data.responseCode.substring(0, 3) == '200'){
+                $scope.CustomerPO = '';
+                $scope.ReasonForService = '';
+                $scope.selectedCustomerSite = undefined;
+                $scope.selectedPriority = undefined;
+                // Refresh Services
+                $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+                  $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
+                  $loading.finish('myloading');
+                  swal("Cube Service", "Service was created.");
+                  // Close modal
+                  $('#create_order').modal('hide');
+                })
+
+              }
+            })
+            .catch(function (data) {
+              console.log('Error 9');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 9.");
+            });
+
+          };
+
+        }])
