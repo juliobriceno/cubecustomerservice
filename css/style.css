@@ -54,7 +54,8 @@ body > .header {
 .left-side {
   min-height: 100%;
   display: block;
-}
+
+  }
 /*right side - contins main content*/
 .right-side {
   background-color: #f9f9f9;
@@ -65,6 +66,7 @@ body > .header {
   position: absolute;
   width: 220px;
   top: 0;
+  height: 100%;
 }
 @media screen and (min-width: 992px) {
   .left-side {

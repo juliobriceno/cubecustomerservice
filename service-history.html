@@ -44,8 +44,6 @@
         <script src="js/angular-bootstrap-toggle.min.js"></script>
         <!-- Pattern -->
         <script src="js/ng-pattern-restrict.js"></script>
-        <!--Librería para máscara números -->
-        <script type="text/javascript" src="js/mask.js"></script>
         <!-- Msgs Apps -->
         <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
         <script src="js/sweetalert.min.js"></script>
@@ -53,7 +51,8 @@
     <body class="skin-blue"  ng-controller="ctrlCubeCustomerAppServiceHistory">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-          <nav class="navbar  navbar-default navbar-fixed-top" role="navigation">
+
+          <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
               <div class="container-fluid">
                   <div class="navbar-header">
                       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav1">
@@ -65,8 +64,10 @@
                       <a href="home.html" class="logo navbar-brand">
                           <!-- Add the class icon to your logo image or logo icon to add the margining -->
                           <img ng-src="img/{{cnnData.DBNAME}}/logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-Cube-Usa" width="105" height="40"  />
+
                       </a>
                   </div>
+
                   <div class="navbar-collapse collapse">
                     <a ng-click="HideMenu();" href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                         <span class="sr-only">Toggle navigation</span>
@@ -89,7 +90,6 @@
                           </li>
                       </ul>
                   </div>
-
               </div> <!--end container fluid-->
           </nav> <!--end nav-->
           <nav class="navbar navbar-static-top " role="navigation">
@@ -135,10 +135,16 @@
                               <i class="fa fa-history"></i><span>Service History</span>
                             </a>
                         </li>
-                        <li>
+                        <li >
                             <a href="sites.html">
                                 <i class="fa fa-bar-chart-o"></i>
                                 <span>Service Sites</span>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="active-projects.html">
+                                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                <span>Active Projects</span>
                             </a>
                         </li>
                     </ul>
@@ -148,423 +154,417 @@
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                    <h1>
-                        Service History
-                    </h1>
-                    <ol class="breadcrumb">
-                        <li class="active"><a href="#"><i class="fa fa-history"></i><span>Service History</span></a></li>
-                    </ol>
-                </section>
-                <!-- Main content -->
-                <section class="content">
-                  <div class="well head-table">
-                  <div class="row">
+              <!-- Content Header (Page header) -->
+              <section class="content-header">
+                  <h1>
+                      Service History
+                  </h1>
+                  <ol class="breadcrumb">
+                      <li class="active"><a href="#"><i class="fa fa-history"></i><span>Service History</span></a></li>
+                  </ol>
+              </section>
+              <!-- Main content -->
+              <section class="content">
+                <div class="well head-table">
+                <div class="row">
 
 
-                    <div ng-class="{true:'form-group col-md-4', false:'form-group has-error col-md-4'}[ValidaDate(fromDate)]">
-                       <label class="control-label" for="">From:</label>
-                       <div class="input-group">
-                           <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                           <span class="input-group-btn">
-                             <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                           </span>
-                       </div>
+                  <div ng-class="{true:'form-group col-md-4', false:'form-group has-error col-md-4'}[ValidaDate(fromDate)]">
+                     <label class="control-label" for="">From:</label>
+                     <div class="input-group">
+                         <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                         <span class="input-group-btn">
+                           <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                         </span>
                      </div>
+                   </div>
 
-                     <div ng-class="{true:'form-group col-md-4', false:'form-group has-error col-md-4'}[ValidaDate(toDate)]">
-                        <label class="control-label" for="">To:</label>
-                        <div class="input-group">
-                            <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                            <span class="input-group-btn">
-                              <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </div>
-                      </div>
-
-
-                    <div class="col-md-4">
-                      <label>Search by site name:</label>
+                   <div ng-class="{true:'form-group col-md-4', false:'form-group has-error col-md-4'}[ValidaDate(toDate)]">
+                      <label class="control-label" for="">To:</label>
                       <div class="input-group">
-                        <span class="input-group-addon "><span class="glyphicon glyphicon-search"></span></span>
-                        <input ng-change="SearchWOL();" ng-model="SearchText" type="text" class="form-control" placeholder="Enter name">
+                          <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
                       </div>
                     </div>
 
+
+                  <div class="col-md-4">
+                    <label>Search by site name:</label>
+                    <div class="input-group">
+                      <span class="input-group-addon "><span class="glyphicon glyphicon-search"></span></span>
+                      <input ng-change="SearchWOL();" ng-model="SearchText" type="text" class="form-control" placeholder="Enter name">
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+                  <div class="container-fluid">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="table-responsive">
+                          <!-- .table - Uses sparkline charts-->
+                          <table class="table table-striped">
+                            <tr>
+                                <th>ID</th>
+                                <th>Reported Issue</th>
+                                <th>Site Name</th>
+                                <th>Service Technician</th>
+                                <th>Status</th>
+                                <th>Schedule Date</th>
+                            </tr>
+                            <tr ng-repeat="CustomerOrderHistoryItem in CustomerOrderHistoryFiltered">
+                                <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(CustomerOrderHistoryItem.Id);" >{{CustomerOrderHistoryItem.Id}}</a></td>
+                                <td>{{CustomerOrderHistoryItem.Reported_Issue}}</td>
+                                <td>{{CustomerOrderHistoryItem.ITEMNAME}}</td>
+                                <td>{{CustomerOrderHistoryItem.Service_Tech}}</td>
+                                <td>{{CustomerOrderHistoryItem.STATUSNAME}}</td>
+                                <td>{{CustomerOrderHistoryItem.Schedule_Date | date:'medium'}}</td>
+                            </tr>
+                          </table><!-- /.table -->
+                      </div>
+                  </div>
+                  <div class="modal fade" id="create_order" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                  <div class="modal-dialog  modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <div class="titulo-modal">
+                          <h5 class="modal-title"><i class="fa fa-file-text-o"></i><b> Create New Work Order</b></h5>
+                        </div>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Site name:</label>
+                                <select class="form-control"
+                                  ng-model="selectedCustomerSite"
+                                  ng-options="CustomerSite as CustomerSite.SITENAME for CustomerSite in CustomerSites">
+                                </select>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label" for="name">Customer PO:</label>
+                              <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Service ID">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Priority:</label>
+                                <select class="form-control"
+                                  ng-model="selectedPriority"
+                                  ng-options="Priority as Priority.PRIORITY for Priority in Priorities">
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for ="description"> Reason for Service</label>
+                              <textarea ng-model="ReasonForService" class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default btn-opciones "><span class="glyphicon glyphicon-floppy-remove"></span> Cancel</button>
+                        <button ng-click="CreateOrder();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+                      </div><!--end modal footer-->
+                    </div>
 
                   </div>
                 </div>
-                    <div class="container-fluid">
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="table-responsive">
-                            <!-- .table - Uses sparkline charts-->
-                            <table class="table table-striped">
-                              <tr>
-                                  <th>ID</th>
-                                  <th>Reported Issue</th>
-                                  <th>Site Name</th>
-                                  <th>Service Technician</th>
-                                  <th>Status</th>
-                                  <th>Schedule Date</th>
-                              </tr>
-                              <tr ng-repeat="CustomerOrderHistoryItem in CustomerOrderHistoryFiltered">
-                                  <td><a href="#id_table_order"  data-toggle="modal" ng-click="GetWorkOrderDetail(CustomerOrderHistoryItem.Id);" >{{CustomerOrderHistoryItem.Id}}</a></td>
-                                  <td>{{CustomerOrderHistoryItem.Reported_Issue}}</td>
-                                  <td>{{CustomerOrderHistoryItem.ITEMNAME}}</td>
-                                  <td>{{CustomerOrderHistoryItem.Service_Tech}}</td>
-                                  <td>{{CustomerOrderHistoryItem.STATUSNAME}}</td>
-                                  <td>{{CustomerOrderHistoryItem.Schedule_Date | date:'medium'}}</td>
-                              </tr>
-                            </table><!-- /.table -->
-                        </div>
-                    </div>
-                    <!-- Widgets as boxes -->
-                    <div class="modal fade" id="create_order" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                  <!-- Modal de ver detalle de servicio -->
+                  <div class="modal fade" id="id_table_order" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
                     <div class="modal-dialog  modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                           <div class="titulo-modal">
-                            <h5 class="modal-title"><i class="fa fa-file-text-o"></i><b> Create New Work Order</b></h5>
+                            <h5 class="modal-title"><i class="fa fa-tasks" aria-hidden="true"></i> <label>{{'Service Id: ' + WorkOrder.SERVICEID}}</label></span></h5>
                           </div>
-                        </div>
-                        <div class="modal-body">
-                          <div class="row">
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                  <label>Site name:</label>
-                                  <select class="form-control"
-                                    ng-model="selectedCustomerSite"
-                                    ng-options="CustomerSite as CustomerSite.SITENAME for CustomerSite in CustomerSites">
-                                  </select>
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label class="control-label" for="name">Customer PO:</label>
-                                <div class="input-group">
-                                  <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Service ID">
+                        </div><!--fin panel modal header-->
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="panel-group" id="accordion">
+                              <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close"></span> Service Information</a>
+                                  </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                  <div class="panel-body">
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Service ID:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>
+                                            <input ng-model="WorkOrder.SERVICEID" ng-disabled="true" class="form-control" type="text" placeholder="Service ID">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Site Name:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                                            <input ng-model="WorkOrder.SITENAME" ng-disabled="true" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Name">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Service Type:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tag" aria-hidden="true"></i></span>
+                                            <input ng-model="WorkOrder.SERVICETYPE" ng-disabled="true" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Service Type">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Site Address:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.SITEADDRESS" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Address">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Category:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tasks" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.SERVICECATEGORY" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Category">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Requested By:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.REQUESTEDBYNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Requested By">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Responsible:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.RESPONSIBLELASTNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Responsible">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Customer PO:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.CUSTOMERPO" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Customer PO">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Resources:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-link" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.RESOURCES" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Resources">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Request Date:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.REQDATE | date:'medium'" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Request Date">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Schedule Date:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.SCHEDULEDATE | date:'medium'" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Schedule Date">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="checkbox">
+                                          <input id="checkbox1" type="checkbox">
+                                          <label for="checkbox1">
+                                            Call Ahead
+                                          </label>
+                                        </div>
+                                        <div class="checkbox">
+                                          <input id="checkbox1" type="checkbox">
+                                          <label for="checkbox1">
+                                            Confirmed
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Status:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tachometer" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.STATUSNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Status">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Quote:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-file" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.QUOTE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Quote">
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Priority:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.PRIORITYANAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Priority">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label class="control-label" for="name">Created By:</label>
+                                          <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                            <input ng-disabled="true" ng-model="WorkOrder.CREATEDBYNAMETEXT" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Created By">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label for ="description"> Reason for Service</label>
+                                          <textarea ng-disabled="true" ng-model="WorkOrder.REASONFORSERVICE"  class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
+                              <div class="panel panel-default">
+                                <div class="panel-heading">
+                                  <h4 class="panel-title">
+                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user"></span> Service Details</a>
+                                  </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse">
+                                  <br>
+                                  <div class="box-body" style="padding:10px;">
+                                    <div class="">
+                                      <div class="table-responsive " >
+                                        <!-- .table - Uses sparkline charts-->
+                                        <table class="table table-striped">
+                                          <tr>
+                                            <th>ID</th>
+                                            <th>Equip System</th>
+                                            <th>QTY</th>
+                                            <th>Part Labor</th>
+                                            <th>Category</th>
+                                            <th>Problem Description</th>
+                                            <th>Resolution Notes</th>
+                                            <th>Completed On</th>
+                                          </tr>
+                                          <tr ng-repeat="WorkOrderDetailItem in WorkOrderDetail">
+                                            <td>{{WorkOrderDetailItem.ID}}</td>
+                                            <td>{{WorkOrderDetailItem.EQUIPMENTSERVICE}}</td>
+                                            <td>{{WorkOrderDetailItem.FQTY}}</td>
+                                            <td>{{WorkOrderDetailItem.SERVICEPART}}</td>
+                                            <td>{{WorkOrderDetailItem.SERVDETAILCATNAME}}</td>
+                                            <td>{{WorkOrderDetailItem.PROBLEMTETX}}</td>
+                                            <td>{{WorkOrderDetailItem.RESOLUTIONTEXT}}</td>
+                                            <td>{{WorkOrderDetailItem.WORKCOMPLETEDDATE | date:'medium'}}</td>
+                                          </tr>
+                                        </table><!-- /.table -->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                </div>
+                                <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th"></span> Recommendations to the Customer</a>
+                                    </h4>
+                                  </div>
+                                  <div id="collapseTwo" class="panel-collapse collapse">
+                                    <div class="box-body" style="padding:10px;">
+                                      <div class="">
+                                        <div class="table-responsive " >
+                                          <!-- .table - Uses sparkline charts-->
+                                          <table class="table table-striped">
+                                            <tr>
+                                              <th>ID</th>
+                                              <th>Observation</th>
+                                              <th>Recommendation</th>
+                                              <th>Status</th>
+                                              <th>User</th>
+                                              <th>Date</th>
+                                            </tr>
+                                            <tr ng-repeat="WorkOrderRecomendationDetail in WorkOrderRecomendation">
+                                              <td>{{WorkOrderRecomendationDetail.ID}}</td>
+                                              <td>{{WorkOrderRecomendationDetail.OBSERVATION}}</td>
+                                              <td>{{WorkOrderRecomendationDetail.OBSERVATION}}</td>
+                                              <td>{{WorkOrderRecomendationDetail.STATUSNAME}}</td>
+                                              <td>{{WorkOrderRecomendationDetail.USERNAME}}</td>
+                                              <td>{{WorkOrderRecomendationDetail.TIMESTAMP | date:'medium'}}</td>
+                                            </tr>
+                                          </table><!-- /.table -->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                  <label>Priority:</label>
-                                  <select class="form-control"
-                                    ng-model="selectedPriority"
-                                    ng-options="Priority as Priority.PRIORITY for Priority in Priorities">
-                                  </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                <label for ="description"> Reason for Service</label>
-                                <textarea ng-model="ReasonForService" class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
-                              </div>
-                            </div>
-                          </div>
                         </div>
-                        <div class="modal-footer">
-                          <button data-dismiss="modal" class="btn btn-default btn-opciones "><span class="glyphicon glyphicon-floppy-remove"></span> Cancel</button>
-                          <button ng-click="CreateOrder();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
-                        </div><!--end modal footer-->
                       </div>
-
                     </div>
                   </div>
-                </section><!-- /.content -->
+                  </div>
+              </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
         <!-- Bootstrap -->
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
+        </div><!-- ./loading -->
     </body>
-
-    <!-- Modal de ver detalle de servicio -->
-    <div class="modal fade" id="id_table_order" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-      <div class="modal-dialog  modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-            <div class="titulo-modal">
-              <h5 class="modal-title"><i class="fa fa-tasks" aria-hidden="true"></i> <label>{{'Service Id: ' + WorkOrder.SERVICEID}}</label></span></h5>
-            </div>
-          </div><!--fin panel modal header-->
-          <div class="row">
-            <div class="col-md-12">
-              <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close"></span> Service Information</a>
-                    </h4>
-                  </div>
-                  <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Service ID:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SERVICEID" ng-disabled="true" class="form-control" type="text" placeholder="Service ID">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Site Name:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-pencil" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SITENAME" ng-disabled="true" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Name">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Service Type:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-tag" aria-hidden="true"></i></span>
-                              <input ng-model="WorkOrder.SERVICETYPE" ng-disabled="true" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Service Type">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Site Address:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.SITEADDRESS" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Site Address">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Category:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-tasks" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.SERVICECATEGORY" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Category">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Requested By:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.REQUESTEDBYNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Requested By">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Responsible:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.RESPONSIBLELASTNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Responsible">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Customer PO:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-users" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.CUSTOMERPO" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Customer PO">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Resources:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-link" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.RESOURCES" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Resources">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Request Date:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.REQDATE | date:'medium'" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Request Date">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Schedule Date:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.SCHEDULEDATE | date:'medium'" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Schedule Date">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="checkbox">
-                            <input id="checkbox1" type="checkbox">
-                            <label for="checkbox1">
-                              Call Ahead
-                            </label>
-                          </div>
-                          <div class="checkbox">
-                            <input id="checkbox1" type="checkbox">
-                            <label for="checkbox1">
-                              Confirmed
-                            </label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Status:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-tachometer" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.STATUSNAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Status">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Quote:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-file" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.QUOTE" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Quote">
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Priority:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-list-ol" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.PRIORITYANAME" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Priority">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label class="control-label" for="name">Created By:</label>
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                              <input ng-disabled="true" ng-model="WorkOrder.CREATEDBYNAMETEXT" id="Nombre" type="text" class="form-control" name="nombre" placeholder="Created By">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for ="description"> Reason for Service</label>
-                            <textarea ng-disabled="true" ng-model="WorkOrder.REASONFORSERVICE"  class="form-control" rows="6" id="description" placeholder="Enter Your Reason"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user"></span> Service Details</a>
-                    </h4>
-                  </div>
-                  <div id="collapseThree" class="panel-collapse collapse">
-                    <br>
-                    <div class="box-body" style="padding:10px;">
-                      <div class="">
-                        <div class="table-responsive " >
-                          <!-- .table - Uses sparkline charts-->
-                          <table class="table table-striped">
-                            <tr>
-                              <th>ID</th>
-                              <th>Equip System</th>
-                              <th>QTY</th>
-                              <th>Part Labor</th>
-                              <th>Category</th>
-                              <th>Problem Description</th>
-                              <th>Resolution Notes</th>
-                              <th>Completed On</th>
-                            </tr>
-                            <tr ng-repeat="WorkOrderDetailItem in WorkOrderDetail">
-                              <td>{{WorkOrderDetailItem.ID}}</td>
-                              <td>{{WorkOrderDetailItem.EQUIPMENTSERVICE}}</td>
-                              <td>{{WorkOrderDetailItem.FQTY}}</td>
-                              <td>{{WorkOrderDetailItem.SERVICEPART}}</td>
-                              <td>{{WorkOrderDetailItem.SERVDETAILCATNAME}}</td>
-                              <td>{{WorkOrderDetailItem.PROBLEMTETX}}</td>
-                              <td>{{WorkOrderDetailItem.RESOLUTIONTEXT}}</td>
-                              <td>{{WorkOrderDetailItem.WORKCOMPLETEDDATE | date:'medium'}}</td>
-                            </tr>
-                          </table><!-- /.table -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th"></span> Recommendations to the Customer</a>
-                      </h4>
-                    </div>
-                    <div id="collapseTwo" class="panel-collapse collapse">
-                      <div class="box-body" style="padding:10px;">
-                        <div class="">
-                          <div class="table-responsive " >
-                            <!-- .table - Uses sparkline charts-->
-                            <table class="table table-striped">
-                              <tr>
-                                <th>ID</th>
-                                <th>Observation</th>
-                                <th>Recommendation</th>
-                                <th>Status</th>
-                                <th>User</th>
-                                <th>Date</th>
-                              </tr>
-                              <tr ng-repeat="WorkOrderRecomendationDetail in WorkOrderRecomendation">
-                                <td>{{WorkOrderRecomendationDetail.ID}}</td>
-                                <td>{{WorkOrderRecomendationDetail.OBSERVATION}}</td>
-                                <td>{{WorkOrderRecomendationDetail.OBSERVATION}}</td>
-                                <td>{{WorkOrderRecomendationDetail.STATUSNAME}}</td>
-                                <td>{{WorkOrderRecomendationDetail.USERNAME}}</td>
-                                <td>{{WorkOrderRecomendationDetail.TIMESTAMP | date:'medium'}}</td>
-                              </tr>
-                            </table><!-- /.table -->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <!-- Fin Modal de ver detalle de servicio -->
-
-    <div dw-loading="myloading" dw-loading-options="{text: 'Working...'}">
-    </div><!-- ./loading -->
-
-
 </html>
