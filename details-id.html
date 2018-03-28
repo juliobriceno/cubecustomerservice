@@ -171,7 +171,7 @@
 
                     <div class="container-fluid">
                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <h5><strong>Site name:</<strog></st><span style="color:#3c8dbc;"> 2979 </span></h5>
+                        <h5><strong>Site name:</<strog></st><span style="color:#3c8dbc;"> {{ActiveSITENAME}} </span></h5>
                          <div class="panel with-nav-tabs panel-default">
                 <div class="panel-heading">
                         <ul class="nav nav-tabs">
@@ -191,13 +191,13 @@
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label>Site ID:</label>
-                                  <input class="form-control" id="siteID" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].ID" class="form-control" id="siteID" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Site name:</label>
-                                  <input class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].SITENAME" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
 
                               </div>
@@ -206,14 +206,14 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Address 1:</label>
-                                  <input class="form-control" id="siteID" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].SITEADDRESS" class="form-control" id="siteID" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-6">
 
                                 <div class="form-group">
                                   <label>Address 2:</label>
-                                  <input class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].SITEADDRESSLINE2" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
 
                               </div>
@@ -222,25 +222,25 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label>City</label>
-                                  <input class="form-control" id="siteID" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].SITECITY" class="form-control" id="siteID" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label>State:</label>
-                                  <input class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].SITESTATE" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label>Zip:</label>
-                                  <input class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].SITEZIP" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label>Country:</label>
-                                  <input class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].SITECOUNTRY" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                             </div>
@@ -248,13 +248,13 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Account Manager:</label>
-                                  <input class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Site Technician:</label>
-                                  <input class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                             </div>
@@ -270,9 +270,9 @@
                                 <div class="form-group">
                                   <label class="control-label" for="">From:</label>
                                   <div class="input-group">
-                                    <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="toDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                                    <input ng-change="SearchWOL();" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="fromDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                                     <span class="input-group-btn">
-                                      <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                      <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
                                   </div>
                                 </div>
@@ -309,13 +309,13 @@
                                     <th>Status</th>
                                     <th>Schedule Date</th>
                                   </tr>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                  <tr ng-repeat="SiteHistoryFilteredItem in SiteHistoryFiltered">
+                                    <td>{{SiteHistoryFilteredItem.Id}}</td>
+                                    <td>{{SiteHistoryFilteredItem.Reported_Issue}}</td>
+                                    <td>{{SiteHistoryFilteredItem.ITEMNAME}}</td>
+                                    <td>{{SiteHistoryFilteredItem.ITEMTYPENAME}}</td>
+                                    <td>{{SiteHistoryFilteredItem.STATUSNAME}}</td>
+                                    <td>{{SiteHistoryFilteredItem.Schedule_Date  | date:'medium'}}</td>
                                   </tr>
                                 </table><!-- /.table -->
                               </div>
@@ -340,14 +340,14 @@
                                     <th>Date</th>
                                     <th>Aset</th>
                                   </tr>
-                                  <tr >
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                  <tr ng-repeat="SiteRecomendationsFilteredItem in SiteRecomendationsFiltered">
+                                    <td>{{SiteRecomendationsFilteredItem.ID}}</td>
+                                    <td>{{SiteRecomendationsFilteredItem.OBSERVATION}}</td>
+                                    <td>{{SiteRecomendationsFilteredItem.DESCRIPTION}}</td>
+                                    <td>{{SiteRecomendationsFilteredItem.STATUS}}</td>
+                                    <td>{{SiteRecomendationsFilteredItem.OWNERID}}</td>
+                                    <td>{{SiteRecomendationsFilteredItem.TIMESTAMP   | date:'medium'}}</td>
+                                    <td>{{SiteRecomendationsFilteredItem.OWNERID}}</td>
                                   </tr>
                                 </table><!-- /.table -->
                               </div>
@@ -414,13 +414,13 @@
                                     <th>Closed Date</th>
                                     <th>Notes</th>
                                   </tr>
-                                  <tr >
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                  <tr ng-repeat="SiteFaultsFilteredItem in SiteFaultsFiltered">
+                                    <td>{{SiteFaultsFilteredItem.ID}}</td>
+                                    <td>{{SiteFaultsFilteredItem.MESSAGE}}</td>
+                                    <td>{{SiteFaultsFilteredItem.FAULTDATE | date:'medium'}}</td>
+                                    <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
+                                    <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
+                                    <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
                                     <td></td>
                                   </tr>
                                 </table><!-- /.table -->
@@ -449,13 +449,17 @@
               <th>Active</th>
               <th>Deleted</th>
             </tr>
-            <tr >
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr ng-repeat="SiteFaultsFilteredItem in SiteFaultsFiltered">
+              <td>{{SiteFaultsFilteredItem.SYSTEMNAMECT}}</td>
+              <td>{{SiteFaultsFilteredItem.MESSAGE}}</td>
+              <td>{{SiteFaultsFilteredItem.FAULTYPE}}</td>
+              <td>{{SiteFaultsFilteredItem.FAULTDATE | date:'medium'}}</td>
+              <td>{{SiteFaultsFilteredItem.INSIGHTID}}</td>
+              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
+              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
+              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
+              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
+              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
               <td></td>
             </tr>
           </table><!-- /.table -->

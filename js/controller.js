@@ -448,6 +448,12 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           };
 
+          $scope.CallSiteDetail = function(SITENAME, ID) {
+            localStorage.ActiveSITENAME = SITENAME;
+            localStorage.ActiveSITEID = ID;
+            window.location = 'details-id.html';
+          }
+
         }])
 
         .controller('ctrlCubeCustomerAppHome', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
@@ -951,6 +957,14 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
         .controller('ctrlCubeCustomerAppSiteDetails', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
 
+          $scope.ActiveSITENAME = localStorage.ActiveSITENAME;
+          $scope.SearchText = '';
+
+          var date = new Date();
+          $scope.fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
+          $scope.toDate = new Date();
+          $scope.toDate.setDate($scope.toDate.getDate()+1);
+
           $scope.User = {};
           $scope.User.name = '';
           $scope.User.password = '';
@@ -995,16 +1009,78 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           if (typeof localStorage.cnnData2 != 'undefined'){
 
 
-            // Get service sites for customer to populate select sites in create new order
-            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_ProjectsCust","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
-              $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
-              $scope.CustomerSitesFiltered = $scope.CustomerSites;
+            // Get Site Detail Master
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_SiteInfo","conncode":"' + cnnData.DBNAME + '","siteid":"' + localStorage.ActiveSITEID + '"}', {headers: headers}).then(function (response) {
+              $scope.SiteDetail = getArray(response.data.CubeFlexIntegration.DATA);
             })
             .catch(function (data) {
               console.log('Error 27');
               console.log(data);
               swal("Cube Service", "Unexpected error. Check console Error 27.");
             });
+
+            // Get service sites History
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_ServiceSite_History","conncode":"' + cnnData.DBNAME + '","siteid":"' + localStorage.ActiveSITEID + '"}', {headers: headers}).then(function (response) {
+              $scope.SiteHistory = getArray(response.data.CubeFlexIntegration.DATA);
+
+              if (typeof $scope.SiteHistory != 'undefined'){
+                $scope.SiteHistory.forEach(function(element) {
+                  element.Schedule_Date = new Date(element.Schedule_Date);
+                });
+              }
+
+              $scope.SiteHistoryFiltered = $scope.SiteHistory;
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+
+            // Get service sites Reccomendations
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceSiteOpen_Recomendations","conncode":"' + cnnData.DBNAME + '","siteid":"' + localStorage.ActiveSITEID + '"}', {headers: headers}).then(function (response) {
+              $scope.SiteRecomendations = getArray(response.data.CubeFlexIntegration.DATA);
+              $scope.SiteRecomendationsFiltered = $scope.SiteRecomendations;
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+
+            // Get service sites Fault
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceSiteFaultDet","conncode":"' + cnnData.DBNAME + '","siteid":"3066"}', {headers: headers}).then(function (response) {
+
+              $scope.SiteFaults = getArray(response.data.CubeFlexIntegration.DATA);
+              $scope.SiteFaultsFiltered = $scope.SiteFaults;
+
+              console.log('Aqui viene la dataaaaaaaaaaaaaaaa');
+              console.log($scope.SiteFaultsFiltered);
+
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+
+            $scope.SearchWOL = function(){
+
+              if (!$scope.ValidaDate($scope.fromDate) || !$scope.ValidaDate($scope.toDate)){
+                $scope.SiteHistoryFiltered = [];
+                return 0;
+              }
+
+              $scope.SiteHistoryFiltered = $scope.SiteHistory;
+
+              var dt = new Date($scope.toDate.getFullYear(), $scope.toDate.getMonth(), $scope.toDate.getDate(), 23, 59, 59);
+              $scope.toDate = dt;
+
+              $scope.SiteHistoryFiltered = $scope.SiteHistoryFiltered.filter(function (el){
+                return (el.Schedule_Date > $scope.fromDate && el.Schedule_Date <= $scope.toDate && (el.ITEMNAME.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1 || el.ITEMNAME.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1));
+              })
+
+            }
 
             // GetPriorities to populate select Priorities in create new order
             $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
@@ -1070,5 +1146,107 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             });
 
           };
+
+          // Data Validate
+          $scope.ValidaDate = function(dDate){
+            if ( Object.prototype.toString.call(dDate) === "[object Date]" ) {
+              if ( isNaN( dDate.getTime() ) ) {
+                return false;
+              }
+              else {
+                return true;
+              }
+            }
+            else {
+              return false;
+            }
+          }
+          // End Data Validate
+
+          // Date Control Functions
+          $scope.today = function() {
+            $scope.dt = new Date();
+          };
+          $scope.today();
+
+          $scope.clear = function() {
+            $scope.dt = null;
+          };
+
+          $scope.inlineOptions = {
+            customClass: getDayClass,
+            minDate: new Date(),
+            showWeeks: true
+          };
+
+          $scope.dateOptions = {
+            dateDisabled: disabled,
+            formatYear: 'yy',
+            maxDate: new Date(2020, 5, 22),
+            minDate: new Date(),
+            startingDay: 1
+          };
+
+          // Disable weekend selection
+          function disabled(data) {
+            var date = data.date,
+              mode = data.mode;
+            return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+          }
+          $scope.toggleMin = function() {
+            $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+            $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+          };
+          $scope.toggleMin();
+          $scope.open1 = function() {
+            $scope.popup1.opened = true;
+          };
+          $scope.open2 = function() {
+            $scope.popup2.opened = true;
+          };
+          $scope.setDate = function(year, month, day) {
+            $scope.dt = new Date(year, month, day);
+          };
+          $scope.formats = ['MM-dd-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+          $scope.format = $scope.formats[0];
+          $scope.altInputFormats = ['M!/d!/yyyy'];
+          $scope.popup1 = {
+            opened: false
+          };
+          $scope.popup2 = {
+            opened: false
+          };
+          var tomorrow = new Date();
+          tomorrow.setDate(tomorrow.getDate() + 1);
+          var afterTomorrow = new Date();
+          afterTomorrow.setDate(tomorrow.getDate() + 1);
+          $scope.events = [
+            {
+              date: tomorrow,
+              status: 'full'
+            },
+            {
+              date: afterTomorrow,
+              status: 'partially'
+            }
+          ];
+          function getDayClass(data) {
+            var date = data.date,
+              mode = data.mode;
+            if (mode === 'day') {
+              var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+              for (var i = 0; i < $scope.events.length; i++) {
+                var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                if (dayToCheck === currentDay) {
+                  return $scope.events[i].status;
+                }
+              }
+            }
+
+            return '';
+          }
+          // End Date Control Functions
 
         }])

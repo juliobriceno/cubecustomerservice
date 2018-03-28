@@ -189,7 +189,7 @@
                                   <th>Active</th>
                               </tr>
                               <tr ng-repeat="CustomerSitesFilteredItem in CustomerSitesFiltered">
-                                  <td><a href="details-id.html">{{CustomerSitesFilteredItem.ID}}</a></td>
+                                  <td ng-click="CallSiteDetail(CustomerSitesFilteredItem.SITENAME, CustomerSitesFilteredItem.ID);"><a href="#">{{CustomerSitesFilteredItem.ID}}</a></td>
                                   <td>{{CustomerSitesFilteredItem.SITENAME}}</td>
                                   <td >{{ (CustomerSitesFilteredItem.ACTIVE == 'true' ? 'Yes' : 'No') }}</td>
                               </tr>
