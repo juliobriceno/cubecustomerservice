@@ -191,13 +191,13 @@
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label>Site ID:</label>
-                                  <input ng-model="SiteDetail[0].ID" class="form-control" id="siteID" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].ID" class="form-control" id="siteID" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Site name:</label>
-                                  <input ng-model="SiteDetail[0].SITENAME" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].SITENAME" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
 
                               </div>
@@ -206,14 +206,14 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Address 1:</label>
-                                  <input ng-model="SiteDetail[0].SITEADDRESS" class="form-control" id="siteID" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].SITEADDRESS" class="form-control" id="siteID" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-6">
 
                                 <div class="form-group">
                                   <label>Address 2:</label>
-                                  <input ng-model="SiteDetail[0].SITEADDRESSLINE2" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].SITEADDRESSLINE2" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
 
                               </div>
@@ -222,25 +222,25 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label>City</label>
-                                  <input ng-model="SiteDetail[0].SITECITY" class="form-control" id="siteID" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].SITECITY" class="form-control" id="siteID" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label>State:</label>
-                                  <input ng-model="SiteDetail[0].SITESTATE" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].SITESTATE" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label>Zip:</label>
-                                  <input ng-model="SiteDetail[0].SITEZIP" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].SITEZIP" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-4">
                                 <div class="form-group">
                                   <label>Country:</label>
-                                  <input ng-model="SiteDetail[0].SITECOUNTRY" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].SITECOUNTRY" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                             </div>
@@ -248,13 +248,13 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Account Manager:</label>
-                                  <input ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Site Technician:</label>
-                                  <input ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true"  ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                             </div>
@@ -304,15 +304,13 @@
                                   <tr>
                                     <th>ID</th>
                                     <th>Reported Issue</th>
-                                    <th>Site Name</th>
                                     <th>Service Technician</th>
                                     <th>Status</th>
                                     <th>Schedule Date</th>
                                   </tr>
                                   <tr ng-repeat="SiteHistoryFilteredItem in SiteHistoryFiltered">
-                                    <td><a href="#id_table_order"  data-toggle="modal">{{SiteHistoryFilteredItem.Id}}</a></td>
+                                    <td><a href="#id_table_order" ng-click="GetWorkOrderDetail(SiteHistoryFilteredItem.Id);"  data-toggle="modal">{{SiteHistoryFilteredItem.Id}}</a></td>
                                     <td>{{SiteHistoryFilteredItem.Reported_Issue}}</td>
-                                    <td>{{SiteHistoryFilteredItem.ITEMNAME}}</td>
                                     <td>{{SiteHistoryFilteredItem.ITEMTYPENAME}}</td>
                                     <td>{{SiteHistoryFilteredItem.STATUSNAME}}</td>
                                     <td>{{SiteHistoryFilteredItem.Schedule_Date  | date:'medium'}}</td>
@@ -367,21 +365,9 @@
                           <div class="well head-table">
 
                             <div class="row">
-                              <div class="col-md-2">
-                                <div class="form-group">
-                                  <label class="control-label" for="">ID:</label>
-                                  <input class="form-control" id="siteID" placeholder="" type="text">
-                                </div>
-                              </div>
                               <div class="col-md-4">
                                 <label for="">Name:</label>
                                   <input class="form-control" id="siteID" placeholder="" type="text">
-                              </div>
-                              <div class="col-md-2">
-                                  <label for="">Closed:</label>
-                                  <select class="form-control" name="">
-                                    <option value=""></option>
-                                  </select>
                               </div>
                               <div class="col-md-4">
                                 <div style="margin-top:25px;">
@@ -446,8 +432,6 @@
               <th>Asset</th>
               <th>Status</th>
               <th>Show in Customer</th>
-              <th>Active</th>
-              <th>Deleted</th>
             </tr>
             <tr ng-repeat="SiteFaultsFilteredItem in SiteFaultsFiltered">
               <td>{{SiteFaultsFilteredItem.SYSTEMNAMECT}}</td>
@@ -458,32 +442,12 @@
               <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
               <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
               <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
-              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
-              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
               <td></td>
             </tr>
           </table><!-- /.table -->
         </div>
       </div>
-      <div class="panel-footer">
-               <div class="row">
-                 <div class="col col-xs-4">Page 1 of 5
-                 </div>
-                 <div class="col col-xs-8">
-                   <ul class="pagination hidden-xs pull-right">
-                     <li><a href="#">1</a></li>
-                     <li><a href="#">2</a></li>
-                     <li><a href="#">3</a></li>
-                     <li><a href="#">4</a></li>
-                     <li><a href="#">5</a></li>
-                   </ul>
-                   <ul class="pagination visible-xs pull-right">
-                       <li><a href="#">«</a></li>
-                       <li><a href="#">»</a></li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
+
 
     </div>
 
