@@ -356,9 +356,9 @@
                         <div class="tab-pane fade" id="tab-pushlist">
                           <div class="row">
                             <div class="col-md-12">
-                              <button   title="Search"  class="btn btn-info">
-                              New Open Item
-                              </button>
+                              <a href="#new_open_item"  data-toggle="modal"><button   title="Search"  class="btn btn-info">
+                              <i class="fa fa-plus"></i> New Open Item
+                            </button></a>
                             </div>
                           </div> <br>
 
@@ -375,7 +375,7 @@
                                     <i class="fa fa-search"></i> Search
                                   </button>
                                   <button   title="Clear filters"  class="btn btn-default">
-                                    Clear filters
+                                    <i class="fa fa-eraser"></i> Clear filters
                                   </button>
                                 </div>
 
@@ -461,7 +461,8 @@
                     </div>
 
 
-                    <!-- Widgets as boxes -->
+                    <!-- Inicio Modales -->
+                    <!--Inicio modal create order-->
                     <div class="modal fade" id="create_order" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
                     <div class="modal-dialog  modal-lg">
                       <div class="modal-content">
@@ -797,6 +798,59 @@
                     </div>
                   </div>
                   </div>
+                  <div class="modal fade" id="new_open_item" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                  <div class="modal-dialog  modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <div class="titulo-modal">
+                          <h5 class="modal-title"><i class="fa fa-file-text-o"></i><b> Open Item Details</b></h5>
+                        </div>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Project:</label>
+                                <div class="form-group">
+                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Project">
+                                </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label" for="name">Item Name:</label>
+                              <div class="form-group">
+                                <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Item Name">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Responsible:</label>
+                                <div class="form-group">
+                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Responsible">
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label for ="description"> Notes</label>
+                              <textarea ng-model="ReasonForService" class="form-control" rows="6" id="description" placeholder="Enter Your Notes"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default btn-opciones "><span class="glyphicon glyphicon-floppy-remove"></span> Cancel</button>
+                        <button ng-click="CreateOrder();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+                      </div><!--end modal footer-->
+                    </div>
+
+                  </div>
+                </div>
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
 
