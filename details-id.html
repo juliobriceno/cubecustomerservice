@@ -311,7 +311,7 @@
                                   <tr ng-repeat="SiteHistoryFilteredItem in SiteHistoryFiltered">
                                     <td><a href="#id_table_order" ng-click="GetWorkOrderDetail(SiteHistoryFilteredItem.Id);"  data-toggle="modal">{{SiteHistoryFilteredItem.Id}}</a></td>
                                     <td>{{SiteHistoryFilteredItem.Reported_Issue}}</td>
-                                    <td>{{SiteHistoryFilteredItem.ITEMTYPENAME}}</td>
+                                    <td>{{SiteHistoryFilteredItem.Service_Tech}}</td>
                                     <td>{{SiteHistoryFilteredItem.STATUSNAME}}</td>
                                     <td>{{SiteHistoryFilteredItem.Schedule_Date  | date:'medium'}}</td>
                                   </tr>
@@ -367,16 +367,10 @@
                             <div class="row">
                               <div class="col-md-4">
                                 <label for="">Name:</label>
-                                  <input class="form-control" id="siteID" placeholder="" type="text">
+                                  <input ng-change="loadPunches();" ng-model="SearchText" class="form-control" id="siteID" placeholder="" type="text">
                               </div>
                               <div class="col-md-4">
                                 <div style="margin-top:25px;">
-                                  <button   title="Search"  class="btn btn-success">
-                                    <i class="fa fa-search"></i> Search
-                                  </button>
-                                  <button   title="Clear filters"  class="btn btn-default">
-                                    <i class="fa fa-eraser"></i> Clear filters
-                                  </button>
                                 </div>
 
 
@@ -394,20 +388,14 @@
                                   <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Open Date</th>
                                     <th>Responsible</th>
-                                    <th>Closed</th>
-                                    <th>Closed Date</th>
                                     <th>Notes</th>
                                   </tr>
-                                  <tr ng-repeat="SiteFaultsFilteredItem in SiteFaultsFiltered">
-                                    <td>{{SiteFaultsFilteredItem.ID}}</td>
-                                    <td>{{SiteFaultsFilteredItem.MESSAGE}}</td>
-                                    <td>{{SiteFaultsFilteredItem.FAULTDATE | date:'medium'}}</td>
-                                    <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
-                                    <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
-                                    <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
-                                    <td></td>
+                                  <tr ng-repeat="SitePunchFilteredItem in SitePunchFiltered">
+                                    <td>{{SitePunchFilteredItem.ID}}</td>
+                                    <td>{{SitePunchFilteredItem.ITEMNAME}}</td>
+                                    <td>{{SitePunchFilteredItem.NOTES}}</td>
+                                    <td>{{SitePunchFilteredItem.NOTES}}</td>
                                   </tr>
                                 </table><!-- /.table -->
                               </div>
@@ -813,7 +801,7 @@
                             <div class="form-group">
                                 <label>Project:</label>
                                 <div class="form-group">
-                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Project">
+                                  <input ng-model="newPunchProject" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Project">
                                 </div>
                             </div>
                           </div>
@@ -821,7 +809,7 @@
                             <div class="form-group">
                               <label class="control-label" for="name">Item Name:</label>
                               <div class="form-group">
-                                <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Item Name">
+                                <input ng-model="newPunchItemName" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Item Name">
                               </div>
                             </div>
                           </div>
@@ -829,7 +817,7 @@
                             <div class="form-group">
                                 <label>Responsible:</label>
                                 <div class="form-group">
-                                  <input ng-model="CustomerPO" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Responsible">
+                                  <input ng-model="newPunchResponsible" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Responsible">
                                 </div>
                             </div>
                           </div>
@@ -838,14 +826,14 @@
                           <div class="col-md-12">
                             <div class="form-group">
                               <label for ="description"> Notes</label>
-                              <textarea ng-model="ReasonForService" class="form-control" rows="6" id="description" placeholder="Enter Your Notes"></textarea>
+                              <textarea ng-model="newPunchNotes" class="form-control" rows="6" id="description" placeholder="Enter Your Notes"></textarea>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-default btn-opciones "><span class="glyphicon glyphicon-floppy-remove"></span> Cancel</button>
-                        <button ng-click="CreateOrder();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
+                        <button ng-click="CreatePunch();"  class="btn btn-primary"><i class="glyphicon glyphicon-floppy-save"></i> Save</button>
                       </div><!--end modal footer-->
                     </div>
 

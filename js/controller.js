@@ -1004,6 +1004,23 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             window.location = 'index.html';
           }
 
+          $scope.CreatePunch = function(){
+            // Save punch
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServicePunchItem","conncode":"' + cnnData.DBNAME + '","servicesiteid":"' + localStorage.ActiveSITEID + '", "name":"' + $scope.newPunchItemName + '", "Responsible":"' + $scope.newPunchResponsible + '", "notes":"' + $scope.newPunchNotes + '"}', {headers: headers}).then(function (response) {
+              $scope.newPunchProject = "";
+              $scope.newPunchItemName = "";
+              $scope.newPunchResponsible = "";
+              $scope.newPunchNotes = "";
+              $scope.loadPunches();
+              swal("Cube Service", "Service Punch was saved.");
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+          }
+
           var headers = {"Authorization": ServerAuth};
 
           if (typeof localStorage.cnnData2 != 'undefined'){
@@ -1037,6 +1054,17 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
               swal("Cube Service", "Unexpected error. Check console Error 27.");
             });
 
+            // Get service sites Punch
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePunchList","conncode":"' + cnnData.DBNAME + '","serviceid":"' + localStorage.ActiveSITEID + '"}', {headers: headers}).then(function (response) {
+              $scope.SitePunch = getArray(response.data.CubeFlexIntegration.DATA);
+              $scope.SitePunchFiltered = $scope.SitePunch;
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+
             // Get service sites Reccomendations
             $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServiceSiteOpen_Recomendations","conncode":"' + cnnData.DBNAME + '","siteid":"' + localStorage.ActiveSITEID + '"}', {headers: headers}).then(function (response) {
               $scope.SiteRecomendations = getArray(response.data.CubeFlexIntegration.DATA);
@@ -1059,21 +1087,25 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
               swal("Cube Service", "Unexpected error. Check console Error 27.");
             });
 
-            // Get service sites Fault
-            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePunchList","conncode":"' + cnnData.DBNAME + '","siteid":"3066"}', {headers: headers}).then(function (response) {
+            $scope.loadPunches = function(){
+              // Get service sites Punch
+              $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePunchList","conncode":"' + cnnData.DBNAME + '","serviceid":"' + localStorage.ActiveSITEID + '"}', {headers: headers}).then(function (response) {
+                $scope.SitePunch = getArray(response.data.CubeFlexIntegration.DATA);
+                $scope.SitePunchFiltered = $scope.SitePunch;
 
-              $scope.SiteFaults = getArray(response.data.CubeFlexIntegration.DATA);
-              $scope.SiteFaultsFiltered = $scope.SiteFaults;
+                $scope.SitePunchFiltered = $scope.SitePunchFiltered.filter(function (el){
+                  return ((el.ITEMNAME.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1 || el.ITEMNAME.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1));
+                })
 
-              console.log('Aqui viene la dataaaaaaaaaaaaaaaa');
-              console.log($scope.SiteFaultsFiltered);
+              })
+              .catch(function (data) {
+                console.log('Error 27');
+                console.log(data);
+                swal("Cube Service", "Unexpected error. Check console Error 27.");
+              });
+            }
 
-            })
-            .catch(function (data) {
-              console.log('Error 27');
-              console.log(data);
-              swal("Cube Service", "Unexpected error. Check console Error 27.");
-            });
+            $scope.loadPunches();
 
             $scope.SearchWOL = function(){
 
