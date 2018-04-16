@@ -1,7 +1,7 @@
 
 // Cube Service Parameters
 // URL Cube Service String
-//var connServiceString = "https://portal.cube-usa.com/api/";
+//var connServiceString = "http://www.cube-mia.com/api/";
 var connServiceString = "https://portal.cube-usa.com/api/";
 
 // Server Authorization
@@ -256,7 +256,6 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           };
 
           $scope.dateOptions = {
-            dateDisabled: disabled,
             formatYear: 'yy',
             maxDate: new Date(2020, 5, 22),
             minDate: new Date(),
@@ -888,6 +887,17 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
               swal("Cube Service", "Unexpected error. Check console Error 27.");
             });
 
+            // Get service sites for customer to populate select sites in create new order
+            $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+              $scope.CustomerSitesCombo = getArray(response.data.CubeFlexIntegration.DATA);
+              $scope.CustomerSitesComboFiltered = $scope.CustomerSitesCombo;
+            })
+            .catch(function (data) {
+              console.log('Error 27');
+              console.log(data);
+              swal("Cube Service", "Unexpected error. Check console Error 27.");
+            });
+
             // GetPriorities to populate select Priorities in create new order
             $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"GetServicePriority","conncode":"' + cnnData.DBNAME + '"}', {headers: headers}).then(function (response) {
               $scope.Priorities = getArray(response.data.CubeFlexIntegration.DATA);
@@ -1047,6 +1057,9 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
               }
 
               $scope.SiteHistoryFiltered = $scope.SiteHistory;
+
+              $scope.SearchWOL();
+
             })
             .catch(function (data) {
               console.log('Error 27');
@@ -1120,7 +1133,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
               $scope.toDate = dt;
 
               $scope.SiteHistoryFiltered = $scope.SiteHistoryFiltered.filter(function (el){
-                return (el.Schedule_Date > $scope.fromDate && el.Schedule_Date <= $scope.toDate && (el.ITEMNAME.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1 || el.ITEMNAME.toUpperCase().indexOf($scope.SearchText.toUpperCase()) > -1));
+                return (el.Schedule_Date > $scope.fromDate && el.Schedule_Date <= $scope.toDate);
               })
 
             }
@@ -1250,7 +1263,6 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
           };
 
           $scope.dateOptions = {
-            dateDisabled: disabled,
             formatYear: 'yy',
             maxDate: new Date(2020, 5, 22),
             minDate: new Date(),

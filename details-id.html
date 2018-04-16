@@ -248,13 +248,13 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Account Manager:</label>
-                                  <input ng-disabled="true" ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true" ng-model="SiteDetail[0].ACCOUNTMANAGER" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                               <div class="col-md-6">
                                 <div class="form-group">
                                   <label>Site Technician:</label>
-                                  <input ng-disabled="true"  ng-model="SiteDetail[0].OWNERNAME" class="form-control" id="siteName" placeholder="" type="text">
+                                  <input ng-disabled="true"  ng-model="SiteDetail[0].SERVICETECH" class="form-control" id="siteName" placeholder="" type="text">
                                 </div>
                               </div>
                             </div>
@@ -284,13 +284,6 @@
                                   <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                                   </span>
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <label>Search by site name:</label>
-                                <div class="input-group">
-                                  <span class="input-group-addon "><span class="glyphicon glyphicon-search"></span></span>
-                                  <input ng-change="SearchWOL();" ng-model="SearchText" type="text" class="form-control" placeholder="Enter name">
                                 </div>
                               </div>
                             </div>
@@ -799,25 +792,24 @@
                         <div class="row">
                           <div class="col-md-4">
                             <div class="form-group">
-                                <label>Project:</label>
+                                <label>Item Name:</label>
                                 <div class="form-group">
-                                  <input ng-model="newPunchProject" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Project">
+                                  <input ng-model="newPunchItemName" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Item Name">
                                 </div>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                              <label class="control-label" for="name">Item Name:</label>
+                              <label class="control-label" for="name">Responsible:</label>
                               <div class="form-group">
-                                <input ng-model="newPunchItemName" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Item Name">
+                                <input ng-model="newPunchResponsible" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Responsible">
                               </div>
                             </div>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
-                                <label>Responsible:</label>
+                                <label></label>
                                 <div class="form-group">
-                                  <input ng-model="newPunchResponsible" ng-pattern-restrict="^[A-Za-z0-9]*$" class="form-control" type="text" placeholder="Responsible">
                                 </div>
                             </div>
                           </div>
