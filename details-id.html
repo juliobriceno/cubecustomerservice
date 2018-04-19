@@ -327,18 +327,14 @@
                                     <th>Observations</th>
                                     <th>Description</th>
                                     <th>Status</th>
-                                    <th>User</th>
                                     <th>Date</th>
-                                    <th>Aset</th>
                                   </tr>
                                   <tr ng-repeat="SiteRecomendationsFilteredItem in SiteRecomendationsFiltered">
                                     <td>{{SiteRecomendationsFilteredItem.ID}}</td>
                                     <td>{{SiteRecomendationsFilteredItem.OBSERVATION}}</td>
                                     <td>{{SiteRecomendationsFilteredItem.DESCRIPTION}}</td>
                                     <td>{{SiteRecomendationsFilteredItem.STATUS}}</td>
-                                    <td>{{SiteRecomendationsFilteredItem.OWNERID}}</td>
                                     <td>{{SiteRecomendationsFilteredItem.TIMESTAMP   | date:'medium'}}</td>
-                                    <td>{{SiteRecomendationsFilteredItem.OWNERID}}</td>
                                   </tr>
                                 </table><!-- /.table -->
                               </div>
@@ -387,7 +383,7 @@
                                   <tr ng-repeat="SitePunchFilteredItem in SitePunchFiltered">
                                     <td>{{SitePunchFilteredItem.ID}}</td>
                                     <td>{{SitePunchFilteredItem.ITEMNAME}}</td>
-                                    <td>{{SitePunchFilteredItem.NOTES}}</td>
+                                    <td>{{SitePunchFilteredItem.TOBEDONEBY}}</td>
                                     <td>{{SitePunchFilteredItem.NOTES}}</td>
                                   </tr>
                                 </table><!-- /.table -->
