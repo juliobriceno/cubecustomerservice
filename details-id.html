@@ -377,13 +377,11 @@
                                   <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Responsible</th>
                                     <th>Notes</th>
                                   </tr>
                                   <tr ng-repeat="SitePunchFilteredItem in SitePunchFiltered">
                                     <td>{{SitePunchFilteredItem.ID}}</td>
                                     <td>{{SitePunchFilteredItem.ITEMNAME}}</td>
-                                    <td>{{SitePunchFilteredItem.TOBEDONEBY}}</td>
                                     <td>{{SitePunchFilteredItem.NOTES}}</td>
                                   </tr>
                                 </table><!-- /.table -->
@@ -792,14 +790,6 @@
                                 <div class="form-group">
                                   <input ng-model="newPunchItemName" class="form-control" type="text" placeholder="Item Name">
                                 </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <div class="form-group">
-                              <label class="control-label" for="name">Responsible:</label>
-                              <div class="form-group">
-                                <input ng-model="newPunchResponsible" class="form-control" type="text" placeholder="Responsible">
-                              </div>
                             </div>
                           </div>
                           <div class="col-md-4">

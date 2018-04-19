@@ -1016,6 +1016,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
           $scope.CreatePunch = function(){
             // Save punch
+            $scope.newPunchResponsible = '';
+
             $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServicePunchItem","conncode":"' + cnnData.DBNAME + '","servicesiteid":"' + localStorage.ActiveSITEID + '", "name":"' + $scope.newPunchItemName + '", "Responsible":"' + $scope.newPunchResponsible + '", "notes":"' + $scope.newPunchNotes + '"}', {headers: headers}).then(function (response) {
               $scope.newPunchProject = "";
               $scope.newPunchItemName = "";
