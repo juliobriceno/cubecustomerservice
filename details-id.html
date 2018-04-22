@@ -404,9 +404,6 @@
               <th>Type</th>
               <th>Ocurred</th>
               <th>Insight ID</th>
-              <th>Asset</th>
-              <th>Status</th>
-              <th>Show in Customer</th>
             </tr>
             <tr ng-repeat="SiteFaultsFilteredItem in SiteFaultsFiltered">
               <td>{{SiteFaultsFilteredItem.SYSTEMNAMECT}}</td>
@@ -414,9 +411,6 @@
               <td>{{SiteFaultsFilteredItem.FAULTYPE}}</td>
               <td>{{SiteFaultsFilteredItem.FAULTDATE | date:'medium'}}</td>
               <td>{{SiteFaultsFilteredItem.INSIGHTID}}</td>
-              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
-              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
-              <td>{{SiteFaultsFilteredItem.ACTIVE}}</td>
               <td></td>
             </tr>
           </table><!-- /.table -->
