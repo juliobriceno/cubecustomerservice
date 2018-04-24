@@ -48,6 +48,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
+            $scope.CreateDisabled = true;
+
             var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + cnnData.ID + '"}';
 
             $loading.start('myloading');
@@ -75,6 +77,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                   $scope.SearchWOL();
 
                   swal("Cube Service", "Service was created.");
+                  $scope.CreateDisabled = false;
+
                   // Close modal
                   $('#create_order').modal('hide');
 
@@ -419,6 +423,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
+            $scope.CreateDisabled = true;
+
             var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
 
             $loading.start('myloading');
@@ -433,6 +439,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
                   $loading.finish('myloading');
                   swal("Cube Service", "Service was created.");
+                  $scope.CreateDisabled = false;
+
                   // Close modal
                   $('#create_order').modal('hide');
                 })
@@ -725,6 +733,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
+            $scope.CreateDisabled = true;
+
             var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
 
             $loading.start('myloading');
@@ -747,6 +757,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
                     $loading.finish('myloading');
                     swal("Cube Service", "Service was created.");
+                    $scope.CreateDisabled = false;
+
                     // Close modal
                     $('#create_order').modal('hide');
                   })
@@ -935,6 +947,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
+            $scope.CreateDisabled = true;
+
             var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
 
             $loading.start('myloading');
@@ -949,6 +963,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
                   $loading.finish('myloading');
                   swal("Cube Service", "Service was created.");
+                  $scope.CreateDisabled = false;
+
                   // Close modal
                   $('#create_order').modal('hide');
                 })
@@ -1018,6 +1034,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             // Save punch
             $scope.newPunchResponsible = '';
 
+            $scope.CreateDisabled = true;
+
             $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServicePunchItem","conncode":"' + cnnData.DBNAME + '","servicesiteid":"' + localStorage.ActiveSITEID + '", "name":"' + $scope.newPunchItemName + '", "Responsible":"' + $scope.newPunchResponsible + '", "notes":"' + $scope.newPunchNotes + '"}', {headers: headers}).then(function (response) {
               $scope.newPunchProject = "";
               $scope.newPunchItemName = "";
@@ -1025,6 +1043,9 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
               $scope.newPunchNotes = "";
               $scope.loadPunches();
               swal("Cube Service", "Service Punch was saved.");
+              $scope.CreateDisabled = false;
+              // Close modal
+              $('#new_open_item').modal('hide');
             })
             .catch(function (data) {
               console.log('Error 27');
@@ -1154,6 +1175,17 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
             window.location = 'index.html';
           }
 
+          // Get service sites for customer to populate select sites in create new order
+          $http.get(connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"Get_Services_Sites_Customer","conncode":"' + cnnData.DBNAME + '","customerid":"' + EmployeeData.EMPLOYEEID + '"}', {headers: headers}).then(function (response) {
+            $scope.CustomerSites = getArray(response.data.CubeFlexIntegration.DATA);
+            $scope.CustomerSitesFiltered = $scope.CustomerSites;
+          })
+          .catch(function (data) {
+            console.log('Error 27');
+            console.log(data);
+            swal("Cube Service", "Unexpected error. Check console Error 27.");
+          });
+
           $scope.SearchSites = function(){
 
             $scope.CustomerSitesFiltered = $scope.CustomerSites;
@@ -1177,6 +1209,8 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                 return 0;
             }
 
+            $scope.CreateDisabled = true;
+
             var urlRq = connServiceString + 'CubeFlexIntegration.ashx?obj={"method":"SaveServiceInfo_Customer","conncode":"' + cnnData.DBNAME + '","siteid":"' + $scope.selectedCustomerSite.ID + '", "customerpo": "' + $scope.CustomerPO + '", "priorityid": "' + $scope.selectedPriority.ID + '", "reasonforservice": "' + $scope.ReasonForService + '", "reqbyid": "' + $scope.cnnnData2.ID + '"}';
 
             $loading.start('myloading');
@@ -1191,6 +1225,7 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
                   $scope.CustomerData = getArray(response.data.CubeFlexIntegration.DATA);
                   $loading.finish('myloading');
                   swal("Cube Service", "Service was created.");
+                  $scope.CreateDisabled = false;
                   // Close modal
                   $('#create_order').modal('hide');
                 })
