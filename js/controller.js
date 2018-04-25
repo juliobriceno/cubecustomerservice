@@ -35,6 +35,23 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
         .controller('ctrlCubeCustomerAppServiceHistory', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
 
+          $scope.ShowSideBar = true;
+          $scope.LeftMenu = 'left-side sidebar-offcanvas';
+          $scope.RightMenu = 'right-side';
+
+          $scope.HideMenu = function(){
+            if ($scope.ShowSideBar == false){
+              $scope.LeftMenu = 'left-side sidebar-offcanvas';
+              $scope.RightMenu = 'right-side';
+              $scope.ShowSideBar = true;
+            }
+            else{
+              $scope.LeftMenu = 'left-side sidebar-offcanvas collapse-left';
+              $scope.RightMenu = 'right-side strech';
+              $scope.ShowSideBar = false;
+            }
+          }
+
           var cnnData = JSON.parse(localStorage.cnnData2);
           var EmployeeData = JSON.parse(localStorage.EmployeeData);
 
@@ -331,6 +348,23 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
         }])
 
         .controller('ctrlCubeCustomerAppSite', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
+
+          $scope.ShowSideBar = true;
+          $scope.LeftMenu = 'left-side sidebar-offcanvas';
+          $scope.RightMenu = 'right-side';
+
+          $scope.HideMenu = function(){
+            if ($scope.ShowSideBar == false){
+              $scope.LeftMenu = 'left-side sidebar-offcanvas';
+              $scope.RightMenu = 'right-side';
+              $scope.ShowSideBar = true;
+            }
+            else{
+              $scope.LeftMenu = 'left-side sidebar-offcanvas collapse-left';
+              $scope.RightMenu = 'right-side strech';
+              $scope.ShowSideBar = false;
+            }
+          }
 
           $scope.User = {};
           $scope.User.name = '';
@@ -844,6 +878,23 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
 
         .controller('ctrlCubeCustomerAppActiveProjects', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
 
+          $scope.ShowSideBar = true;
+          $scope.LeftMenu = 'left-side sidebar-offcanvas';
+          $scope.RightMenu = 'right-side';
+
+          $scope.HideMenu = function(){
+            if ($scope.ShowSideBar == false){
+              $scope.LeftMenu = 'left-side sidebar-offcanvas';
+              $scope.RightMenu = 'right-side';
+              $scope.ShowSideBar = true;
+            }
+            else{
+              $scope.LeftMenu = 'left-side sidebar-offcanvas collapse-left';
+              $scope.RightMenu = 'right-side strech';
+              $scope.ShowSideBar = false;
+            }
+          }
+
           $scope.User = {};
           $scope.User.name = '';
           $scope.User.password = '';
@@ -982,6 +1033,23 @@ angular.module('WarrantyModule', ['angularFileUpload', 'darthwade.loading', 'ngT
         }])
 
         .controller('ctrlCubeCustomerAppSiteDetails', ['$scope', '$http', '$loading', '$uibModal', function ($scope, $http, $loading, $uibModal) {
+
+          $scope.ShowSideBar = true;
+          $scope.LeftMenu = 'left-side sidebar-offcanvas';
+          $scope.RightMenu = 'right-side';
+
+          $scope.HideMenu = function(){
+            if ($scope.ShowSideBar == false){
+              $scope.LeftMenu = 'left-side sidebar-offcanvas';
+              $scope.RightMenu = 'right-side';
+              $scope.ShowSideBar = true;
+            }
+            else{
+              $scope.LeftMenu = 'left-side sidebar-offcanvas collapse-left';
+              $scope.RightMenu = 'right-side strech';
+              $scope.ShowSideBar = false;
+            }
+          }
 
           $scope.ActiveSITENAME = localStorage.ActiveSITENAME;
           $scope.SearchText = '';
