@@ -246,7 +246,7 @@
                   <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
               </div>
           </div>
-          <main class="col-md-10 col-sm-10 col-lg-12 col pl-4 pt-2" style="background-color:#F2F7FB;height: 100%;">
+          <main class="col-md-10 col-sm-10 col-lg-12 px-5 col pl-4 pt-2" style="background-color:#F2F7FB;height: 100%;">
             <div class="row mb-3">
                 <div class="col-md-7 col-lg-7">
                   <div class="page-header-title">
@@ -266,10 +266,9 @@
             </div>
             <div class="row mb-2">
               <div class="col-md-12">
-                <button type="button" class="btn btn-blue " data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus"></i> New Estimate</button>
+                <button type="button" class="btn btn-blue" data-toggle="modal" data-target="#ModalNewEstimate"><i class="fas fa-plus"></i> New Estimate</button>
               </div>
             </div>
-
             <div class="row  mb-2">
               <div class="col-md-12">
                 <div id="accordion">
@@ -282,39 +281,39 @@
                      <div id="collapseOne" class="collapse show" data-parent="#accordion">
                        <div class="card-body card-body-container">
                          <div class="row">
-                           <div class="col-md-2">
+                           <div class="col-md-2 col-xs-12 col-sm-12">
                              <div class="form-group form-text">
                                 <label for="exampleInputEmail1">Estimate ID</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                               </div>
                            </div>
-                           <div class="col-md-3">
+                           <div class="col-md-3 col-xs-12 col-sm-12">
                              <div class="form-group form-text">
                                 <label for="exampleInputEmail1">Project name</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                               </div>
                            </div>
-                           <div class="col">
+                           <div class="col-md col-xs-12 col-sm-12">
                              <div class="form-group form-text">
                                 <label for="exampleInputEmail1">Category</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                               </div>
                            </div>
-                           <div class="col">
+                           <div class="col-md  col-xs-12 col-sm-12">
                              <div class="form-group form-text">
                                 <label for="exampleInputEmail1">Vertical market</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                               </div>
                            </div>
-                           <div class="col">
+                           <div class="col-md col-xs-12 col-sm-12">
                              <div class="form-group form-text">
                                 <label for="exampleInputEmail1">Status</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
                               </div>
                            </div>
                          </div>
-                         <div class="row ">
-                           <div class="col-md-12">
+                         <div class="row">
+                           <div class="col-md-12 col-xs-12 col-sm-12">
                              <div  class="float-right">
                                <button type="button" class="btn btn-outline-secondary"  data-toggle="tooltip" data-placement="top" title="Clear filters"  ><i class="fas fa-times"></i></button>
                                <button type="button" class="btn  btn-blue ml-1" data-toggle="tooltip" data-placement="top" title="Search" ><i class="fas fa-search"></i> Search</button>
@@ -468,7 +467,7 @@
         								<td class="text-right">876</td>
         								<td>5505 - TK 2019</td>
                         <td>Construction</td>
-                        <td>Aerospace Support Facilities</td>
+                        <td>Aerospace Support Facilitiesa</td>
                         <td>Sold</td>
                         <td class="text-right">12/05/2018
                           <div class="action">
@@ -496,7 +495,7 @@
     </div>
     <!-- Modal -->
     <!-- Start modal new estimate -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalNewEstimate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -506,68 +505,12 @@
             </button>
           </div>
           <div class="modal-body">
-            <!-- form new estimate -->
-            <!-- <form>
-              <div class="form-row">
-                <div class="col-md-12">
-                  <div class="form-group ">
-                    <label for="exampleFormControlSelect1">Project</label>
-                    <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
-                      <option>Project 1</option>
-                      <option>Project 2</option>
-                      <option>Project 3</option>
-                      <option>Project 4</option>
-                      <option>Project 5</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-8 col-xs-12">
-                  <div class="form-group ">
-                    <label class="control-label">Estimate Date</label>
-                    <div class="input-group date">
-                       <input class="form-control col-md-6 col-xs-12" type="text" placeholder="mm/dd/yyy" />
-                       <span class="input-group-append">
-                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                       </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-8 col-xs-12">
-                  <div class="form-group ">
-                    <label class="control-label">Overhead</label>
-                    <div class="input-group date">
-                       <input class="form-control col-md-6 col-xs-12" type="text" placeholder="enter overhead" />
-                       <span class="input-group-append">
-                         <div class="input-group-text"><i class="fas fa-percentage"></i></div>
-                       </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-8 col-xs-12">
-                  <div class="form-group">
-                     <label class="control-label">Margin</label>
-                     <div class="input-group date">
-                        <input class="form-control col-md-6 col-xs-12" type="text" placeholder="enter margin" />
-                        <span class="input-group-append">
-                          <div class="input-group-text"><i class="fas fa-percentage"></i></div>
-                        </span>
-                     </div>
-                   </div>
-                </div>
-                <div class="col-md-8 col-xs-12">
-                  <div class="form-group ">
-                    <label for="exampleInputPassword1">Taxes</label>
-                    <input type="text" class="form-control col-md-6 col-xs-12" id="exampleInputPassword1" placeholder="enter taxes">
-                  </div>
-                </div>
-            </div>
-          </form> -->
-
           <form>
             <div class="form-row">
               <div class="col-md-12">
                 <div class="form-group ">
                   <label for="exampleFormControlSelect1">Project</label>
+                  <div class="text-right" style="margin-top:-25px"><small><a href="" data-toggle="modal" data-target="#ModalNewProject"><i class="fas fa-plus-circle"></i> Add New Project</a></small></div>
                   <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
                     <option>Project 1</option>
                     <option>Project 2</option>
@@ -628,6 +571,159 @@
     </div>
   </div>
   <!-- End modal new estimate -->
+  <div class="modal fade" id="ModalNewProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                  <label class="control-label">Requested Bid Date</label>
+                  <div class="input-group date">
+                     <input class="form-control " type="text" placeholder="mm/dd/yyy" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                  <label class="control-label">Bid Date</label>
+                  <div class="input-group date">
+                     <input class="form-control" type="text" placeholder="mm/dd/yyy" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Estimate Number</label>
+                  <input type="text" class="form-control col-xs-12" id="exampleInputPassword1" placeholder="">
+                </div>
+              </div>
+              <div class="col-md-8 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Estimate Name</label>
+                  <input type="text" class="form-control col-xs-12" id="exampleInputPassword1" placeholder="enter estimate name">
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Category</label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Category 1</option>
+                    <option>Category 2</option>
+                    <option>Category 3</option>
+                    <option>Category 4</option>
+                    <option>Category 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Status </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Status 1</option>
+                    <option>Status 2</option>
+                    <option>Status 3</option>
+                    <option>Status 4</option>
+                    <option>Status 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Consulting Firm </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Consulting Firm 1</option>
+                    <option>Consulting Firm 2</option>
+                    <option>Consulting Firm 3</option>
+                    <option>Consulting Firm 4</option>
+                    <option>Consulting Firm 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Customer Requesting the Price </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Customer 1</option>
+                    <option>Customer 2</option>
+                    <option>Customer 3</option>
+                    <option>Customer 4</option>
+                    <option>Customer 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Vertical Market </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Vertical 1</option>
+                    <option>Vertical 2</option>
+                    <option>Vertical 3</option>
+                    <option>Vertical 4</option>
+                    <option>Vertical 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                  <label class="control-label">Close Date</label>
+                  <div class="input-group date">
+                     <input class="form-control" type="text" placeholder="mm/dd/yyy" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Estimate amout</label>
+                  <div class="input-group date">
+                     <input class="form-control col-xs-12" type="text" placeholder="enter estimate amount" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Sales Margin</label>
+                  <div class="input-group date">
+                     <input class="form-control col-xs-12" type="text" placeholder="enter sales margin" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Modal New Project -->
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
