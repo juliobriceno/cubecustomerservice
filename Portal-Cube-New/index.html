@@ -5,8 +5,9 @@
 		<title>Cube::.</title>
     <!--optimize code for mobile devices-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <!--  bootstrap 4.0.0 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--  bootstrap 4.0.0 -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!--Theme style-->
     <link rel="stylesheet" href="css/style.css"/>
     <!-- enlace con fuentes de iconos font-awosome-->
@@ -340,7 +341,7 @@
                         <div class="float-right mt-1">
                           <span style="font-size:0.79rem;margin-top:3px;color:#333;"><strong>154</strong> items in <strong>2</strong> pages</span>
                           <div class="pagination" style="float:right;">
-                              <a href='#'><i class="fas fa-chevron-left" style="color:#333;"></i></a>
+                              <a href="edit_estimate.html"><i class="fas fa-chevron-left" style="color:#333;"></i></a>
                               <a href='#'>1</a>
                               <a class='active' href='#'>2</a>
                               <a href='#'>3</a>
@@ -371,7 +372,7 @@
                         <td>Pre Bid</td>
                         <td class="text-right">02/01/2018
                           <div class="action">
-                            <a href="#" class="icon-table-option">
+                            <a href="edit_estimate.html" class="icon-table-option">
                              <span style="font-size: 1rem;" class="bg-green" data-toggle="tooltip" title="Edit estimate" ><i class="fas fa-edit"></i></span>
                             </a>
                             <a href="#" class="icon-table-option">
@@ -391,7 +392,7 @@
                         <td>Pre Bid</td>
                         <td class="text-right">03/29/2019
                           <div class="action">
-                            <a href="#" class="icon-table-option">
+                            <a href="edit_estimate.html" class="icon-table-option">
                              <span style="font-size: 1rem;" class="bg-green"><i class="fas fa-edit"></i></span>
                             </a>
                             <a href="#" class="icon-table-option">
@@ -411,10 +412,10 @@
                         <td>Sold</td>
                         <td class="text-right">04/01/2019
                           <div class="action">
-                            <a href="#" class="icon-table-option">
+                            <a href="edit_estimate.html" class="icon-table-option">
                              <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
                             </a>
-                            <a href="#" class="icon-table-option">
+                            <a href="edit_estimate.html" class="icon-table-option">
                              <span style="font-size: 1rem;" class="bg-blue"> <i class="fas fa-copy"></i></span>
                             </a>
                             <a href="#" class="icon-table-option">
@@ -431,7 +432,7 @@
                         <td>Sold</td>
                         <td class="text-right">03/12/2018
                           <div class="action">
-                            <a href="#">
+                            <a href="edit_estimate.html">
                              <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
                             </a>
                             <a href="#">
@@ -451,7 +452,7 @@
                         <td>Bid</td>
                         <td class="text-right">08/01/2018
                           <div class="action">
-                            <a href="#">
+                            <a href="edit_estimate.html">
                              <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
                             </a>
                             <a href="#">
@@ -471,7 +472,7 @@
                         <td>Sold</td>
                         <td class="text-right">12/05/2018
                           <div class="action">
-                            <a href="#">
+                            <a href="edit_estimate.html">
                              <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
                             </a>
                             <a href="#">
@@ -572,7 +573,7 @@
   </div>
   <!-- End modal new estimate -->
   <div class="modal fade" id="ModalNewProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
@@ -722,9 +723,12 @@
   </div>
   <!-- Modal New Project -->
 </div>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 
 </html>

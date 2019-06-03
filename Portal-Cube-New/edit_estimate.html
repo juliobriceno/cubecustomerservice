@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+		<title>Cube::.</title>
+    <!--optimize code for mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  bootstrap 4.0.0 -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Theme style-->
+    <link rel="stylesheet" href="css/style.css"/>
+    <!-- enlace con fuentes de iconos font-awosome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+    <style>
+    @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+      #sidebar {
+          overflow: hidden;
+          z-index: 3;
+      }
+      #sidebar .list-group {
+          min-width: 100%;
+          background-color: #333;
+          min-height: 100%;
+      }
+      #sidebar i {
+          margin-right: 6px;
+      }
+
+      #sidebar .list-group-item {
+          border-radius: 0;
+          background-color: #104B85;
+          color: #ccc;
+          border-left: 0;
+          border-right: 0;
+          border-color: transparent;
+          white-space: nowrap;
+      }
+
+      /* highlight active menu */
+      #sidebar .list-group-item:not(.collapsed) {
+          background-color: #1A4064;
+      }
+
+      /* closed state */
+      #sidebar .list-group .list-group-item[aria-expanded="false"]::after {
+        content: '\f054';
+        font-family: FontAwesome;
+        display: inline;
+        text-align: right;
+        padding-left: 1.5rem;
+        font-size: .70rem;
+        top: 18px;
+        float:right;
+
+      }
+
+      /* open state */
+      #sidebar .list-group .list-group-item[aria-expanded="true"] {
+        background-color: #104b85;
+        border-left: 5px solid #5584ff;
+      }
+      #sidebar .list-group .list-group-item[aria-expanded="true"]::after {
+        content: " \f078";
+        font-family: FontAwesome;
+        display: inline;
+        text-align: right;
+        padding-left: 2rem;
+        font-size: .70rem;
+        float:right;
+      }
+
+      /* level 1*/
+      #sidebar .list-group .collapse .list-group-item,
+      #sidebar .list-group .collapsing .list-group-item  {
+        padding-left: 20px;
+      }
+
+      /* level 2*/
+      #sidebar .list-group .collapse > .collapse .list-group-item,
+      #sidebar .list-group .collapse > .collapsing .list-group-item {
+        padding-left: 30px;
+      }
+
+      /* level 3*/
+      #sidebar .list-group .collapse > .collapse > .collapse .list-group-item {
+        padding-left: 40px;
+      }
+
+      @media (max-width:768px) {
+          #sidebar {
+              min-width: 35px;
+              max-width: 40px;
+              overflow-y: auto;
+              overflow-x: visible;
+              transition: all 0.25s ease;
+              transform: translateX(-45px);
+              position: fixed;
+          }
+
+          #sidebar.show {
+              transform: translateX(0);
+          }
+
+          #sidebar::-webkit-scrollbar{ width: 0px; }
+
+          #sidebar, #sidebar .list-group {
+              min-width: 35px;
+              overflow: visible;
+          }
+          /* overlay sub levels on small screens */
+          #sidebar .list-group .collapse.show, #sidebar .list-group .collapsing {
+              position: relative;
+              z-index: 1;
+              width: 190px;
+              top: 0;
+          }
+          #sidebar .list-group > .list-group-item {
+              text-align: center;
+              padding: .75rem .5rem;
+          }
+          /* hide caret icons of top level when collapsed */
+          #sidebar .list-group > .list-group-item[aria-expanded="true"]::after,
+          #sidebar .list-group > .list-group-item[aria-expanded="false"]::after {
+              display:none;
+          }
+      }
+
+      .collapse.show {
+        visibility: visible;
+      }
+      .collapsing {
+        visibility: visible;
+        height: 0;
+        -webkit-transition-property: height, visibility;
+        transition-property: height, visibility;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+      }
+      .collapsing.width {
+        -webkit-transition-property: width, visibility;
+        transition-property: width, visibility;
+        width: 0;
+        height: 100%;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand navbar-dark">
+        <a href="#menu-toggle" id="menu-toggle" class="navbar-brand"></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <img src="img/cube-logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-Cube-Usa" width="105" height="40"  />
+            <div style="margin-left:3.5rem;"><a href="#" data-target="#sidebar" data-toggle="collapse" style="color:#0e1a35;"><i class="fas fa-bars"></i></a></div>
+        </div>
+       <ul class="nav navbar-right top-nav icon-header">
+         <li><a href=""><i class="fas fa-headset" style="color:#F48120"></i> Support</a></li>
+         <li><a href=""><i class="fas fa-desktop" style="color:#8eca3f;"></i> Training</a></li>
+         <li class="nav-item dropdown">
+           <a href="#"  class=" dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  ><i class="fas fa-question-circle" style="color:#12A5DD;"></i> Help</a>
+           <div  class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+              <a class="dropdown-item" href="#"> Cube Navigation</a>
+              <a class="dropdown-item" href="#"> Edit Estimate</a>
+              <a class="dropdown-item" href="#">Edit Area</a>
+           </div>
+         </li>
+         <li>
+           <a href="">FAQ</a>
+         </li>
+         <li class="nav-item dropdown">
+             <a href="#" class="dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"></i> Welcome Back, <b>Cube Friend</b> </a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                 <a class="dropdown-item" href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a>
+                  <div class="dropdown-divider"></div>
+                 <a class="dropdown-item"  href="#"><i class="fa fa-fw fa-power-off"></i> Logout</a>
+             </div>
+         </li>
+       </ul>
+      </nav>
+      <div class="row d-flex d-md-block flex-nowrap wrapper" >
+          <div class="col-md-2 float-left col-1 pl-0 pr-0 collapse width show"  id="sidebar" >
+                  <div class="list-group border-0 card text-center text-md-left">
+                  <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false"><i class="fas fa-tachometer-alt"></i> <span class="d-none d-md-inline" ><span>Dashboard</span> <span class="badge badge-warning" style="margin-left: 10px;margin-right: -20px">New</span> </a>
+                  <div class="collapse" id="menu1" data-parent="#sidebar">
+                      <a href="#menu1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 1 </a>
+                      <div class="collapse" id="menu1sub1" data-parent="#menu1">
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem a</a>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem b</a>
+                          <a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem c </a>
+                          <div class="collapse" id="menu1sub1sub1">
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem c.1</a>
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem c.2</a>
+                          </div>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem d</a>
+                          <a href="#menu1sub1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem e </a>
+                          <div class="collapse" id="menu1sub1sub2">
+                              <a href="#" class="list-group-item">Subitem e.1</a>
+                              <a href="#" class="list-group-item">Subitem e.2</a>
+                          </div>
+                      </div>
+                      <a href="#menu1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 2</a>
+                      <div class="collapse" id="menu1sub2" data-parent="#menu1">
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 1 a</a>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 2 b</a>
+                          <a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 3 c </a>
+                          <div class="collapse" id="menu1sub1sub1">
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.1</a>
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.2</a>
+                          </div>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 4 d</a>
+                          <a href="#menu1sub1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 5 e </a>
+                          <div class="collapse" id="menu1sub1sub2">
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.1</a>
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.2</a>
+                          </div>
+                      </div>
+                      <a href="#" class="list-group-item">Subitem 3</a>
+                  </div>
+                  <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false"><i class="fas fa-hard-hat"></i> <span class="d-none d-md-inline">Engineering    </span></a>
+                  <div class="collapse" id="menu3" data-parent="#sidebar">
+                      <a href="#" class="list-group-item" data-parent="#menu3">Eng Projects</a>
+                      <a href="#menu3sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">3.2 </a>
+                      <div class="collapse" id="menu3sub2">
+                          <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 a</a>
+                          <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 b</a>
+                          <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 c</a>
+                      </div>
+                      <a href="#" class="list-group-item" data-parent="#menu3">3.3</a>
+                  </div>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-heart"></i> <span class="d-none d-md-inline">Item 4</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-list"></i> <span class="d-none d-md-inline">Item 5</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-clock-o"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-th"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-gear"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-calendar"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+              </div>
+          </div>
+          <main class="col-md-10 col-sm-10 col-lg-12 px-5 col pl-4 pt-2" style="background-color:#F2F7FB;height: 100%;">
+            <div class="row mb-3">
+                <div class="col-md-7 col-lg-7">
+                  <div class="page-header-title">
+                      <h5>Edit Estimate</h5>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit Quisque iaculis.</span>
+                  </div>
+                </div>
+                <div class="col-md-5 col-lg-5">
+                  <nav aria-label="breadcrumb breadcrumb-title">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                      <li class="breadcrumb-item"><a href="#">Eng Project</a></li>
+                    </ol>
+                  </nav>
+                </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#build" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-project-diagram"></i> Build your Project</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#price" role="tab" aria-controls="profile" aria-selected="false"> <i class="fas fa-dollar-sign"></i> Price Summary</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#material" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-clipboard-list"></i> Material Summary</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#labor" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-user-clock"></i> Labor Summary</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#valve" role="tab" aria-controls="contact" aria-selected="false">Valve Schedule</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#network" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-cogs"></i> Network Configuration</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#attachment" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-paperclip"></i> Attachment</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#drawing" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-ruler-combined"></i> Drawing Setup</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#blog" role="tab" aria-controls="contact" aria-selected="false"><i class="far fa-comments"></i> Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#generate" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-file-invoice"></i> Generate a Quote</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#reports" role="tab" aria-controls="contact" aria-selected="false"><i class="fas fa-chart-pie"></i> Reports</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="build" role="tabpanel" aria-labelledby="home-tab">1</div>
+                  <div class="tab-pane fade" id="price" role="tabpanel" aria-labelledby="profile-tab">2</div>
+                  <div class="tab-pane fade" id="material" role="tabpanel" aria-labelledby="contact-tab">3</div>
+                  <div class="tab-pane fade" id="labor" role="tabpanel" aria-labelledby="contact-tab">4</div>
+                  <div class="tab-pane fade" id="valve" role="tabpanel" aria-labelledby="contact-tab">5</div>
+                  <div class="tab-pane fade" id="network" role="tabpanel" aria-labelledby="contact-tab">6</div>
+                  <div class="tab-pane fade" id="attachment" role="tabpanel" aria-labelledby="contact-tab">7</div>
+                  <div class="tab-pane fade" id="drawing" role="tabpanel" aria-labelledby="contact-tab">8</div>
+                  <div class="tab-pane fade" id="blog" role="tabpanel" aria-labelledby="contact-tab">9</div>
+                  <div class="tab-pane fade" id="generate" role="tabpanel" aria-labelledby="contact-tab">10</div>
+                  <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="contact-tab">11</div>
+
+
+                </div>
+              </div>
+
+            </div>
+
+          </main>
+    </div>
+    </div>
+  </div>
+  </div>
+  <!-- Modal New Project -->
+</div>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+</html>

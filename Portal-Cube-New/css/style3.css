@@ -2,8 +2,7 @@ body{
   font-size: .9375rem;
 }
 .bg-body{
-/* background: linear-gradient(to left bottom, #104b85, #0c5c96, #066da7, #017eb8, #0190c8, #009ecd, #00abd1, #00b8d2, #00c2c0, #00c89d, #57ca70, #95c83d); */
-  background:linear-gradient(to right top, #104b85, #0a619c, #0378b3, #0190c8, #0ca8dd);
+  background-color:#F2F7FB;
   width:100%;
   margin: 0;
   padding: 0;
@@ -13,7 +12,8 @@ body{
 .login-container{
   margin-top: 7%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  max-width:60%;
+  max-width:35%;
+  border-radius: 4px;
 }
 
 .forget-pwd{
@@ -23,24 +23,74 @@ body{
 .form-container{
   padding: 2rem;
   background-color: #fff;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-radius: 4px;
+
 }
 
 .bg-login{
   /* background-color: #2273B9; */
   background-color: #f2f7fb;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-radius: 5px;
   color: #fff;
   padding: 15px;
   text-align: center;
 }
 
+
+
+.btn-green{
+  background-color:#95c83d;
+  border-color:#95c83d;
+  color:#fff;
+}
+
+.btn-green:hover{
+  background-color:#4ba645 !important;
+  border-color:#4ba645 !important;
+  color:  #fff;
+}
 .btn-blue{
   background-color:#0CA8DD;
   border-color:#0CA8DD;
   color:#fff;
+}
+
+.text-green{
+  color:#12A5DD;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: rgba(75, 166, 69, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(75, 166, 69, 0.7);
+  outline: 0 none;
+}
+
+.btn-outline-gray{
+  border-color: #58595b;
+  color: #58595b;
+  background-color: transparent;
+  background-image: none;
+}
+.btn-outline-gray:hover{
+  border-color: #58595b;
+  color: white;
+  background-color: #58595b;
+
 }
 
 .btn-blue:hover{
@@ -73,6 +123,7 @@ body{
   color:#0e1a35;
 
 }
+
 
 /* Header Page */
 
