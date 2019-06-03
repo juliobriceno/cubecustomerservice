@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+		<title>Cube::.</title>
+    <!--optimize code for mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--  bootstrap 4.0.0 -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--Theme style-->
+    <link rel="stylesheet" href="css/style5.css"/>
+    <!-- enlace con fuentes de iconos font-awosome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+    <style>
+    @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+      #sidebar {
+          overflow: hidden;
+          z-index: 3;
+          box-shadow: 0 2px 4px rgba(0,0,0,.08);
+      }
+      #sidebar .list-group {
+          min-width: 100%;
+          background-color: #333;
+          min-height: 100%;
+      }
+      #sidebar i {
+          margin-right: 6px;
+      }
+
+      #sidebar .list-group-item {
+          border-radius: 0;
+          background-color: #ffff;
+          color: #58595b;
+          border-left: 0;
+          border-right: 0;
+          border-color: transparent;
+          white-space: nowrap;
+      }
+
+      /* highlight active menu */
+      #sidebar .list-group-item:not(.collapsed) {
+          /* background-color: #1A4064; */
+      }
+
+      /* closed state */
+      #sidebar .list-group .list-group-item[aria-expanded="false"]::after {
+        content: '\f054';
+        font-family: FontAwesome;
+        display: inline;
+        text-align: right;
+        padding-left: 1.5rem;
+        font-size: .70rem;
+        top: 18px;
+        float:right;
+
+      }
+      #sidebar .list-group a:hover{
+        text-decoration: none;
+        color:#0CA8DD;
+        background: #f2f7fb;
+      }
+      /* open state */
+      #sidebar .list-group .list-group-item[aria-expanded="true"] {
+        /* background-color: #104b85; */
+        color:#0CA8DD;
+        border-left: 5px solid #0CA8DD;
+      }
+      #sidebar .list-group .list-group-item[aria-expanded="true"]::after {
+        content: " \f078";
+        font-family: FontAwesome;
+        display: inline;
+        text-align: right;
+        padding-left: 2rem;
+        font-size: .70rem;
+        float:right;
+      }
+
+      /* level 1*/
+      #sidebar .list-group .collapse .list-group-item,
+      #sidebar .list-group .collapsing .list-group-item  {
+        padding-left: 20px;
+      }
+
+      /* level 2*/
+      #sidebar .list-group .collapse > .collapse .list-group-item,
+      #sidebar .list-group .collapse > .collapsing .list-group-item {
+        padding-left: 30px;
+      }
+
+      /* level 3*/
+      #sidebar .list-group .collapse > .collapse > .collapse .list-group-item {
+        padding-left: 40px;
+      }
+
+      @media (max-width:768px) {
+          #sidebar {
+              min-width: 35px;
+              max-width: 40px;
+              overflow-y: auto;
+              overflow-x: visible;
+              transition: all 0.25s ease;
+              transform: translateX(-45px);
+              position: fixed;
+          }
+
+          #sidebar.show {
+              transform: translateX(0);
+          }
+
+          #sidebar::-webkit-scrollbar{ width: 0px; }
+
+          #sidebar, #sidebar .list-group {
+              min-width: 35px;
+              overflow: visible;
+          }
+          /* overlay sub levels on small screens */
+          #sidebar .list-group .collapse.show, #sidebar .list-group .collapsing {
+              position: relative;
+              z-index: 1;
+              width: 190px;
+              top: 0;
+          }
+          #sidebar .list-group > .list-group-item {
+              text-align: center;
+              padding: .75rem .5rem;
+          }
+          /* hide caret icons of top level when collapsed */
+          #sidebar .list-group > .list-group-item[aria-expanded="true"]::after,
+          #sidebar .list-group > .list-group-item[aria-expanded="false"]::after {
+              display:none;
+          }
+      }
+
+      .collapse.show {
+        visibility: visible;
+      }
+      .collapsing {
+        visibility: visible;
+        height: 0;
+        -webkit-transition-property: height, visibility;
+        transition-property: height, visibility;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+      }
+      .collapsing.width {
+        -webkit-transition-property: width, visibility;
+        transition-property: width, visibility;
+        width: 0;
+        height: 100%;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand navbar-dark">
+        <a href="#menu-toggle" id="menu-toggle" class="navbar-brand"></a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+        <div class="collapse navbar-collapse" id="navbarsExample02">
+            <img src="img/cube-logo.png" class="img-responsive center-block text-center img-logo" alt="Logo-Cube-Usa" width="105" height="40"  />
+            <div style="margin-left:3.5rem;"><a href="#" data-target="#sidebar" data-toggle="collapse" style="color:#0CA8DD;"><i class="fas fa-bars"></i></a></div>
+        </div>
+       <ul class="nav navbar-right top-nav icon-header">
+         <li><a href=""><i class="fas fa-headset" style="color:#F48120"></i> Support</a></li>
+         <li><a href=""><i class="fas fa-desktop" style="color:#8eca3f;"></i> Training</a></li>
+         <li class="nav-item dropdown">
+           <a href="#"  class=" dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  ><i class="fas fa-question-circle" style="color:#12A5DD;"></i> Help</a>
+           <div  class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+              <a class="dropdown-item" href="#"> Cube Navigation</a>
+              <a class="dropdown-item" href="#"> Edit Estimate</a>
+              <a class="dropdown-item" href="#">Edit Area</a>
+           </div>
+         </li>
+         <li>
+           <a href="">FAQ</a>
+         </li>
+         <li class="nav-item dropdown">
+             <a href="#" class="dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-circle"></i> Welcome Back, <b>Cube Friend</b> </a>
+             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                 <a class="dropdown-item" href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a>
+                  <div class="dropdown-divider"></div>
+                 <a class="dropdown-item"  href="#"><i class="fa fa-fw fa-power-off"></i> Logout</a>
+             </div>
+         </li>
+       </ul>
+      </nav>
+      <div class="row d-flex d-md-block flex-nowrap wrapper" >
+          <div class="col-md-2 float-left col-1 pl-0 pr-0 collapse width show"  id="sidebar" >
+                  <div class="list-group border-0 card text-center text-md-left">
+                  <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false"><i class="fas fa-tachometer-alt"></i> <span class="d-none d-md-inline" ><span>Dashboard</span> <span class="badge badge-warning" style="margin-left: 10px;margin-right: -20px">New</span> </a>
+                  <div class="collapse" id="menu1" data-parent="#sidebar">
+                      <a href="#menu1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 1 </a>
+                      <div class="collapse" id="menu1sub1" data-parent="#menu1">
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem a</a>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem b</a>
+                          <a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem c </a>
+                          <div class="collapse" id="menu1sub1sub1">
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem c.1</a>
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem c.2</a>
+                          </div>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem d</a>
+                          <a href="#menu1sub1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem e </a>
+                          <div class="collapse" id="menu1sub1sub2">
+                              <a href="#" class="list-group-item">Subitem e.1</a>
+                              <a href="#" class="list-group-item">Subitem e.2</a>
+                          </div>
+                      </div>
+                      <a href="#menu1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 2</a>
+                      <div class="collapse" id="menu1sub2" data-parent="#menu1">
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 1 a</a>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 2 b</a>
+                          <a href="#menu1sub1sub1" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 3 c </a>
+                          <div class="collapse" id="menu1sub1sub1">
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.1</a>
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub1">Subitem 3 c.2</a>
+                          </div>
+                          <a href="#" class="list-group-item" data-parent="#menu1sub1">Subitem 4 d</a>
+                          <a href="#menu1sub1sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">Subitem 5 e </a>
+                          <div class="collapse" id="menu1sub1sub2">
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.1</a>
+                              <a href="#" class="list-group-item" data-parent="#menu1sub1sub2">Subitem 5 e.2</a>
+                          </div>
+                      </div>
+                      <a href="#" class="list-group-item">Subitem 3</a>
+                  </div>
+                  <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" aria-expanded="false"><i class="fas fa-hard-hat"></i> <span class="d-none d-md-inline">Engineering    </span></a>
+                  <div class="collapse" id="menu3" data-parent="#sidebar">
+                      <a href="#" class="list-group-item" data-parent="#menu3">Eng Projects</a>
+                      <a href="#menu3sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">3.2 </a>
+                      <div class="collapse" id="menu3sub2">
+                          <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 a</a>
+                          <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 b</a>
+                          <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 c</a>
+                      </div>
+                      <a href="#" class="list-group-item" data-parent="#menu3">3.3</a>
+                  </div>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-heart"></i> <span class="d-none d-md-inline">Item 4</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-list"></i> <span class="d-none d-md-inline">Item 5</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-clock-o"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-th"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-gear"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-calendar"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-envelope"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-bar-chart-o"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+                  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-star"></i> <span class="d-none d-md-inline">Link</span></a>
+              </div>
+          </div>
+          <main class="col-md-10 col-sm-10 col-lg-12 px-5 col pl-4 pt-2" style="background-color:#F2F7FB;height: 100%;">
+            <div class="row mb-3">
+                <div class="col-md-7 col-lg-7">
+                  <div class="page-header-title">
+                      <h5>Eng Projects</h5>
+                      <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit Quisque iaculis.</span>
+                  </div>
+                </div>
+                <div class="col-md-5 col-lg-5">
+                  <nav aria-label="breadcrumb breadcrumb-title">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                      <li class="breadcrumb-item"><a href="#">Engineering</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Eng Project</li>
+                    </ol>
+                  </nav>
+                </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-12">
+                <button type="button" class="btn btn-blue" data-toggle="modal" data-target="#ModalNewEstimate"><i class="fas fa-plus"></i> New Estimate</button>
+              </div>
+            </div>
+            <div class="row  mb-2">
+              <div class="col-md-12">
+                <div id="accordion">
+                   <div class="card">
+                     <div class="card-header">
+                       <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                         <i class="fas fa-filter"></i> Filters
+                       </a>
+                     </div>
+                     <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                       <div class="card-body card-body-container">
+                         <div class="row">
+                           <div class="col-md-2 col-xs-12 col-sm-12">
+                             <div class="form-group form-text">
+                                <label for="exampleInputEmail1">Estimate ID</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                              </div>
+                           </div>
+                           <div class="col-md-3 col-xs-12 col-sm-12">
+                             <div class="form-group form-text">
+                                <label for="exampleInputEmail1">Project name</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                              </div>
+                           </div>
+                           <div class="col-md col-xs-12 col-sm-12">
+                             <div class="form-group form-text">
+                                <label for="exampleInputEmail1">Category</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                              </div>
+                           </div>
+                           <div class="col-md  col-xs-12 col-sm-12">
+                             <div class="form-group form-text">
+                                <label for="exampleInputEmail1">Vertical market</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                              </div>
+                           </div>
+                           <div class="col-md col-xs-12 col-sm-12">
+                             <div class="form-group form-text">
+                                <label for="exampleInputEmail1">Status</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+                              </div>
+                           </div>
+                         </div>
+                         <div class="row">
+                           <div class="col-md-12 col-xs-12 col-sm-12">
+                             <div  class="float-right">
+                               <button type="button" class="btn btn-outline-secondary"  data-toggle="tooltip" data-placement="top" title="Clear filters"  ><i class="fas fa-times"></i></button>
+                               <button type="button" class="btn  btn-blue ml-1" data-toggle="tooltip" data-placement="top" title="Search" ><i class="fas fa-search"></i> Search</button>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col-md-12">
+                <div class="table-responsive table-container RadGrid" >
+                  <div class="row" style="margin-right:0 !important">
+                      <div class="col-md-6">
+                        <div class="header-table-title">
+                          <i class="fas fa-list"></i>
+                          <h3>Estimate List</h3>
+                        </div> <!-- /widget-header -->
+                      </div>
+                      <div class="col">
+                        <div class="float-right mt-1">
+                          <span style="font-size:0.79rem;margin-top:3px;color:#333;"><strong>154</strong> items in <strong>2</strong> pages</span>
+                          <div class="pagination" style="float:right;">
+                              <a href="edit_estimate.html"><i class="fas fa-chevron-left" style="color:#333;"></i></a>
+                              <a href='#'>1</a>
+                              <a class='active' href='#'>2</a>
+                              <a href='#'>3</a>
+                              <a href='#'><i class="fas fa-chevron-right" style="color:#333;"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+
+                  <div>
+                  <table class="table rgMasterTable">
+        						<thead>
+        							<tr>
+        								<th class="text-right">Estimate ID</th>
+        								<th>Project Name</th>
+                        <th>Category</th>
+                        <th>Vertical Market</th>
+                        <th>Status</th>
+                        <th class="text-right">Date</th>
+        							</tr>
+        						</thead>
+        						<tbody>
+        							<tr  class="rgRow">
+        								<td class="text-right">890</td>
+        								<td>5254 - Distech</td>
+                        <td>Construction</td>
+                        <td>Aerospace Support Facilities</td>
+                        <td>Pre Bid</td>
+                        <td class="text-right">02/01/2018
+                          <div class="action">
+                            <a href="edit_estimate.html" class="icon-table-option">
+                             <span style="font-size: 1rem;" class="bg-green" data-toggle="tooltip" title="Edit estimate" ><i class="fas fa-edit"></i></span>
+                            </a>
+                            <a href="#" class="icon-table-option">
+                             <span style="font-size: 1rem;" class="bg-blue" data-toggle="tooltip" title="Duplicate estimate" > <i class="fas fa-copy"></i></span>
+                            </a>
+                            <a href="#" class="icon-table-option">
+                              <span style="font-size: 1rem;" class="bg-dang" data-toggle="tooltip" title="Delete estimate" ><i class="fas fa-trash"></i></span>
+                            </a>
+                          </div>
+                        </td>
+        							</tr>
+                      <tr  class="rgRow">
+        								<td class="text-right">889</td>
+        								<td>5532 - Denkar Controls</td>
+                        <td>Owner Direct Existing</td>
+                        <td>Aerospace Support Facilities</td>
+                        <td>Pre Bid</td>
+                        <td class="text-right">03/29/2019
+                          <div class="action">
+                            <a href="edit_estimate.html" class="icon-table-option">
+                             <span style="font-size: 1rem;" class="bg-green"><i class="fas fa-edit"></i></span>
+                            </a>
+                            <a href="#" class="icon-table-option">
+                             <span style="font-size: 1rem;" class="bg-blue"> <i class="fas fa-copy"></i></span>
+                            </a>
+                            <a href="#" class="icon-table-option">
+                              <span style="font-size: 1rem;" class="bg-dang"><i class="fas fa-trash"></i></span>
+                            </a>
+                          </div>
+                        </td>
+        							</tr>
+                      <tr  class="rgRow">
+        								<td class="text-right">879</td>
+        								<td>5533 - 8061-ABC Marlins Park</td>
+                        <td>Emergency Service</td>
+                        <td>Airports</td>
+                        <td>Sold</td>
+                        <td class="text-right">04/01/2019
+                          <div class="action">
+                            <a href="edit_estimate.html" class="icon-table-option">
+                             <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
+                            </a>
+                            <a href="edit_estimate.html" class="icon-table-option">
+                             <span style="font-size: 1rem;" class="bg-blue"> <i class="fas fa-copy"></i></span>
+                            </a>
+                            <a href="#" class="icon-table-option">
+                              <span style="font-size: 1rem;" class="bg-dang" ><i class="fas fa-trash"></i></span>
+                            </a>
+                          </div>
+                        </td>
+        							</tr>
+                      <tr  class="rgRow">
+        								<td class="text-right">878</td>
+        								<td>5509 - TLC Engineer</td>
+                        <td>Construction</td>
+                        <td>Aerospace Support Facilities</td>
+                        <td>Sold</td>
+                        <td class="text-right">03/12/2018
+                          <div class="action">
+                            <a href="edit_estimate.html">
+                             <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
+                            </a>
+                            <a href="#">
+                             <span style="font-size: 1rem;" class="bg-blue"> <i class="fas fa-copy"></i></span>
+                            </a>
+                            <a href="#">
+                              <span style="font-size: 1rem;" ><i class="fas fa-trash"></i></span>
+                            </a>
+                          </div>
+                        </td>
+        							</tr>
+                      <tr  class="rgRow">
+        								<td class="text-right">877</td>
+        								<td>5475 - COCO Inc.</td>
+                        <td>Test Category</td>
+                        <td>Entertaiment</td>
+                        <td>Bid</td>
+                        <td class="text-right">08/01/2018
+                          <div class="action">
+                            <a href="edit_estimate.html">
+                             <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
+                            </a>
+                            <a href="#">
+                             <span style="font-size: 1rem;" class="bg-blue"> <i class="fas fa-copy"></i></span>
+                            </a>
+                            <a href="#">
+                              <span style="font-size: 1rem;" ><i class="fas fa-trash"></i></span>
+                            </a>
+                          </div>
+                        </td>
+        							</tr>
+                      <tr  class="rgRow">
+        								<td class="text-right">876</td>
+        								<td>5505 - TK 2019</td>
+                        <td>Construction</td>
+                        <td>Aerospace Support Facilities</td>
+                        <td>Sold</td>
+                        <td class="text-right">12/05/2018
+                          <div class="action">
+                            <a href="edit_estimate.html">
+                             <span style="font-size: 1rem;" class="bg-green" ><i class="fas fa-edit"></i></span>
+                            </a>
+                            <a href="#">
+                             <span style="font-size: 1rem;" class="bg-blue"> <i class="fas fa-copy"></i></span>
+                            </a>
+                            <a href="#">
+                              <span style="font-size: 1rem;" ><i class="fas fa-trash"></i></span>
+                            </a>
+                          </div>
+                        </td>
+        							</tr>
+        							</tbody>
+        						</table>
+                </div>
+              </div>
+              </div>
+            </div>
+            <br/>
+            <br/>
+          </main>
+    </div>
+    <!-- Modal -->
+    <!-- Start modal new estimate -->
+    <div class="modal fade" id="ModalNewEstimate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Estimate</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          <form>
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Project</label>
+                  <div class="text-right" style="margin-top:-25px"><small><a href="" data-toggle="modal" data-target="#ModalNewProject"><i class="fas fa-plus-circle"></i> Add New Project</a></small></div>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Project 1</option>
+                    <option>Project 2</option>
+                    <option>Project 3</option>
+                    <option>Project 4</option>
+                    <option>Project 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-8 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Estimate Date</label>
+                  <div class="input-group date">
+                     <input class="form-control col-md-6 col-xs-12" type="text" placeholder="mm/dd/yyy" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Overhead</label>
+                  <div class="input-group date">
+                     <input class="form-control col-md-6 col-xs-12" type="text" placeholder="enter overhead" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fas fa-percentage"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-8 col-xs-12">
+                <div class="form-group">
+                   <label class="control-label">Margin</label>
+                   <div class="input-group date">
+                      <input class="form-control col-md-6 col-xs-12" type="text" placeholder="enter margin" />
+                      <span class="input-group-append">
+                        <div class="input-group-text"><i class="fas fa-percentage"></i></div>
+                      </span>
+                   </div>
+                 </div>
+              </div>
+              <div class="col-md-8 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleInputPassword1">Taxes</label>
+                  <input type="text" class="form-control col-md-6 col-xs-12" id="exampleInputPassword1" placeholder="enter taxes">
+                </div>
+              </div>
+          </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-outline-secondary"> Save & Edit</button>
+          <button type="button" class="btn btn-primary"><i class="fas fa-check"></i> Save & New</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End modal new estimate -->
+  <div class="modal fade" id="ModalNewProject" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                  <label class="control-label">Requested Bid Date</label>
+                  <div class="input-group date">
+                     <input class="form-control " type="text" placeholder="mm/dd/yyy" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                  <label class="control-label">Bid Date</label>
+                  <div class="input-group date">
+                     <input class="form-control" type="text" placeholder="mm/dd/yyy" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Estimate Number</label>
+                  <input type="text" class="form-control col-xs-12" id="exampleInputPassword1" placeholder="">
+                </div>
+              </div>
+              <div class="col-md-8 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Estimate Name</label>
+                  <input type="text" class="form-control col-xs-12" id="exampleInputPassword1" placeholder="enter estimate name">
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Category</label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Category 1</option>
+                    <option>Category 2</option>
+                    <option>Category 3</option>
+                    <option>Category 4</option>
+                    <option>Category 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Status </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Status 1</option>
+                    <option>Status 2</option>
+                    <option>Status 3</option>
+                    <option>Status 4</option>
+                    <option>Status 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Consulting Firm </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Consulting Firm 1</option>
+                    <option>Consulting Firm 2</option>
+                    <option>Consulting Firm 3</option>
+                    <option>Consulting Firm 4</option>
+                    <option>Consulting Firm 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Customer Requesting the Price </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Customer 1</option>
+                    <option>Customer 2</option>
+                    <option>Customer 3</option>
+                    <option>Customer 4</option>
+                    <option>Customer 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 col-xs-12">
+                <div class="form-group ">
+                  <label for="exampleFormControlSelect1">Vertical Market </label>
+                  <select class="form-control col-md-12 col-xs-12" id="exampleFormControlSelect1">
+                    <option>Vertical 1</option>
+                    <option>Vertical 2</option>
+                    <option>Vertical 3</option>
+                    <option>Vertical 4</option>
+                    <option>Vertical 5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-6">
+                <div class="form-group ">
+                  <label class="control-label">Close Date</label>
+                  <div class="input-group date">
+                     <input class="form-control" type="text" placeholder="mm/dd/yyy" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Estimate amout</label>
+                  <div class="input-group date">
+                     <input class="form-control col-xs-12" type="text" placeholder="enter estimate amount" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group ">
+                  <label class="control-label">Sales Margin</label>
+                  <div class="input-group date">
+                     <input class="form-control col-xs-12" type="text" placeholder="enter sales margin" />
+                     <span class="input-group-append">
+                       <div class="input-group-text"><i class="fas fa-dollar-sign"></i></div>
+                     </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary"><i class="fas fa-check"></i> Save</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Modal New Project -->
+</div>
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+
+</html>
