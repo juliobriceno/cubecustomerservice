@@ -494,3 +494,7 @@ h5{
 .nav-link{
   padding: .5rem .45rem;
 }
+
+.form-control{
+  background-color: #e8f0fe;
+}
